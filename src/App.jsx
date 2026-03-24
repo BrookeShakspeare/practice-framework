@@ -346,7 +346,7 @@ function MapView({ satItems, onSatAdd, onSatRemove }) {
   const [hovSat, setHovSat]   = useState(null);
   const [openSat, setOpenSat] = useState(null);
 
-  const W = 1020, H = 1020, CX = 510, CY = 510;
+  const W = 1240, H = 1240, CX = 620, CY = 620;
   const SAT_ORBIT = 490, SAT_R = 68;
   const toR = d => d * Math.PI / 180;
 
@@ -367,8 +367,8 @@ function MapView({ satItems, onSatAdd, onSatRemove }) {
 
   return (
     <div style={{ position: "relative" }}>
-      <div style={{ width: "100%", maxWidth: "1020px", margin: "0 auto" }}>
-        <svg viewBox={`0 0 ${W} ${H}`} style={{ width: "100%", height: "auto", display: "block" }}>
+      <div style={{ width: "100%", maxWidth: "1020px", margin: "0 auto", overflow: "visible" }}>
+        <svg viewBox={`0 0 ${W} ${H}`} style={{ width: "100%", height: "auto", display: "block", overflow: "visible" }}>
           <defs>
             <radialGradient id="mapBg" cx="50%" cy="50%" r="70%">
               <stop offset="0%" stopColor="#FEFCF8"/>
@@ -768,7 +768,7 @@ export default function App() {
                 );
               })}
             </div>
-            <div style={{ backgroundColor: "white", borderRadius: "16px", border: `1.5px solid ${T.lineFaint}`, padding: "12px", boxShadow: "0 2px 16px #00000008" }}>
+            <div style={{ backgroundColor: "white", borderRadius: "16px", border: `1.5px solid ${T.lineFaint}`, padding: "12px", boxShadow: "0 2px 16px #00000008", overflow: "visible" }}>
               <MapView satItems={satItems} onSatAdd={addSat} onSatRemove={removeSat}/>
             </div>
           </div>
