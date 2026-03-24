@@ -333,18 +333,215 @@ function T2({ x, y, rows, size = 9.5, fill = "#1A1410", bold = false, italic = f
   ));
 }
 
-// ─── MAP VIEW ────────────────────────────────────────────────────────────────
+// ─── RING PANEL DEFINITIONS ──────────────────────────────────────────────────
+const RING_PANELS = {
+  wob: {
+    title: "Way of Being",
+    tagline: "I-Thou · Unconditional Positive Regard · The foundation of all therapeutic work",
+    color: { bg: "#FEF6EE", border: "#C07840", text: "#5A2A10" },
+    prompts: [
+      "How would you describe your Way of Being with this client — are you in an I-Thou or I-It position, and what tells you that?",
+      "What do you notice in yourself when you are with this client — emotionally, somatically, relationally?",
+      "How are your own Social GRACES showing up in your work with this client?",
+      "What does Unconditional Positive Regard look like for you with this client — where does it come easily, and where is it harder?",
+      "How does your Way of Being shift across different clients, contexts or presentations — and what does that tell you?",
+      "What life experiences, family of origin stories or personal material are present and influencing how you show up in the room?",
+    ],
+    gaps: [
+      "Where in your Way of Being do you notice the most uncertainty or thin edges?",
+      "Which clients or presentations make it hardest to sustain an I-Thou position — and what does that tell you?",
+      "What personal work, supervision or learning would most develop your Way of Being as a clinician?",
+    ],
+    suggestions: ["I-Thou presence","UPR in practice","Congruence & authenticity","Social GRACES reflection","Personal material activated","Embodied presence","Emotional attunement","Relational safety created","Countertransference awareness","I-It moments & recovery"],
+  },
+  alliance: {
+    title: "Therapeutic Alliance",
+    tagline: "Goals · Tasks · Bonds · Neuroscience · PACE · Mentalizing",
+    color: { bg: "#EFF0FA", border: "#5060B8", text: "#1A2060" },
+    prompts: [
+      "What type of relationship do you have with this client — customer, complainant, visitor or mandated? How does this shape your approach?",
+      "How shared and meaningful are the goals of the work — does the client see themselves as part of the solution?",
+      "How safe does the client feel in the room — what tells you this neurobiologically and relationally?",
+      "How are you using PACE (Playfulness, Acceptance, Curiosity, Empathy) in your work with this client?",
+      "Where is the alliance strongest — with an individual, a subsystem, or the whole family system?",
+      "How are you drawing on mentalization and epistemic trust to deepen the alliance?",
+    ],
+    gaps: [
+      "Where do you find alliance-building most challenging — which client types, presentations or contexts?",
+      "What neuroscience or attachment knowledge would strengthen how you build and repair alliance?",
+      "What would you like to develop in how you hold the systemic alliance across family members?",
+    ],
+    suggestions: ["Customer relationship","Complainant relationship","Shared goals established","Safety neurobiologically","PACE in practice","Mentalization","Epistemic trust","Right-brain attunement","Alliance rupture & repair","Systemic alliance across members"],
+  },
+  systemic: {
+    title: "Systemic Formulation & Practice",
+    tagline: "The Helicopter · Hypothesising · Formulation · Context",
+    color: { bg: "#EAF0F8", border: "#3A68B0", text: "#162848" },
+    prompts: [
+      "What is your systemic hypothesis about what is maintaining the presenting problem?",
+      "What does the genogram reveal about multigenerational patterns, triangles, and transmission processes?",
+      "How are you holding the full ecosystem — family, school, services, community — in your formulation?",
+      "What are the behavioural sequences (the 'dances') around the problem — and what function might the symptom serve in the system?",
+      "What are the strengths, resources and resilience in this system that you can build on?",
+      "What primary, secondary and rejected pictures are shaping your formulation — and what might you be missing?",
+    ],
+    gaps: [
+      "Where does your systemic formulation feel thin or underdeveloped — what are you not yet seeing?",
+      "Which schools of family therapy or systemic tools do you draw on least — and what would it mean to develop these?",
+      "What training or practice would most strengthen your systemic assessment and formulation skills?",
+    ],
+    suggestions: ["Systemic hypothesis","Genogram findings","Ecosystem mapping","Behavioural sequences","Function of symptom","Meaning & narrative","Strengths & resilience","Vertical stressors","Family Life Cycle stage","Multigenerational patterns","Primary picture named"],
+  },
+  therapy: {
+    title: "Therapy & Intervention in the Room",
+    tagline: "Grounded in Way of Being · Alliance · Systemic Formulation",
+    color: { bg: "#EAF5EC", border: "#3A8A58", text: "#163820" },
+    prompts: [
+      "Before reflecting on technique — how were your Way of Being, the alliance, and your systemic formulation present and active in this session?",
+      "What was your theory of change for this session — and did your interventions align with it?",
+      "What did you actually do in the room — which approaches, techniques or modalities did you draw on, and why those?",
+      "How intentional vs intuitive were your choices in session — and what does that tell you about your conscious competence?",
+      "What was the client's response to your interventions — what worked, what landed, what didn't?",
+      "How did you sequence and time your interventions — what shaped your decisions about when to move and when to wait?",
+      "What would you do differently — and what does that illuminate about your developing practice?",
+      "How did the layers beneath — Way of Being, Alliance, Systemic thinking — support or constrain your interventions?",
+    ],
+    gaps: [
+      "Where do you notice your intervention choices becoming narrow, habitual or reactive rather than intentional?",
+      "Which therapeutic modalities or approaches do you want to develop further in your direct practice?",
+      "What would more conscious competence look like in your intervention choices — what would you be doing differently?",
+    ],
+    suggestions: ["Theory of change applied","Intentional intervention","Technique selection rationale","Client response observed","Timing & sequencing","Conscious competence","Intuitive vs deliberate","What worked & why","What didn't land","Would do differently","Integration of layers","Ongoing review process"],
+  },
+};
+
+// ─── RING PANEL COMPONENT ────────────────────────────────────────────────────
+function RingPanel({ ringKey, onClose }) {
+  const panel = RING_PANELS[ringKey];
+  const c = panel.color;
+  const storageKey = `pfm_ring_${ringKey}`;
+  const gapsKey    = `pfm_ring_gaps_${ringKey}`;
+  const itemsKey   = `pfm_ring_items_${ringKey}`;
+
+  const [reflection, setReflection] = useState(() => { try { return localStorage.getItem(storageKey) || ""; } catch { return ""; } });
+  const [gaps,       setGaps]       = useState(() => { try { return localStorage.getItem(gapsKey)    || ""; } catch { return ""; } });
+  const [items, setItems] = useState(() => { try { return JSON.parse(localStorage.getItem(itemsKey) || "[]"); } catch { return []; } });
+  const [input, setInput] = useState("");
+  const saveTimer = useRef(null);
+
+  const save = (key, val) => {
+    clearTimeout(saveTimer.current);
+    saveTimer.current = setTimeout(() => { try { localStorage.setItem(key, val); } catch {} }, 500);
+  };
+
+  const addItem = (v) => {
+    const t = v.trim(); if (!t || items.includes(t)) return;
+    const next = [...items, t]; setItems(next); setInput("");
+    try { localStorage.setItem(itemsKey, JSON.stringify(next)); } catch {}
+  };
+  const removeItem = (it) => {
+    const next = items.filter(x => x !== it); setItems(next);
+    try { localStorage.setItem(itemsKey, JSON.stringify(next)); } catch {}
+  };
+
+  const divider = (label) => (
+    <div style={{ display: "flex", alignItems: "center", gap: "8px", margin: "4px 0" }}>
+      <div style={{ flex: 1, height: "1px", backgroundColor: T.lineFaint }}/>
+      <span style={{ fontSize: "9px", color: T.inkGhost, letterSpacing: "0.1em", textTransform: "uppercase", fontFamily: "monospace", whiteSpace: "nowrap" }}>{label}</span>
+      <div style={{ flex: 1, height: "1px", backgroundColor: T.lineFaint }}/>
+    </div>
+  );
+
+  return (
+    <div style={{ position: "fixed", top: 0, right: 0, width: "400px", height: "100vh", backgroundColor: "white", boxShadow: "-4px 0 32px #00000020", zIndex: 1000, display: "flex", flexDirection: "column", overflowY: "auto" }}>
+      {/* Header */}
+      <div style={{ backgroundColor: c.bg, borderBottom: `2px solid ${c.border}`, padding: "20px 22px 16px", position: "sticky", top: 0 }}>
+        <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: "12px" }}>
+          <div>
+            <h2 style={{ margin: "0 0 4px", fontFamily: "Georgia, serif", fontSize: "17px", fontWeight: "700", color: c.text }}>{panel.title}</h2>
+            <p style={{ margin: 0, fontSize: "12px", color: c.border, fontFamily: "Georgia, serif", fontStyle: "italic", lineHeight: 1.4 }}>{panel.tagline}</p>
+          </div>
+          <button onClick={onClose} style={{ background: "none", border: "none", fontSize: "20px", cursor: "pointer", color: T.inkGhost, flexShrink: 0, padding: "0 4px" }}>✕</button>
+        </div>
+        {items.length > 0 && (
+          <div style={{ marginTop: "10px", display: "flex", flexWrap: "wrap", gap: "5px" }}>
+            {items.map(it => <Chip key={it} label={it} color={c} onRemove={() => removeItem(it)}/>)}
+          </div>
+        )}
+      </div>
+
+      <div style={{ padding: "18px 22px", display: "flex", flexDirection: "column", gap: "14px", flex: 1 }}>
+        {/* Reflection prompts */}
+        <div>
+          <p style={{ margin: "0 0 8px", fontSize: "10px", color: c.border, letterSpacing: "0.1em", textTransform: "uppercase", fontFamily: "monospace" }}>Reflection prompts</p>
+          <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+            {panel.prompts.map((p, i) => (
+              <div key={i} style={{ backgroundColor: c.bg, borderRadius: "8px", padding: "9px 13px", borderLeft: `3px solid ${c.border}` }}>
+                <p style={{ margin: 0, fontSize: "12px", color: c.text, fontFamily: "Georgia, serif", lineHeight: 1.6 }}>{p}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Reflection text */}
+        <div>
+          <p style={{ margin: "0 0 6px", fontSize: "10px", color: T.inkGhost, letterSpacing: "0.1em", textTransform: "uppercase", fontFamily: "monospace" }}>Your reflection</p>
+          <textarea value={reflection} onChange={e => { setReflection(e.target.value); save(storageKey, e.target.value); }}
+            placeholder="Write your reflections on these prompts…" rows={4}
+            style={{ width: "100%", border: `1.5px solid ${T.lineFaint}`, borderRadius: "8px", padding: "10px 12px", fontSize: "12.5px", fontFamily: "Georgia, serif", color: T.inkMid, resize: "vertical", outline: "none", backgroundColor: T.bg, boxSizing: "border-box", lineHeight: 1.6 }}/>
+        </div>
+
+        {/* Key notes */}
+        <div>
+          <p style={{ margin: "0 0 6px", fontSize: "10px", color: T.inkGhost, letterSpacing: "0.1em", textTransform: "uppercase", fontFamily: "monospace" }}>Key notes & observations</p>
+          <div style={{ display: "flex", gap: "6px", alignItems: "center", border: `1.5px solid ${T.lineFaint}`, borderRadius: "8px", padding: "6px 10px", backgroundColor: "white" }}>
+            <input value={input} onChange={e => setInput(e.target.value)} onKeyDown={e => e.key === "Enter" && addItem(input)}
+              placeholder="Add a key observation…"
+              style={{ flex: 1, border: "none", outline: "none", fontSize: "13px", fontFamily: "Georgia, serif", color: T.inkMid, background: "transparent" }}/>
+            <button onClick={() => addItem(input)} style={{ padding: "4px 12px", borderRadius: "6px", cursor: "pointer", fontSize: "12px", backgroundColor: c.border, color: "white", border: "none", opacity: input.trim() ? 1 : 0.4 }}>Add</button>
+          </div>
+          {items.length > 0 && <div style={{ marginTop: "8px", display: "flex", flexWrap: "wrap", gap: "5px" }}>{items.map(it => <Chip key={it} label={it} color={c} onRemove={() => removeItem(it)}/>)}</div>}
+        </div>
+
+        {/* Suggestions */}
+        <div>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "5px" }}>
+            {panel.suggestions.filter(s => !items.includes(s)).map(s => <SuggPill key={s} label={s} color={c} onClick={() => addItem(s)}/>)}
+          </div>
+        </div>
+
+        {divider("Gaps, Growth & Supervision Goals")}
+
+        {/* Gaps prompts */}
+        <div>
+          <div style={{ display: "flex", flexDirection: "column", gap: "6px", marginBottom: "10px" }}>
+            {panel.gaps.map((p, i) => (
+              <div key={i} style={{ backgroundColor: "#F9F5EF", borderRadius: "8px", padding: "9px 13px", borderLeft: `3px solid ${T.line}` }}>
+                <p style={{ margin: 0, fontSize: "12px", color: T.inkMid, fontFamily: "Georgia, serif", lineHeight: 1.6 }}>{p}</p>
+              </div>
+            ))}
+          </div>
+          <textarea value={gaps} onChange={e => { setGaps(e.target.value); save(gapsKey, e.target.value); }}
+            placeholder="Note any gaps, areas for growth, or supervision goals related to this layer…" rows={4}
+            style={{ width: "100%", border: `1.5px solid ${T.lineFaint}`, borderRadius: "8px", padding: "10px 12px", fontSize: "12.5px", fontFamily: "Georgia, serif", color: T.inkMid, resize: "vertical", outline: "none", backgroundColor: "#F9F5EF", boxSizing: "border-box", lineHeight: 1.6 }}/>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 const RING_DETAIL = {
-  wob:      { title: "Way of Being — the Foundation", body: "I-Thou position · Unconditional Positive Regard · The quality of your relational presence. Way of Being is the Foundation." },
-  alliance: { title: "Therapeutic Alliance", body: "Content Dimension: Goals, Tasks & Bonds · Interpersonal Dimension: Individuals, Subsystems, Whole Family · Neurobiology Understandings · Mentalization · PACEful Interactions." },
-  systemic: { title: "Systemic Thinking — The Helicopter", body: "Structural Consideration · Family Life Cycle · Stressors · Strengths · Systemic Context (Genogram & Timeline) · Meaning Making · Emotions · Client Ecosystem · The Dances." },
-  therapy:  { title: "Therapy / Intervention", body: "Decision Making: Theory of Change, context, resources & constraints, Timing & Staging. Ongoing Review. E.g., CBT, ACT, DDP, MBT, Play Therapy, DBT, COS, Art Therapy, Somatic Approaches, IFS." },
+  wob:      { title: "Way of Being — the Foundation", body: "Click to reflect & identify growth areas" },
+  alliance: { title: "Therapeutic Alliance", body: "Click to reflect & identify growth areas" },
+  systemic: { title: "Systemic Formulation & Practice", body: "Click to reflect & identify growth areas" },
+  therapy:  { title: "Therapy & Intervention in the Room", body: "Click to reflect & identify growth areas" },
 };
 
 function MapView({ satItems, onSatAdd, onSatRemove }) {
   const [hovRing, setHovRing] = useState(null);
   const [hovSat, setHovSat]   = useState(null);
   const [openSat, setOpenSat] = useState(null);
+  const [openRing, setOpenRing] = useState(null);
 
   const W = 1240, H = 1240, CX = 620, CY = 620;
   const SAT_ORBIT = 490, SAT_R = 68;
@@ -398,8 +595,9 @@ function MapView({ satItems, onSatAdd, onSatRemove }) {
           {/* Ellipses — outermost first */}
           {E.map(e => (
             <ellipse key={e.key} cx={CX} cy={CY} rx={e.rx} ry={e.ry}
-              fill="white" stroke="#1A1A1A" strokeWidth={hovRing === e.key ? e.sw + 2 : e.sw}
+              fill="white" stroke="#1A1A1A" strokeWidth={hovRing === e.key || openRing === e.key ? e.sw + 2 : e.sw}
               onMouseEnter={() => setHovRing(e.key)} onMouseLeave={() => setHovRing(null)}
+              onClick={() => { setOpenRing(openRing === e.key ? null : e.key); setOpenSat(null); }}
               style={{ cursor: "pointer", transition: "stroke-width 0.18s" }}/>
           ))}
 
@@ -531,24 +729,25 @@ function MapView({ satItems, onSatAdd, onSatRemove }) {
       </div>
 
       {/* Instruction strip */}
-      {!openSat && (
+      {!openSat && !openRing && (
         <p style={{ textAlign: "center", fontSize: "11px", color: T.inkGhost, fontFamily: "Georgia, serif", fontStyle: "italic", margin: "8px 0 0" }}>
-          Click any satellite node to open its reflection prompts and build your framework
+          Click any satellite node or ellipse ring to open reflection prompts
         </p>
       )}
 
       {/* Slide-in satellite panel */}
       {activeSat && (
         <>
-          {/* Backdrop */}
           <div onClick={() => setOpenSat(null)} style={{ position: "fixed", inset: 0, backgroundColor: "#00000022", zIndex: 999 }}/>
-          <SatPanel
-            sat={activeSat}
-            items={satItems[activeSat.id] || []}
-            onAdd={onSatAdd}
-            onRemove={onSatRemove}
-            onClose={() => setOpenSat(null)}
-          />
+          <SatPanel sat={activeSat} items={satItems[activeSat.id] || []} onAdd={onSatAdd} onRemove={onSatRemove} onClose={() => setOpenSat(null)}/>
+        </>
+      )}
+
+      {/* Slide-in ring panel */}
+      {openRing && (
+        <>
+          <div onClick={() => setOpenRing(null)} style={{ position: "fixed", inset: 0, backgroundColor: "#00000022", zIndex: 999 }}/>
+          <RingPanel ringKey={openRing} onClose={() => setOpenRing(null)}/>
         </>
       )}
     </div>
@@ -671,6 +870,138 @@ function SupervisionQView() {
   );
 }
 
+// ─── CASE REFLECTION VIEW ────────────────────────────────────────────────────
+const CASE_SECTIONS = [
+  {
+    id: "context",
+    label: "Client & Context",
+    icon: "◇",
+    color: { bg: "#EAF0F8", border: "#3A68B0", text: "#162848" },
+    desc: "Brief context for the case or session you are reflecting on",
+    prompts: [
+      "Who is this client/family — what is the presenting concern and how long have you been working together?",
+      "What is the broader system context — who else is involved, what services, what pressures?",
+      "What stage of the work are you at — beginning, middle, ending — and what does that mean for this session?",
+    ],
+  },
+  {
+    id: "wob_case",
+    label: "Way of Being in This Session",
+    icon: "◉",
+    color: { bg: "#FEF6EE", border: "#C07840", text: "#5A2A10" },
+    desc: "How your relational presence showed up — I-Thou, UPR, personal material",
+    prompts: [
+      "How present and attuned were you in this session — what was your Way of Being like?",
+      "Were there moments of I-It — where the client became a problem to solve rather than a person to be with? What happened?",
+      "What personal material, family of origin stories or lived experiences were activated in you during this session?",
+      "How did your Social GRACES show up — what did you notice about the relational dynamics between you and this client?",
+    ],
+  },
+  {
+    id: "alliance_case",
+    label: "Therapeutic Alliance in This Session",
+    icon: "◈",
+    color: { bg: "#EFF0FA", border: "#5060B8", text: "#1A2060" },
+    desc: "The quality, strengths and ruptures of the alliance in this session",
+    prompts: [
+      "How would you describe the alliance in this session — what type of relationship were you working with?",
+      "Were there moments of rupture or disconnection — and how did you respond?",
+      "How safe did the client feel — what told you this neurobiologically and relationally?",
+      "How well-aligned were you and the client on the goals and tasks of the session?",
+    ],
+  },
+  {
+    id: "formulation_case",
+    label: "Systemic Formulation — What Was Present",
+    icon: "◎",
+    color: { bg: "#EAF5EC", border: "#3A8A58", text: "#163820" },
+    desc: "How your systemic thinking and formulation shaped the session",
+    prompts: [
+      "What systemic hypothesis were you working from in this session — and did it hold, shift or deepen?",
+      "How did the broader ecosystem — family, services, context — show up in the room?",
+      "What patterns, dances or sequences were visible in this session?",
+      "What did you notice about strengths, resilience or exceptions to the problem?",
+    ],
+  },
+  {
+    id: "intervention_case",
+    label: "Therapy & Intervention — What You Did",
+    icon: "◆",
+    color: { bg: "#F5E6F0", border: "#A03880", text: "#481830" },
+    desc: "The actual interventions, grounded in all the layers that came before",
+    prompts: [
+      "What did you actually do in the room — which approaches, techniques or modalities did you use?",
+      "How intentional vs intuitive were your choices — and what does that tell you?",
+      "What was the client's response — what worked, what landed, what didn't?",
+      "How did you sequence and time your interventions — what shaped when you moved and when you waited?",
+      "How did your Way of Being, the alliance and your formulation support — or constrain — what you did?",
+    ],
+  },
+  {
+    id: "learning_case",
+    label: "Learning & Next Steps",
+    icon: "○",
+    color: { bg: "#F5F0E0", border: "#907020", text: "#3A2C00" },
+    desc: "What this session reveals about your developing practice",
+    prompts: [
+      "What would you do differently — and what does that illuminate about your growth edges?",
+      "What did this session reveal about gaps in your framework, knowledge or skills?",
+      "What do you want to bring to supervision from this reflection?",
+      "What is one thing you want to carry forward into your next session with this client?",
+    ],
+  },
+];
+
+function CaseSection({ section }) {
+  const c = section.color;
+  const textKey = `pfm_case_${section.id}`;
+  const [open, setOpen] = useState(false);
+  const [reflection, setReflection] = useState(() => { try { return localStorage.getItem(textKey) || ""; } catch { return ""; } });
+  const saveTimer = useRef(null);
+  const save = val => {
+    clearTimeout(saveTimer.current);
+    saveTimer.current = setTimeout(() => { try { localStorage.setItem(textKey, val); } catch {} }, 500);
+  };
+  return (
+    <div style={{ borderRadius: "14px", overflow: "hidden", border: `1.5px solid ${open ? c.border : T.lineFaint}`, boxShadow: open ? `0 4px 24px ${c.border}22` : "0 1px 3px #00000008", transition: "all 0.2s" }}>
+      <div onClick={() => setOpen(o => !o)} style={{ display: "flex", alignItems: "center", gap: "12px", padding: "14px 18px", cursor: "pointer", backgroundColor: open ? c.bg : "white", borderBottom: open ? `1px solid ${c.border}33` : "none", transition: "background 0.2s" }}>
+        <span style={{ fontSize: "18px", color: c.border }}>{section.icon}</span>
+        <div style={{ flex: 1 }}>
+          <span style={{ fontSize: "14px", fontWeight: "700", color: T.inkMid, fontFamily: "Georgia, serif" }}>{section.label}</span>
+          {reflection && <span style={{ marginLeft: "8px", fontSize: "9px", color: c.border, fontFamily: "monospace", backgroundColor: c.bg, border: `1px solid ${c.border}44`, borderRadius: "100px", padding: "1px 7px" }}>notes saved</span>}
+          <p style={{ margin: "2px 0 0", fontSize: "11px", color: T.inkFaint, fontFamily: "Georgia, serif", lineHeight: 1.4 }}>{section.desc}</p>
+        </div>
+        <span style={{ color: T.inkGhost, fontSize: "12px", transform: open ? "rotate(180deg)" : "none", transition: "transform 0.2s" }}>▾</span>
+      </div>
+      {open && (
+        <div style={{ padding: "16px 18px 18px", display: "flex", flexDirection: "column", gap: "12px", backgroundColor: "white" }}>
+          <div style={{ backgroundColor: c.bg, borderRadius: "8px", padding: "12px 14px", borderLeft: `3px solid ${c.border}` }}>
+            <p style={{ margin: "0 0 6px", fontSize: "10px", color: c.border, letterSpacing: "0.08em", textTransform: "uppercase", fontFamily: "monospace" }}>Reflection prompts</p>
+            {section.prompts.map((p, i) => <p key={i} style={{ margin: "4px 0 0", fontSize: "12px", color: c.text, fontFamily: "Georgia, serif", lineHeight: 1.6 }}>· {p}</p>)}
+          </div>
+          <textarea value={reflection} onChange={e => { setReflection(e.target.value); save(e.target.value); }}
+            placeholder="Write your reflection here…" rows={5}
+            style={{ width: "100%", border: `1.5px solid ${T.lineFaint}`, borderRadius: "8px", padding: "10px 12px", fontSize: "12.5px", fontFamily: "Georgia, serif", color: T.inkMid, resize: "vertical", outline: "none", backgroundColor: T.bg, boxSizing: "border-box", lineHeight: 1.6 }}/>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function CaseReflectionView() {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+      <div style={{ padding: "18px 22px", backgroundColor: T.bgDeep, borderRadius: "12px", border: `1px solid ${T.line}` }}>
+        <h2 style={{ margin: "0 0 4px", fontFamily: "Georgia, serif", fontSize: "18px", color: T.inkMid, fontWeight: "700" }}>Case Reflection</h2>
+        <p style={{ margin: 0, fontSize: "12px", color: T.inkFaint, fontFamily: "Georgia, serif", lineHeight: 1.6 }}>
+          A structured reflection on a specific client or session — working through each layer of the SIPM from Way of Being through to the intervention in the room.
+        </p>
+      </div>
+      {CASE_SECTIONS.map(s => <CaseSection key={s.id} section={s}/>)}
+    </div>
+  );
+}
+
 // ─── MAIN APP ────────────────────────────────────────────────────────────────
 
 // Load saved data from localStorage or return default
@@ -712,6 +1043,12 @@ export default function App() {
     localStorage.removeItem("pfm_satItems");
     localStorage.removeItem("pfm_notes");
     SAT_DEFS.forEach(s => localStorage.removeItem(`pfm_reflection_${s.id}`));
+    Object.keys(RING_PANELS).forEach(k => {
+      localStorage.removeItem(`pfm_ring_${k}`);
+      localStorage.removeItem(`pfm_ring_gaps_${k}`);
+      localStorage.removeItem(`pfm_ring_items_${k}`);
+    });
+    CASE_SECTIONS.forEach(s => localStorage.removeItem(`pfm_case_${s.id}`));
     setAllItems({ values: [], theories: [], approaches: [], influences: [], self: [], context: [] });
     setSatItems({ systems: [], foundational: [], epistemology: [], humanrights: [], antioppressive: [], cultural: [], ethics: [], philosophy: [], contemporary: [] });
     setNotes("");
@@ -723,6 +1060,7 @@ export default function App() {
     { id: "editor",    label: "Editor" },
     { id: "summary",   label: "Summary" },
     { id: "questions", label: "Supervision Qs" },
+    { id: "case",      label: "Case Reflection" },
   ];
 
   return (
@@ -796,6 +1134,7 @@ export default function App() {
 
         {tab === "summary"   && <SummaryView allItems={allItems} satItems={satItems} notes={notes}/>}
         {tab === "questions" && <SupervisionQView/>}
+        {tab === "case"      && <CaseReflectionView/>}
       </div>
     </div>
   );
