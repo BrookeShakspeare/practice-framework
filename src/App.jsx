@@ -1,4 +1,3 @@
-import { useState, useRef, useCallback } from "react";
 
 // ─── DESIGN TOKENS ───────────────────────────────────────────────────────────
 const T = {
@@ -98,7 +97,7 @@ const SAT_DEFS = [
       "How does your professional discipline's training shape what you foreground in assessment and what you overlook — and where does that create blind spots?",
     ],
     suggestions: [
-      "Attachment Theory (Bowlby)","Polyvagal Theory (Porges)","Interpersonal Neurobiology (Siegel)","Developmental Psychology","Dyadic Developmental Psychotherapy (DDP)","Mentalization (Fonagy)","Trauma-Informed Practice","PACE framework","Window of tolerance (Ogden)","ACEs framework",
+      "Attachment Theory (Bowlby)","Polyvagal Theory (Porges)","Interpersonal Neurobiology (Siegel)","Developmental Psychology","Dyadic Developmental Psychotherapy (DDP)","Mentalization (Fonagy)","Trauma-Informed Practice","PACE framework","Window of tolerance (Ogden)","ACEs framework","Circle of Security (COS)","Triple P (PPP)",
       "Multi-level diagnostic formulation (O'Keeffe & Macaulay)","Biopsychosocial model (Engel)","Bronfenbrenner's ecological theory","Neuropsychological constructs","Temporal axis (predisposing · precipitating · perpetuating)","Strengths & resilience focus","Beyond categorical diagnosis","Behavioural level","Neuropsychological level","Biological level","Environmental/family level",
     ],
   },
@@ -470,16 +469,18 @@ const RING_PANELS = {
       "What is your systemic hypothesis about what is maintaining the presenting problem?",
       "What does the genogram reveal about multigenerational patterns, triangles, and transmission processes?",
       "How are you holding the full ecosystem — family, school, services, community — in your formulation?",
+      "How are broader societal factors — structural oppression, racism, poverty, housing, systemic disadvantage — present in this person's situation, and how are these held in your formulation rather than located within the individual?",
       "What are the behavioural sequences (the 'dances') around the problem — and what function might the symptom serve in the system?",
       "What are the strengths, resources and resilience in this system that you can build on?",
+      "How are you actively considering anti-oppressive practice in this work — how are you attending to power, privilege, structural oppression and the risk of imposing Western frameworks in ways that may not fit this client's culture, context or knowledge systems?",
       "What primary, secondary and rejected pictures are shaping your formulation — and what might you be missing?",
     ],
     gaps: [
       "Where does your systemic formulation feel thin or underdeveloped — what are you not yet seeing?",
-      "Which schools of family therapy or systemic tools do you draw on least — and what would it mean to develop these?",
-      "What training or practice would most strengthen your systemic assessment and formulation skills?",
+      "How explicitly are you holding broader societal and structural factors in your formulation — or are you inadvertently locating the problem within the individual or family?",
+      "What training or practice would most strengthen your systemic assessment, formulation and anti-oppressive practice skills?",
     ],
-    suggestions: ["Systemic hypothesis","Genogram findings","Ecosystem mapping","Behavioural sequences","Function of symptom","Meaning & narrative","Strengths & resilience","Vertical stressors","Family Life Cycle stage","Multigenerational patterns","Primary picture named"],
+    suggestions: ["Systemic hypothesis","Genogram findings","Ecosystem mapping","Behavioural sequences","Function of symptom","Meaning & narrative","Strengths & resilience","Vertical stressors","Family Life Cycle stage","Multigenerational patterns","Broader societal factors","Structural oppression","Anti-oppressive practice","Primary picture named"],
   },
   therapy: {
     title: "Therapy & Intervention in the Room",
@@ -489,18 +490,20 @@ const RING_PANELS = {
       "Before reflecting on technique — how were your Way of Being, the alliance, and your systemic formulation present and active in this session?",
       "What was your theory of change for this session — and did your interventions align with it?",
       "What did you actually do in the room — which approaches, techniques or modalities did you draw on, and why those?",
+      "How did you attend to the self of the therapist in your decision-making — your wobble points, your theory of change preferences, your reactions to this client or family?",
       "How intentional vs intuitive were your choices in session — and what does that tell you about your conscious competence?",
+      "How did you consider anti-oppressive practice in your intervention decisions — were you alert to power dynamics, cultural fit, and the risk of imposing frameworks that may not suit this client's context, identity or knowledge systems?",
       "What was the client's response to your interventions — what worked, what landed, what didn't?",
       "How did you sequence and time your interventions — what shaped your decisions about when to move and when to wait?",
       "What would you do differently — and what does that illuminate about your developing practice?",
-      "How did the layers beneath — Way of Being, Alliance, Systemic thinking — support or constrain your interventions?",
+      "How did the layers beneath — Way of Being, Alliance, Systemic Formulation — support or constrain your interventions?",
     ],
     gaps: [
       "Where do you notice your intervention choices becoming narrow, habitual or reactive rather than intentional?",
-      "Which therapeutic modalities or approaches do you want to develop further in your direct practice?",
-      "What would more conscious competence look like in your intervention choices — what would you be doing differently?",
+      "How well do you attend to the self of the therapist in your decision-making — your wobble points, contagious anxiety, and theory of change preferences?",
+      "What would more conscious competence and anti-oppressive practice look like in your intervention choices — what would you be doing differently?",
     ],
-    suggestions: ["Theory of change applied","Intentional intervention","Technique selection rationale","Client response observed","Timing & sequencing","Conscious competence","Intuitive vs deliberate","What worked & why","What didn't land","Would do differently","Integration of layers","Ongoing review process"],
+    suggestions: ["Theory of change applied","Self of therapist","Wobble points managed","Anti-oppressive practice","Intentional intervention","Technique selection rationale","Client response observed","Timing & sequencing","Conscious competence","Intuitive vs deliberate","What worked & why","What didn't land","Would do differently","Integration of layers","Ongoing review process"],
   },
 };
 
@@ -715,37 +718,38 @@ function MapView({ satItems, onSatAdd, onSatRemove }) {
 
           {/* Left side — x between CX-252 and CX-128 */}
           {T2({ x: CX - 186, y: CY - 82, rows: ["Structural", "Consideration:", "Family &", "Stakeholder", "Systems"], size: 9, fill: "#222" })}
-          {T2({ x: CX - 186, y: CY + 20, rows: ["Family", "Life Cycle"], size: 9, fill: "#222" })}
-          {T2({ x: CX - 186, y: CY + 58, rows: ["Vertical &", "Horizontal", "Stressors"], size: 9, fill: "#222" })}
-          {T2({ x: CX - 162, y: CY + 118, rows: ["Strengths,", "Resources", "& Resilience"], size: 9, fill: "#222" })}
+          {T2({ x: CX - 186, y: CY + 14, rows: ["Family", "Life Cycle"], size: 9, fill: "#222" })}
+          {T2({ x: CX - 186, y: CY + 46, rows: ["Vertical &", "Horizontal", "Stressors"], size: 9, fill: "#222" })}
+          {T2({ x: CX - 178, y: CY + 82, rows: ["Broader Societal", "Factors e.g.,", "structural", "oppression"], size: 8.5, fill: "#222", dy: 11 })}
+          {T2({ x: CX - 140, y: CY + 138, rows: ["Strengths,", "Resources", "& Resilience"], size: 9, fill: "#222" })}
 
           {/* Right side — x between CX+128 and CX+252 */}
           {T2({ x: CX + 182, y: CY - 82, rows: ["Systemic", "Context", "(Genogram", "& Timeline)"], size: 9, fill: "#222" })}
           {T2({ x: CX + 182, y: CY + 16, rows: ["Meaning", "Making"], size: 9, fill: "#222" })}
           {T2({ x: CX + 182, y: CY + 52, rows: ["Emotions"], size: 9, fill: "#222" })}
-          {T2({ x: CX + 182, y: CY + 68, rows: ["Client(s)'s", "Ecosystem"], size: 9, fill: "#222" })}
+          {T2({ x: CX + 182, y: CY + 72, rows: ["Client(s)'s", "Ecosystem"], size: 9, fill: "#222" })}
           {T2({ x: CX + 138, y: CY + 110, rows: ['The "Dances":', "Problem &", "Exception", "Patterns"], size: 8.5, fill: "#222", dy: 11 })}
 
           {/* THERAPY / INTERVENTION — inner ellipse rx=128 ry=106 */}
-          {/* Decision Making box — top. 3 text rows at dy=11 after title = needs ~52px height */}
-          <rect x={CX-58} y={CY-102} width={116} height={52} rx={4} fill="white" stroke="#333" strokeWidth="1.5" style={{ pointerEvents: "none" }}/>
-          {T2({ x: CX, y: CY - 88, rows: ["Decision Making:"], size: 8.5, bold: true })}
-          {T2({ x: CX, y: CY - 76, rows: ["Theory of Change,", "context, resources,", "timing & staging"], size: 7.5, fill: "#444", dy: 11 })}
+          {/* Decision Making box — top — taller to fit 5 rows */}
+          <rect x={CX-58} y={CY-102} width={116} height={60} rx={4} fill="white" stroke="#333" strokeWidth="1.5" style={{ pointerEvents: "none" }}/>
+          {T2({ x: CX, y: CY - 89, rows: ["Decision Making:"], size: 8.5, bold: true })}
+          {T2({ x: CX, y: CY - 77, rows: ["Theory of Change,", "context, resources,", "timing & staging,", "decolonizing,", "self of therapist"], size: 7, fill: "#444", dy: 10 })}
 
           {/* Down arrow */}
-          <polygon points={`${CX-9},${CY-49} ${CX+9},${CY-49} ${CX+9},${CY-38} ${CX+16},${CY-38} ${CX},${CY-26} ${CX-16},${CY-38} ${CX-9},${CY-38}`} fill="#333" opacity="0.85" style={{ pointerEvents: "none" }}/>
+          <polygon points={`${CX-9},${CY-41} ${CX+9},${CY-41} ${CX+9},${CY-30} ${CX+16},${CY-30} ${CX},${CY-18} ${CX-16},${CY-30} ${CX-9},${CY-30}`} fill="#333" opacity="0.85" style={{ pointerEvents: "none" }}/>
 
           {/* Therapy label + list */}
-          {T2({ x: CX, y: CY - 14, rows: ["Therapy/Intervention"], size: 10, bold: true })}
-          {T2({ x: CX, y: CY + 0, rows: ["CBT, ACT, DDP, MBT,", "Play Therapy, DBT,", "Somatic, IFS, COS,", "Art Therapy & more"], size: 7.5, fill: "#333", dy: 11 })}
+          {T2({ x: CX, y: CY - 7, rows: ["Therapy/Intervention"], size: 9.5, bold: true })}
+          {T2({ x: CX, y: CY + 5, rows: ["Systemic FT (1st, 2nd, 3rd Gen),", "Psychoeducation, ACT, DDP,", "MBT, Play Therapy, CBT,", "DBT, PPP, COS, Art Therapy,", "Somatic Approaches."], size: 7, fill: "#333", dy: 10 })}
 
           {/* Up arrow */}
-          <polygon points={`${CX-9},${CY+46} ${CX+9},${CY+46} ${CX+9},${CY+57} ${CX+16},${CY+57} ${CX},${CY+69} ${CX-16},${CY+57} ${CX-9},${CY+57}`} fill="#333" opacity="0.85" style={{ pointerEvents: "none" }}/>
+          <polygon points={`${CX-9},${CY+56} ${CX+9},${CY+56} ${CX+9},${CY+67} ${CX+16},${CY+67} ${CX},${CY+79} ${CX-16},${CY+67} ${CX-9},${CY+67}`} fill="#333" opacity="0.85" style={{ pointerEvents: "none" }}/>
 
           {/* Ongoing Review box — bottom */}
-          <rect x={CX-58} y={CY+71} width={116} height={32} rx={4} fill="white" stroke="#333" strokeWidth="1.5" style={{ pointerEvents: "none" }}/>
-          {T2({ x: CX, y: CY + 84, rows: ["Ongoing Review:"], size: 8.5, bold: true })}
-          {T2({ x: CX, y: CY + 96, rows: ["Circular & Collaborative"], size: 7.5, fill: "#444" })}
+          <rect x={CX-58} y={CY+81} width={116} height={24} rx={4} fill="white" stroke="#333" strokeWidth="1.5" style={{ pointerEvents: "none" }}/>
+          {T2({ x: CX, y: CY + 90, rows: ["Ongoing Review:"], size: 8, bold: true })}
+          {T2({ x: CX, y: CY + 100, rows: ["Circular & Collaborative"], size: 7, fill: "#444" })}
 
           {/* FOUNDATION STATEMENTS — correctly placed within their own ring band */}
 
@@ -813,7 +817,7 @@ function MapView({ satItems, onSatAdd, onSatRemove }) {
             </g>
           )}
 
-          <text x={W - 14} y={H - 10} textAnchor="end" fontSize="8" fill="#B8A898" fontFamily="monospace">SIPM: White &amp; Owen (2022) · Dr Leonie White</text>
+          <text x={W - 14} y={H - 10} textAnchor="end" fontSize="8" fill="#B8A898" fontFamily="monospace">Systemic Meta-Framework for Integrative Practice · Dr Leonie White · Therapywell</text>
         </svg>
       </div>
 
@@ -1007,21 +1011,15 @@ const CASE_SECTIONS = [
     color: { bg: "#EAF5EC", border: "#3A8A58", text: "#163820" },
     desc: "A multi-level understanding: observable behaviours · neuropsychological constructs · biological factors · environmental systems",
     prompts: [
-      // Behavioural level
       "What are the presenting symptoms and functional skills — both difficulties (weaknesses) and competencies (strengths)? What are the observable behaviours and functional concerns that brought this person to you?",
-      // Neuropsychological level
       "What neuropsychological constructs help explain what you are observing? Consider: attention control, executive function (planning, impulse control, self-monitoring), emotional regulation, social competence, language, memory, higher order cognition. What is the underlying process beneath the surface behaviour?",
-      // Biological level
       "What biological factors — genetic, neurological, developmental, medical — may be predisposing or contributing to this presentation? Are there biological red flags requiring further investigation?",
-      // Environmental/family level
       "What does the environmental and family assessment reveal? How are family interaction patterns, beliefs, parenting, sibling dynamics, and broader social systems (school, community, services) contributing to and maintaining the presenting concern?",
-      // Temporal axis
+      "How are broader societal factors — structural oppression, racism, poverty, housing instability, systemic disadvantage — present in this person's situation? How are these held in your formulation rather than located within the individual or family?",
       "What predisposed this person to this difficulty (early biological or environmental risk factors)? What precipitated the current presentation (acute stressors or events)? What is perpetuating it (biological, psychological or environmental maintaining factors)?",
-      // Systemic formulation
       "What is your systemic hypothesis about what is maintaining the presenting problem — what is keeping this from being resolved? How are you holding the full ecosystem in your formulation?",
-      // Strengths & resilience
+      "How are you actively considering anti-oppressive practice in this case — how are you attending to power, privilege, structural oppression and the risk of imposing Western frameworks in ways that may not fit this client's culture, context or knowledge systems?",
       "What are the strengths, affinities, resilience factors and protective elements in this person, their family, school and community — and how are you building these explicitly into the formulation and management plan?",
-      // Prognosis
       "What is your prognosis — with and without intervention? What is likely to happen for this person over time, and what does that mean for your plan?",
     ],
   },
@@ -1033,8 +1031,11 @@ const CASE_SECTIONS = [
     desc: "The actual interventions, grounded in all the layers that came before",
     prompts: [
       "Before reflecting on technique — how were your Way of Being, the alliance, and your formulation present and active in this session?",
+      "What was your theory of change for this session — and did your interventions align with it?",
       "What did you actually do in the room — which approaches, techniques or modalities did you draw on, and why those?",
+      "How did you attend to the self of the therapist in your decision-making — your wobble points, your anxiety, your theory of change preferences, and any pull toward induction?",
       "How intentional vs intuitive were your choices — and what does that tell you about your conscious competence?",
+      "How did you consider anti-oppressive practice in your intervention decisions — were you alert to power dynamics, cultural fit, and the risk of imposing frameworks that may not suit this client's context, identity or knowledge systems?",
       "What was the client's response — what worked, what landed, what didn't?",
       "How did you sequence and time your interventions — what shaped when you moved and when you waited?",
       "How did the layers beneath — Way of Being, Alliance, Formulation — support or constrain what you did in the room?",
@@ -1507,7 +1508,7 @@ function HowToUseView({ onNavigate }) {
       {/* Credit */}
       <div style={{ padding: "12px 18px", backgroundColor: T.bgDeep, borderRadius: "10px", border: `1px solid ${T.lineFaint}` }}>
         <p style={{ margin: 0, fontFamily: "Georgia, serif", fontSize: "11px", color: T.inkGhost, lineHeight: 1.7, fontStyle: "italic" }}>
-          Built around the Systemic Integrative Practice Model (SIPM) — White & Owen (2022), Dr Leonie White, Therapywell Allied Health and Wellbeing. See the References tab for full attribution.
+          Built around the <em>Systemic Meta-Framework for Integrative Practice</em> — Dr Leonie White, Therapywell Allied Health and Wellbeing. See the References tab for full attribution.
         </p>
       </div>
     </div>
@@ -1516,9 +1517,11 @@ function HowToUseView({ onNavigate }) {
 
 const REFERENCE_GROUPS = [
   {
-    heading: "Systemic Integrative Practice Model (SIPM)",
+    heading: "Systemic Meta-Framework for Integrative Practice",
     color: { bg: "#EAF5EC", border: "#3A8A58", text: "#163820" },
     refs: [
+      { authors: "White, L.", year: "2025", title: "Systemic Meta-Framework for Integrative Practice", source: "Therapywell Allied Health and Wellbeing. www.drleoniewhite.com" },
+      { authors: "White, L.", year: "2025", title: "Embracing Systemic Integrative Practice: A Meta-Framework and Roadmap", source: "Phoenix Family Therapy Academy Blog. Retrieved from https://www.phoenixftacademy.com/post/embracing-systemic-integrative-practice-a-meta-framework-and-roadmap [Updated model including Decision Making, Decolonizing, Self of Therapist, and Broader Societal Factors]" },
       { authors: "White, L. & Owen, K.", year: "2022", title: "Systemic Integrative Practice: A Meta-Framework", source: "Australian and New Zealand Journal of Family Therapy, 43, 33–53." },
       { authors: "White, L.", year: "2022", title: "Editorial: Integrative practice in family therapy", source: "Australian and New Zealand Journal of Family Therapy, 43, 3–8." },
       { authors: "Fife, S., Whiting, J., Bradford, K. & Davis, S.", year: "2014", title: "The therapeutic pyramid: A common factors synthesis of techniques, alliance and way of being", source: "Journal of Marital and Family Therapy, 40(1), 20–33." },
@@ -1647,7 +1650,7 @@ function ReferencesView() {
       <div style={{ padding: "14px 18px", backgroundColor: "white", borderRadius: "12px", border: `1px solid ${T.lineFaint}` }}>
         <p style={{ margin: "0 0 6px", fontFamily: "Georgia, serif", fontSize: "13px", fontWeight: "700", color: T.inkMid }}>Primary Framework</p>
         <p style={{ margin: 0, fontFamily: "Georgia, serif", fontSize: "12.5px", color: T.inkFaint, lineHeight: 1.7 }}>
-          This tool is built around the <strong style={{ color: T.inkMid }}>Systemic Integrative Practice Model (SIPM)</strong> developed by Dr Leonie White and Kylie Owen (2022), hosted by Therapywell Allied Health and Wellbeing. The supervision framework also draws on Kieran O'Donoghue's <em>Restorying Social Work Supervision</em> (2003). The multi-level diagnostic formulation framework is drawn from O'Keeffe & Macaulay (2012).
+          This tool is built around the <strong style={{ color: T.inkMid }}>Systemic Meta-Framework for Integrative Practice</strong> developed by Dr Leonie White, Therapywell Allied Health and Wellbeing. The supervision framework also draws on Kieran O'Donoghue's <em>Restorying Social Work Supervision</em> (2003). The multi-level diagnostic formulation framework is drawn from O'Keeffe & Macaulay (2012).
         </p>
       </div>
 
