@@ -143,16 +143,32 @@ const SAT_DEFS = [
   {
     id: "philosophy", angle: 190,
     title: "Philosophy of Practice & Professional Identity", icon: "◐",
-    tagline: "Why this work — your theory of the person, of change, and of what it means to help",
+    tagline: "Your internal architecture — the synthesis of values, beliefs and identity that guides you when nobody is watching",
     color: { bg: "#E8F5F0", border: "#208870", text: "#083828" },
     prompts: [
-      "What is your philosophy of what it means to help another person?",
-      "What is your theory of the person — how do you understand human nature, suffering and growth?",
-      "How does your professional discipline shape what you think change looks like — and is that the same as what you actually believe?",
-      "How has your philosophy of practice evolved over your career — what has shifted and why?",
-      "What does it mean to you to work systemically when your discipline's dominant paradigm may be individualistic?",
+      // Internalized professionalism
+      "How have you moved from complying with professional rules to genuinely embodying the values and ethics of your field as your own — what does that look like in practice?",
+      // Portable sense of self
+      "How would you describe your 'portable' professional identity — the consistent way of being, thinking and acting that you carry with you regardless of role, organisation or context?",
+      // Integration of personal and professional
+      "How have your life experiences, cultural background, family of origin and personality been deliberately woven into your professional identity — not set aside, but integrated?",
+      // Unique value proposition
+      "What unique perspective, skill set or way of being do you bring to your field — what do clients, colleagues and systems get from you that they wouldn't get from someone else?",
+      // Epistemology of practice
+      "How do you know what you know? How do you weigh research, theory, experience, intuition and the wisdom of clients in your decision-making?",
+      // Ethical anchors
+      "Which core ethical principles — justice, autonomy, integrity, dignity — do you refuse to compromise even under organisational pressure or ambiguity?",
+      // The 3 R's
+      "How do reflection, relationships and resilience show up as active practices in your professional life — not just ideals, but lived habits?",
+      // Community of practice
+      "How do your personal values harmonise — or sit in tension — with the professional norms and expectations of your discipline and organisation?",
+      // Evolution
+      "How has your philosophy of practice evolved over your career — what has shifted, what has deepened, and what have you had to let go of?",
     ],
-    suggestions: ["Existentialism","Phenomenology","Virtue ethics","Relational ethics","Theory of the person","Theory of change","Humanistic psychology","Positive psychology","Philosophy of mind","Meaning-making frameworks","Professional identity","Interdisciplinary practice","Conscious competence"],
+    suggestions: [
+      "Internalized professionalism","Portable professional identity","Personal-professional integration","Unique value proposition","Epistemology of practice","Ethical anchors","Virtue ethics","Relational ethics","Theory of the person","Theory of change",
+      "Reflection as practice","Resilience & burnout prevention","Community of practice alignment","Existentialism","Phenomenology","Humanistic psychology","Meaning-making","Conscious competence","The 3 R's: Reflection, Relationships, Resilience","Disciplinary identity",
+    ],
   },
   {
     id: "contemporary", angle: 230,
