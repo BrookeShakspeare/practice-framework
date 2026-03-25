@@ -1118,7 +1118,7 @@ function loadFromStorage(key, defaultValue) {
 }
 
 export default function App() {
-  const [tab, setTab] = useState("map");
+  const [tab, setTab] = useState("howto");
   const [allItems, setAllItems] = useState(() => loadFromStorage("pfm_allItems", { values: [], theories: [], approaches: [], influences: [], self: [], context: [] }));
   const [satItems, setSatItems] = useState(() => loadFromStorage("pfm_satItems", { systems: [], foundational: [], epistemology: [], humanrights: [], antioppressive: [], cultural: [], ethics: [], philosophy: [], contemporary: [] }));
   const [notes, setNotes] = useState(() => loadFromStorage("pfm_notes", ""));
@@ -1163,6 +1163,7 @@ export default function App() {
   const totalItems  = Object.values(allItems).flat().length + Object.values(satItems).flat().length;
 
   const tabs = [
+    { id: "howto",     label: "How to Use" },
     { id: "map",       label: "Visual Map" },
     { id: "editor",    label: "Editor" },
     { id: "summary",   label: "Summary" },
@@ -1245,6 +1246,7 @@ export default function App() {
         {tab === "questions" && <SupervisionQView/>}
         {tab === "case"      && <CaseReflectionView/>}
         {tab === "growth"    && <GrowthGapsView/>}
+        {tab === "howto"     && <HowToUseView onNavigate={setTab}/>}
         {tab === "refs"      && <ReferencesView/>}
       </div>
     </div>
@@ -1382,6 +1384,132 @@ function GrowthGapsView() {
           </div>
         </>
       )}
+    </div>
+  );
+}
+
+// ─── HOW TO USE VIEW ─────────────────────────────────────────────────────────
+function HowToUseView({ onNavigate }) {
+  const USE_CASES = [
+    {
+      icon: "◎", title: "Mapping your practice framework",
+      color: { bg: "#E6F0F8", border: "#3A68B0", text: "#162848" },
+      desc: "Use this when starting supervision, beginning with a new supervisor, or at key points in your professional development.",
+      steps: [
+        { tab: "map", label: "Visual Map", instruction: "Start here. The SIPM diagram sits at the centre — click any of the four ellipse rings (Way of Being, Therapeutic Alliance, Systemic Formulation, Therapy & Intervention) to open a reflection panel for that layer." },
+        { tab: "map", label: "Visual Map", instruction: "Then click each of the nine satellite nodes around the outside. Each one represents a knowledge base that informs your practice. Read the framework overview, then work through the reflection prompts." },
+        { tab: "editor", label: "Editor", instruction: "Use the Editor tab to add the specific theories, approaches, values and influences that make up your practice. Tap suggestions or type your own." },
+        { tab: "summary", label: "Summary", instruction: "The Summary tab collects everything you've added into one view — useful to bring to supervision as a snapshot of your framework." },
+      ],
+    },
+    {
+      icon: "◆", title: "Reflecting on a specific client or session",
+      color: { bg: "#F5E6F0", border: "#A03880", text: "#481830" },
+      desc: "Use this when you want to think through a case in depth — moving layer by layer from your Way of Being to what you actually did in the room.",
+      steps: [
+        { tab: "case", label: "Case Reflection", instruction: "Go to the Case Reflection tab. Work through the six sections in order — starting with the client context, then your Way of Being, the alliance, the formulation, the intervention, and finally your learning." },
+        { tab: "case", label: "Case Reflection", instruction: "You don't need to complete every section. Open the ones most relevant to what you want to bring to supervision. Each section saves automatically." },
+        { tab: "map", label: "Visual Map", instruction: "You can also click the SIPM rings on the Visual Map and use those panels to reflect on a specific client — the prompts are framed around live clinical situations." },
+        { tab: "questions", label: "Supervision Qs", instruction: "Use the Supervision Questions tab to generate discussion questions to bring to your supervisor after completing your case reflection." },
+      ],
+    },
+    {
+      icon: "○", title: "Identifying gaps and setting learning goals",
+      color: { bg: "#F5F0E0", border: "#907020", text: "#3A2C00" },
+      desc: "Use this periodically — at supervision, at the start of a training year, or when you're feeling stuck or uncertain in your practice.",
+      steps: [
+        { tab: "map", label: "Visual Map", instruction: "Click each SIPM ring on the Visual Map. At the bottom of each panel you'll find a Gaps, Growth & Supervision Goals section with specific prompts about where your knowledge or practice is thin." },
+        { tab: "case", label: "Case Reflection", instruction: "Complete a Case Reflection and pay particular attention to the final section — Learning & Next Steps — which asks what the session revealed about gaps in your framework." },
+        { tab: "growth", label: "Growth & Gaps", instruction: "Go to the Growth & Gaps tab. It automatically collects everything you've written in the gaps sections across all panels into one view. Use the Synthesis and Goals sections to identify patterns and build your supervision goals." },
+      ],
+    },
+    {
+      icon: "◈", title: "Preparing for a supervision session",
+      color: { bg: "#EAF5EC", border: "#3A8A58", text: "#163820" },
+      desc: "Use this in the hour before supervision to gather your thinking and identify what you most want to bring.",
+      steps: [
+        { tab: "summary", label: "Summary", instruction: "Review your Summary tab for an overview of your practice framework — this is useful context for your supervisor." },
+        { tab: "growth", label: "Growth & Gaps", instruction: "Check the Growth & Gaps tab to see what gaps and goals you've already identified — bring these to supervision explicitly." },
+        { tab: "questions", label: "Supervision Qs", instruction: "Work through one or two Supervision Questions and write brief notes. These give you something concrete to open the supervision conversation." },
+        { tab: "editor", label: "Editor", instruction: "Use the Supervision Notes field in the Editor tab to jot down specific questions, dilemmas or areas of uncertainty you want to raise." },
+      ],
+    },
+  ];
+
+  const NAV_TIPS = [
+    { icon: "◉", text: "Your data saves automatically as you type — you can close the app and return to find everything where you left it." },
+    { icon: "◎", text: "You don't need to use every tab. Start with what's most relevant to you right now — the tool is designed to be used flexibly and in any order." },
+    { icon: "◈", text: "On the Visual Map, click the ellipse rings to reflect on each SIPM layer. Click the satellite nodes to explore the knowledge bases informing your practice." },
+    { icon: "◇", text: "Panel descriptions can be collapsed — look for the 'Hide framework overview' toggle to bring the reflection prompts into view more quickly." },
+    { icon: "◆", text: "The References tab credits all authors and frameworks underpinning the tool — useful for further reading or citing in professional development portfolios." },
+  ];
+
+  const Block = ({ uc }) => {
+    const [open, setOpen] = useState(false);
+    const c = uc.color;
+    return (
+      <div style={{ borderRadius: "12px", overflow: "hidden", border: `1.5px solid ${open ? c.border : T.lineFaint}`, transition: "border-color 0.2s" }}>
+        <div onClick={() => setOpen(o => !o)} style={{ display: "flex", alignItems: "flex-start", gap: "12px", padding: "14px 18px", cursor: "pointer", backgroundColor: open ? c.bg : "white", borderBottom: open ? `1px solid ${c.border}33` : "none", transition: "background 0.2s" }}>
+          <span style={{ fontSize: "20px", color: c.border, flexShrink: 0, marginTop: "2px" }}>{uc.icon}</span>
+          <div style={{ flex: 1 }}>
+            <p style={{ margin: "0 0 3px", fontFamily: "Georgia, serif", fontSize: "14px", fontWeight: "700", color: T.inkMid }}>{uc.title}</p>
+            <p style={{ margin: 0, fontFamily: "Georgia, serif", fontSize: "11.5px", color: T.inkFaint, lineHeight: 1.5 }}>{uc.desc}</p>
+          </div>
+          <span style={{ color: T.inkGhost, fontSize: "12px", flexShrink: 0, transform: open ? "rotate(180deg)" : "none", transition: "transform 0.2s", marginTop: "4px" }}>▾</span>
+        </div>
+        {open && (
+          <div style={{ backgroundColor: "white", padding: "4px 18px 16px" }}>
+            {uc.steps.map((step, i) => (
+              <div key={i} style={{ display: "flex", gap: "12px", marginTop: "12px" }}>
+                <div style={{ flexShrink: 0, width: "22px", height: "22px", borderRadius: "50%", backgroundColor: c.bg, border: `1.5px solid ${c.border}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <span style={{ fontSize: "10px", fontFamily: "monospace", color: c.border, fontWeight: "700" }}>{i + 1}</span>
+                </div>
+                <div style={{ flex: 1 }}>
+                  <button onClick={() => onNavigate(step.tab)} style={{ marginBottom: "4px", padding: "2px 9px", borderRadius: "100px", border: `1px solid ${c.border}`, backgroundColor: c.bg, color: c.text, fontSize: "10px", fontFamily: "monospace", cursor: "pointer", letterSpacing: "0.04em" }}>
+                    → {step.label}
+                  </button>
+                  <p style={{ margin: 0, fontFamily: "Georgia, serif", fontSize: "12.5px", color: T.inkMid, lineHeight: 1.65 }}>{step.instruction}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    );
+  };
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
+      {/* Header */}
+      <div style={{ padding: "18px 22px", backgroundColor: T.bgDeep, borderRadius: "12px", border: `1px solid ${T.line}` }}>
+        <h2 style={{ margin: "0 0 4px", fontFamily: "Georgia, serif", fontSize: "18px", color: T.inkMid, fontWeight: "700" }}>How to Use This Tool</h2>
+        <p style={{ margin: 0, fontSize: "12px", color: T.inkFaint, fontFamily: "Georgia, serif", lineHeight: 1.65 }}>
+          This tool supports clinical supervision and professional development. It can be used in different ways depending on what you need — below are four common starting points. You don't need to use every feature; start with what's most relevant and explore from there.
+        </p>
+      </div>
+
+      {/* Use cases */}
+      {USE_CASES.map((uc, i) => <Block key={i} uc={uc}/>)}
+
+      {/* General tips */}
+      <div style={{ backgroundColor: "white", borderRadius: "12px", border: `1.5px solid ${T.lineFaint}`, padding: "16px 18px" }}>
+        <p style={{ margin: "0 0 10px", fontSize: "10px", color: T.inkGhost, letterSpacing: "0.1em", textTransform: "uppercase", fontFamily: "monospace" }}>Good to know</p>
+        <div style={{ display: "flex", flexDirection: "column", gap: "9px" }}>
+          {NAV_TIPS.map((tip, i) => (
+            <div key={i} style={{ display: "flex", gap: "10px", alignItems: "flex-start" }}>
+              <span style={{ fontSize: "13px", color: T.inkGhost, flexShrink: 0, marginTop: "1px" }}>{tip.icon}</span>
+              <p style={{ margin: 0, fontFamily: "Georgia, serif", fontSize: "12.5px", color: T.inkFaint, lineHeight: 1.6 }}>{tip.text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Credit */}
+      <div style={{ padding: "12px 18px", backgroundColor: T.bgDeep, borderRadius: "10px", border: `1px solid ${T.lineFaint}` }}>
+        <p style={{ margin: 0, fontFamily: "Georgia, serif", fontSize: "11px", color: T.inkGhost, lineHeight: 1.7, fontStyle: "italic" }}>
+          Built around the Systemic Integrative Practice Model (SIPM) — White & Owen (2022), Dr Leonie White, Therapywell Allied Health and Wellbeing. See the References tab for full attribution.
+        </p>
+      </div>
     </div>
   );
 }
