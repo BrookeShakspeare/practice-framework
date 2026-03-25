@@ -45,44 +45,95 @@ const SAT_DEFS = [
   {
     id: "systems", angle: -90,
     title: "Systems & Complexity Thinking", icon: "◎",
-    tagline: "How you understand relationship, pattern, context and circularity",
+    tagline: "From parts to wholes — understanding the web of relationships, patterns, context and circularity",
+    description: [
+      { label: "Relationship", body: "A system is not the sum of its parts — it is the product of their interaction. Key question: What does this part influence, and what influences it?" },
+      { label: "Pattern", body: "Recurring behaviours and underlying structures reveal root causes rather than isolated incidents. Key question: What is happening over time — why do we keep facing the same issue?" },
+      { label: "Context", body: "A situation cannot be understood in isolation — it must be understood within its environment. Key question: How does shifting the boundary of our investigation change how we understand this problem?" },
+      { label: "Circularity", body: "Events are interconnected feedback loops, not straight lines with a single root cause. Key question: What are the reinforcing or balancing feedback loops driving this behaviour?" },
+    ],
     color: { bg: "#E6F0F8", border: "#3A68B0", text: "#162848" },
     prompts: [
-      "Which aspects of systems and complexity thinking most shape how you see your clients and their world?",
-      "How do you hold circularity, non-linearity and context in mind during your work?",
-      "What systems frameworks — structural, Milan, ecological, complexity — sit at the heart of how you think?",
-      "How does Indigenous systems wisdom and relational thinking inform your understanding of people and change?",
-      "How does your professional discipline's dominant paradigm sit alongside systemic thinking — where does it fit, and where is there tension?",
+      // Relationship / interconnectedness
+      "How do you move beyond focusing on isolated individuals to holding the interactions and relationships between them? What does this part influence — and what influences it?",
+      // Pattern
+      "How do you look for recurring patterns and underlying structures rather than isolated incidents? When you see the same issue repeating, what questions do you ask about what is driving it over time?",
+      // Context
+      "How do you hold the broader environment — family, community, culture, history, social context — as essential to understanding what you are seeing? How does shifting the boundary of your investigation change how you understand a problem?",
+      // Circularity
+      "How do you move from linear thinking (A causes B) to circular causality — seeing the feedback loops where A influences B, which influences C, which comes back to influence A? What reinforcing or balancing loops can you identify?",
+      // Holism vs reductionism
+      "Where does your training pull you toward a mechanistic or reductionist view — breaking things into parts — and how do you actively cultivate a more holistic, relational lens?",
+      // Systems frameworks
+      "What systems frameworks — structural, Milan, ecological, complexity science, Bateson — sit at the heart of how you think, and how do they show up in your practice?",
+      // Indigenous knowledge
+      "How does Indigenous systems wisdom and relational thinking inform your understanding of people, community and change — and whose ways of knowing are you centring?",
+      // Disciplinary tension
+      "How does your professional discipline's dominant paradigm sit alongside systemic thinking — where does it fit naturally, and where is there genuine tension?",
     ],
-    suggestions: ["Circularity","Structural FT (Minuchin)","Milan Systemic Therapy","Ecological / ecosystems thinking","Bowen Family Systems","Non-linear causality","Complexity science","Chaos theory","Irreducible wholeness","Goodchild's relational systems","General Systems Theory","Family as emotional unit","Bateson's ecology of mind"],
+    suggestions: [
+      "Relationship & interconnectedness","Pattern recognition","Context as essential","Circular causality","Feedback loops","Holistic vs reductionist","Non-linear causality","Complexity science","Chaos theory",
+      "Structural FT (Minuchin)","Milan Systemic Therapy","Ecological / ecosystems thinking","Bowen Family Systems","Bateson's ecology of mind","Goodchild's relational systems","General Systems Theory","Indigenous relational systems","Family as emotional unit","Irreducible wholeness",
+    ],
   },
   {
     id: "foundational", angle: -50,
     title: "Foundational Theories", icon: "◈",
-    tagline: "The developmental, neuroscience & attachment theories underpinning your practice",
+    tagline: "The developmental, neuroscience, attachment & diagnostic formulation frameworks underpinning your practice",
     color: { bg: "#EAF5EC", border: "#3A8A58", text: "#163820" },
     prompts: [
-      "How do attachment theory and developmental psychology shape how you understand your clients?",
+      // Attachment & neuroscience
+      "How do attachment theory and developmental psychology shape how you understand your clients — and how does this show up in practice?",
       "How does nervous system science and neurobiology inform how you create safety in the room?",
-      "Which developmental or trauma frameworks are foundational for you — and why?",
-      "How do you draw on interpersonal neurobiology or polyvagal theory in practice?",
-      "How does your professional discipline's training in these areas shape what you foreground and what you overlook?",
+      "How do you draw on polyvagal theory, interpersonal neurobiology or DDP in your clinical thinking?",
+      // Multi-level diagnostic formulation (O'Keeffe & Macaulay)
+      "How do you hold a multi-level understanding of your clients — moving beyond presenting symptoms to consider the neuropsychological processes, biological factors and environmental systems that interact to create and maintain the presenting concern?",
+      "How do you think about the neuropsychological constructs underlying a client's behaviour — areas like executive function, attention control, emotional regulation, social competence, language and memory — rather than defaulting to categorical diagnostic labels?",
+      "How do you hold the temporal axis in your formulation — what predisposed this person (biological and environmental risk factors), what precipitated the current presentation, and what is perpetuating it? What is your prognosis with and without intervention?",
+      "How explicitly do you assess and document the environmental systems — family patterns, school, community, broader ecology — as part of your formulation, rather than focusing primarily on the individual?",
+      "How strengths-focused is your assessment and formulation? Are you as thorough in identifying resilience factors, affinities and protective factors as you are in identifying deficits and difficulties?",
+      // Biopsychosocial & beyond labels
+      "How do you hold the limitations of categorical diagnostic labels alongside their utility — and how do you advocate for a more individualised, functional formulation rather than diagnosis-as-endpoint?",
+      // Disciplinary training
+      "How does your professional discipline's training shape what you foreground in assessment and what you overlook — and where does that create blind spots?",
     ],
-    suggestions: ["Attachment Theory (Bowlby)","Polyvagal Theory (Porges)","Interpersonal Neurobiology (Siegel)","Developmental Psychology","Dyadic Developmental Psychotherapy","Mentalization (Fonagy)","Trauma-Informed Practice","Neurobiology of safety","PACE framework (DDP)","Adverse Childhood Experiences (ACEs)","Epigenetics","Window of tolerance (Ogden)"],
+    suggestions: [
+      "Attachment Theory (Bowlby)","Polyvagal Theory (Porges)","Interpersonal Neurobiology (Siegel)","Developmental Psychology","Dyadic Developmental Psychotherapy (DDP)","Mentalization (Fonagy)","Trauma-Informed Practice","PACE framework","Window of tolerance (Ogden)","ACEs framework",
+      "Multi-level diagnostic formulation (O'Keeffe & Macaulay)","Biopsychosocial model (Engel)","Bronfenbrenner's ecological theory","Neuropsychological constructs","Temporal axis (predisposing · precipitating · perpetuating)","Strengths & resilience focus","Beyond categorical diagnosis","Behavioural level","Neuropsychological level","Biological level","Environmental/family level",
+    ],
   },
   {
     id: "epistemology", angle: -10,
     title: "Epistemological Frameworks", icon: "◉",
-    tagline: "How you know what you know — the paradigms shaping your understanding of reality",
+    tagline: "How you know what you know — and how that shapes your position in the room",
     color: { bg: "#F0EBF8", border: "#7048B0", text: "#2A1050" },
-    prompts: [
-      "What is your theory of knowledge — how do you understand truth, reality and meaning in your practice?",
-      "How do postmodern ideas shape your relationship with certainty, expertise and clinical authority?",
-      "How does social constructionism inform how you understand problems, solutions and the stories clients bring?",
-      "Where does your practice sit in relation to modernist and postmodern ways of knowing — and how do you hold that tension?",
-      "How has your thinking about knowledge and truth shifted over your professional life?",
+    description: [
+      { label: "Expert / Rationalist stance", body: "The therapist holds privileged knowledge — they diagnose, prescribe and act from a position of authority. Knowledge is objective and knowable; the clinician's expertise is what creates change." },
+      { label: "Not-Knowing stance", body: "The therapist approaches with genuine curiosity and openness, without fixed assumptions about the client's meaning. Knowledge is co-constructed in conversation — the client is the expert on their own life (Anderson & Goolishian, 1992)." },
+      { label: "Critical Not-Knowing", body: "A third position — holding not-knowing and knowing together. The therapist contributes meaning, interpretation and expertise while remaining genuinely open to being changed by the client's perspective. Neither pure expert nor absence of expertise." },
+      { label: "Your epistemic style shapes everything", body: "Research shows therapist epistemological approach predicts therapeutic method, working alliance emphasis, and intervention use. A rationalist stance predicts directive, advice-giving interventions; a constructivist stance predicts collaborative, meaning-making approaches." },
     ],
-    suggestions: ["Social constructionism","Postmodernism","Critical realism","Phenomenology","Modernism vs postmodernism","Multiple realities","Narrative epistemology","Not-knowing stance","Second-order cybernetics","Constructivism","Collaborative language systems (Anderson & Goolishian)","Reflecting processes (Andersen)"],
+    prompts: [
+      // Expert vs not-knowing
+      "Where do you sit on the spectrum between expert and not-knowing — and does that position shift across clients, presentations or contexts?",
+      "How comfortable are you with not knowing — with sitting in uncertainty, ambiguity and complexity without rushing to an answer or a label?",
+      "When do you find yourself taking an expert stance — diagnosing, prescribing, directing — and when is that appropriate vs. when does it close down the client's own knowing?",
+      "How do you hold the tension between contributing your expertise and remaining genuinely open to being changed by what the client brings? What does 'critical not-knowing' look like in your practice?",
+      // Epistemic style and method
+      "How does your epistemological position predict the kinds of interventions you reach for — and are those aligned with what this client needs?",
+      "How does your training's dominant paradigm — rationalist or constructivist — shape what you privilege as 'knowledge' and what you dismiss?",
+      // Power and authority
+      "How does the expert position locate power in the therapeutic relationship — and what are the ethical implications of that for you?",
+      "Whose knowledge and meaning-making gets privileged in the room — yours or your client's? How do you actively work to centre the client's own knowing?",
+      // Broader epistemology
+      "What is your theory of knowledge — how do you understand truth, reality and meaning in your practice?",
+      "Where does your practice sit in relation to modernist and postmodern ways of knowing — and how do you hold that tension?",
+      "How has your thinking about knowledge, certainty and clinical authority shifted over your professional life?",
+    ],
+    suggestions: [
+      "Not-knowing stance (Anderson & Goolishian)","Critical not-knowing","Expert vs collaborative position","Rationalist epistemology","Constructivist epistemology","Social constructionism","Postmodernism","Critical realism","Phenomenology","Second-order cybernetics",
+      "Collaborative language systems","Reflecting processes (Andersen)","Narrative epistemology","Multiple realities","Epistemic humility","Power in therapeutic relationship","Client as expert on own life","Uncertainty & ambiguity tolerance","Conscious use of expertise",
+    ],
   },
   {
     id: "humanrights", angle: 30,
@@ -177,7 +228,7 @@ const SAT_DEFS = [
     color: { bg: "#EEF0F8", border: "#485898", text: "#181830" },
     prompts: [
       "How does the instability and pace of contemporary life — liquid modernity — show up in your clinical room?",
-      "How do you hold the social and political context of your clients' lives in your thinking, not just their individual stories?",
+      "How do you hold the social, political and economic context of your clients' lives in your thinking, not just their individual stories?",
       "How are late capitalism, precarity and inequality shaping the presentations you see?",
       "How do you think about digital life, social media and technology as part of your clients' relational world?",
       "How does climate anxiety, ecological grief or the broader environmental context appear in your work?",
@@ -255,6 +306,7 @@ function DomainCard({ domain, items, onAdd, onRemove }) {
 function SatPanel({ sat, items, onAdd, onRemove, onClose }) {
   const [input, setInput] = useState("");
   const [focused, setFocused] = useState(false);
+  const [descOpen, setDescOpen] = useState(true);
   const inputRef = useRef(null);
   const c = sat.color;
   const add = v => { const t = v.trim(); if (!t || items.includes(t)) return; onAdd(sat.id, t); setInput(""); };
@@ -276,14 +328,35 @@ function SatPanel({ sat, items, onAdd, onRemove, onClose }) {
   return (
     <div style={{ position: "fixed", top: 0, right: 0, width: "380px", height: "100vh", backgroundColor: "white", boxShadow: "-4px 0 32px #00000020", zIndex: 1000, display: "flex", flexDirection: "column", overflowY: "auto" }}>
       {/* Header */}
-      <div style={{ backgroundColor: c.bg, borderBottom: `2px solid ${c.border}`, padding: "20px 22px 16px", position: "sticky", top: 0 }}>
+      <div style={{ backgroundColor: c.bg, borderBottom: `2px solid ${c.border}`, padding: "16px 22px 14px", position: "sticky", top: 0 }}>
         <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: "12px" }}>
-          <div>
-            <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "4px" }}>
+          <div style={{ flex: 1 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "3px" }}>
               <span style={{ fontSize: "20px", color: c.border }}>{sat.icon}</span>
               <h2 style={{ margin: 0, fontFamily: "Georgia, serif", fontSize: "17px", fontWeight: "700", color: c.text }}>{sat.title}</h2>
             </div>
             <p style={{ margin: 0, fontSize: "12px", color: c.border, fontFamily: "Georgia, serif", fontStyle: "italic", lineHeight: 1.4 }}>{sat.tagline}</p>
+
+            {/* Collapsible description */}
+            {sat.description && (
+              <div style={{ marginTop: "10px" }}>
+                <button onClick={() => setDescOpen(o => !o)}
+                  style={{ display: "flex", alignItems: "center", gap: "6px", background: "none", border: `1px solid ${c.border}66`, borderRadius: "6px", padding: "4px 10px", cursor: "pointer", fontSize: "10px", color: c.border, fontFamily: "monospace", letterSpacing: "0.06em" }}>
+                  <span style={{ transform: descOpen ? "rotate(90deg)" : "none", transition: "transform 0.2s", display: "inline-block" }}>▶</span>
+                  {descOpen ? "Hide framework overview" : "Show framework overview"}
+                </button>
+                {descOpen && (
+                  <div style={{ marginTop: "10px", display: "flex", flexDirection: "column", gap: "7px" }}>
+                    {sat.description.map((d, i) => (
+                      <div key={i} style={{ borderLeft: `2px solid ${c.border}`, paddingLeft: "10px" }}>
+                        <span style={{ fontSize: "11px", fontWeight: "700", color: c.text, fontFamily: "Georgia, serif" }}>{d.label} — </span>
+                        <span style={{ fontSize: "11px", color: c.text, fontFamily: "Georgia, serif", lineHeight: 1.55 }}>{d.body}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
           </div>
           <button onClick={onClose} style={{ background: "none", border: "none", fontSize: "20px", cursor: "pointer", color: T.inkGhost, flexShrink: 0, padding: "0 4px", lineHeight: 1 }}>✕</button>
         </div>
@@ -896,8 +969,9 @@ const CASE_SECTIONS = [
     desc: "Brief context for the case or session you are reflecting on",
     prompts: [
       "Who is this client/family — what is the presenting concern and how long have you been working together?",
-      "What is the broader system context — who else is involved, what services, what pressures?",
       "What stage of the work are you at — beginning, middle, ending — and what does that mean for this session?",
+      "What is the broader system context — who else is involved, what services, what pressures, what mandates?",
+      "What were the questions for this assessment or session — what were you trying to understand or address?",
     ],
   },
   {
@@ -920,7 +994,7 @@ const CASE_SECTIONS = [
     color: { bg: "#EFF0FA", border: "#5060B8", text: "#1A2060" },
     desc: "The quality, strengths and ruptures of the alliance in this session",
     prompts: [
-      "How would you describe the alliance in this session — what type of relationship were you working with?",
+      "How would you describe the alliance in this session — customer, complainant, visitor or mandated? How did this shape your approach?",
       "Were there moments of rupture or disconnection — and how did you respond?",
       "How safe did the client feel — what told you this neurobiologically and relationally?",
       "How well-aligned were you and the client on the goals and tasks of the session?",
@@ -928,15 +1002,27 @@ const CASE_SECTIONS = [
   },
   {
     id: "formulation_case",
-    label: "Systemic Formulation — What Was Present",
+    label: "Multi-Level Formulation",
     icon: "◎",
     color: { bg: "#EAF5EC", border: "#3A8A58", text: "#163820" },
-    desc: "How your systemic thinking and formulation shaped the session",
+    desc: "A multi-level understanding: observable behaviours · neuropsychological constructs · biological factors · environmental systems",
     prompts: [
-      "What systemic hypothesis were you working from in this session — and did it hold, shift or deepen?",
-      "How did the broader ecosystem — family, services, context — show up in the room?",
-      "What patterns, dances or sequences were visible in this session?",
-      "What did you notice about strengths, resilience or exceptions to the problem?",
+      // Behavioural level
+      "What are the presenting symptoms and functional skills — both difficulties (weaknesses) and competencies (strengths)? What are the observable behaviours and functional concerns that brought this person to you?",
+      // Neuropsychological level
+      "What neuropsychological constructs help explain what you are observing? Consider: attention control, executive function (planning, impulse control, self-monitoring), emotional regulation, social competence, language, memory, higher order cognition. What is the underlying process beneath the surface behaviour?",
+      // Biological level
+      "What biological factors — genetic, neurological, developmental, medical — may be predisposing or contributing to this presentation? Are there biological red flags requiring further investigation?",
+      // Environmental/family level
+      "What does the environmental and family assessment reveal? How are family interaction patterns, beliefs, parenting, sibling dynamics, and broader social systems (school, community, services) contributing to and maintaining the presenting concern?",
+      // Temporal axis
+      "What predisposed this person to this difficulty (early biological or environmental risk factors)? What precipitated the current presentation (acute stressors or events)? What is perpetuating it (biological, psychological or environmental maintaining factors)?",
+      // Systemic formulation
+      "What is your systemic hypothesis about what is maintaining the presenting problem — what is keeping this from being resolved? How are you holding the full ecosystem in your formulation?",
+      // Strengths & resilience
+      "What are the strengths, affinities, resilience factors and protective elements in this person, their family, school and community — and how are you building these explicitly into the formulation and management plan?",
+      // Prognosis
+      "What is your prognosis — with and without intervention? What is likely to happen for this person over time, and what does that mean for your plan?",
     ],
   },
   {
@@ -946,11 +1032,12 @@ const CASE_SECTIONS = [
     color: { bg: "#F5E6F0", border: "#A03880", text: "#481830" },
     desc: "The actual interventions, grounded in all the layers that came before",
     prompts: [
-      "What did you actually do in the room — which approaches, techniques or modalities did you use?",
-      "How intentional vs intuitive were your choices — and what does that tell you?",
+      "Before reflecting on technique — how were your Way of Being, the alliance, and your formulation present and active in this session?",
+      "What did you actually do in the room — which approaches, techniques or modalities did you draw on, and why those?",
+      "How intentional vs intuitive were your choices — and what does that tell you about your conscious competence?",
       "What was the client's response — what worked, what landed, what didn't?",
       "How did you sequence and time your interventions — what shaped when you moved and when you waited?",
-      "How did your Way of Being, the alliance and your formulation support — or constrain — what you did?",
+      "How did the layers beneath — Way of Being, Alliance, Formulation — support or constrain what you did in the room?",
     ],
   },
   {
@@ -958,12 +1045,14 @@ const CASE_SECTIONS = [
     label: "Learning & Next Steps",
     icon: "○",
     color: { bg: "#F5F0E0", border: "#907020", text: "#3A2C00" },
-    desc: "What this session reveals about your developing practice",
+    desc: "What this session reveals about your developing practice — and what comes next",
     prompts: [
       "What would you do differently — and what does that illuminate about your growth edges?",
-      "What did this session reveal about gaps in your framework, knowledge or skills?",
+      "Where was your formulation thin or incomplete — which level of analysis (behavioural, neuropsychological, biological, environmental) did you attend to least, and why?",
+      "Was your assessment sufficiently strengths-focused — or did deficit-thinking dominate? What resilience and protective factors need more attention?",
+      "What did this session reveal about gaps in your framework, knowledge or skills — and what do you want to learn more about?",
       "What do you want to bring to supervision from this reflection?",
-      "What is one thing you want to carry forward into your next session with this client?",
+      "What management goals — including resilience-building goals — are you taking forward, and what is your follow-up plan?",
     ],
   },
 ];
@@ -1065,6 +1154,8 @@ export default function App() {
       localStorage.removeItem(`pfm_ring_items_${k}`);
     });
     CASE_SECTIONS.forEach(s => localStorage.removeItem(`pfm_case_${s.id}`));
+    localStorage.removeItem("pfm_growth_synthesis");
+    localStorage.removeItem("pfm_growth_goals");
     setAllItems({ values: [], theories: [], approaches: [], influences: [], self: [], context: [] });
     setSatItems({ systems: [], foundational: [], epistemology: [], humanrights: [], antioppressive: [], cultural: [], ethics: [], philosophy: [], contemporary: [] });
     setNotes("");
@@ -1077,6 +1168,8 @@ export default function App() {
     { id: "summary",   label: "Summary" },
     { id: "questions", label: "Supervision Qs" },
     { id: "case",      label: "Case Reflection" },
+    { id: "growth",    label: "Growth & Gaps" },
+    { id: "refs",      label: "References" },
   ];
 
   return (
@@ -1151,6 +1244,319 @@ export default function App() {
         {tab === "summary"   && <SummaryView allItems={allItems} satItems={satItems} notes={notes}/>}
         {tab === "questions" && <SupervisionQView/>}
         {tab === "case"      && <CaseReflectionView/>}
+        {tab === "growth"    && <GrowthGapsView/>}
+        {tab === "refs"      && <ReferencesView/>}
+      </div>
+    </div>
+  );
+}
+
+// ─── REFERENCES VIEW ─────────────────────────────────────────────────────────
+// ─── GROWTH & GAPS VIEW ──────────────────────────────────────────────────────
+// Collates all gaps/growth text from ring panels + case reflection learning section
+
+const RING_GAP_SOURCES = [
+  { key: "wob",      label: "Way of Being — Gaps & Growth",                  color: { bg: "#FEF6EE", border: "#C07840", text: "#5A2A10" } },
+  { key: "alliance", label: "Therapeutic Alliance — Gaps & Growth",          color: { bg: "#EFF0FA", border: "#5060B8", text: "#1A2060" } },
+  { key: "systemic", label: "Systemic Formulation & Practice — Gaps & Growth", color: { bg: "#EAF0F8", border: "#3A68B0", text: "#162848" } },
+  { key: "therapy",  label: "Therapy & Intervention — Gaps & Growth",        color: { bg: "#EAF5EC", border: "#3A8A58", text: "#163820" } },
+];
+
+function GrowthGapsView() {
+  // Read all saved gaps text from localStorage
+  const ringGaps = RING_GAP_SOURCES.map(s => ({
+    ...s,
+    text: (() => { try { return localStorage.getItem(`pfm_ring_gaps_${s.key}`) || ""; } catch { return ""; } })(),
+  }));
+  const caselearning = (() => { try { return localStorage.getItem("pfm_case_learning_case") || ""; } catch { return ""; } })();
+  const hasAny = ringGaps.some(r => r.text.trim()) || caselearning.trim();
+
+  // Synthesis goals — own editable localStorage field
+  const synthKey = "pfm_growth_synthesis";
+  const goalsKey = "pfm_growth_goals";
+  const [synthesis, setSynthesis] = useState(() => { try { return localStorage.getItem(synthKey) || ""; } catch { return ""; } });
+  const [goals,     setGoals]     = useState(() => { try { return localStorage.getItem(goalsKey) || ""; } catch { return ""; } });
+  const saveTimer = useRef(null);
+  const save = (key, val) => {
+    clearTimeout(saveTimer.current);
+    saveTimer.current = setTimeout(() => { try { localStorage.setItem(key, val); } catch {} }, 500);
+  };
+
+  const divider = (label) => (
+    <div style={{ display: "flex", alignItems: "center", gap: "10px", margin: "4px 0 2px" }}>
+      <div style={{ flex: 1, height: "1px", backgroundColor: T.lineFaint }}/>
+      <span style={{ fontSize: "9px", color: T.inkGhost, letterSpacing: "0.12em", textTransform: "uppercase", fontFamily: "monospace", whiteSpace: "nowrap" }}>{label}</span>
+      <div style={{ flex: 1, height: "1px", backgroundColor: T.lineFaint }}/>
+    </div>
+  );
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
+      {/* Header */}
+      <div style={{ padding: "18px 22px", backgroundColor: T.bgDeep, borderRadius: "12px", border: `1px solid ${T.line}` }}>
+        <h2 style={{ margin: "0 0 4px", fontFamily: "Georgia, serif", fontSize: "18px", color: T.inkMid, fontWeight: "700" }}>Growth & Gaps</h2>
+        <p style={{ margin: 0, fontSize: "12px", color: T.inkFaint, fontFamily: "Georgia, serif", lineHeight: 1.65 }}>
+          A collation of the gaps and growth reflections you have recorded across the SIPM ring panels and Case Reflection. Use this page to identify patterns, name priority areas, and build your supervision and learning goals.
+        </p>
+      </div>
+
+      {/* Empty state */}
+      {!hasAny && (
+        <div style={{ padding: "32px 22px", backgroundColor: "white", borderRadius: "12px", border: `1.5px solid ${T.lineFaint}`, textAlign: "center" }}>
+          <p style={{ margin: "0 0 6px", fontFamily: "Georgia, serif", fontSize: "16px", color: T.inkGhost }}>No gaps or growth notes recorded yet</p>
+          <p style={{ margin: 0, fontFamily: "Georgia, serif", fontSize: "12px", color: T.inkGhost, lineHeight: 1.6 }}>
+            Click the ellipse rings on the Visual Map to open each SIPM layer panel — scroll to the bottom of each panel to find the Gaps, Growth & Supervision Goals section. Reflections from the Case Reflection tab also appear here.
+          </p>
+        </div>
+      )}
+
+      {/* Collated ring gaps */}
+      {hasAny && (
+        <>
+          {divider("Collated from SIPM ring panels")}
+          {ringGaps.map(r => r.text.trim() ? (
+            <div key={r.key} style={{ borderRadius: "10px", overflow: "hidden", border: `1.5px solid ${r.color.border}33` }}>
+              <div style={{ backgroundColor: r.color.bg, padding: "10px 16px", borderBottom: `1px solid ${r.color.border}22` }}>
+                <span style={{ fontFamily: "Georgia, serif", fontSize: "13px", fontWeight: "700", color: r.color.text }}>{r.label}</span>
+              </div>
+              <div style={{ padding: "12px 16px", backgroundColor: "white" }}>
+                <p style={{ margin: 0, fontFamily: "Georgia, serif", fontSize: "12.5px", color: T.inkMid, lineHeight: 1.75, whiteSpace: "pre-wrap" }}>{r.text}</p>
+              </div>
+            </div>
+          ) : null)}
+
+          {/* Case reflection learning */}
+          {caselearning.trim() && (
+            <>
+              {divider("From Case Reflection — Learning & Next Steps")}
+              <div style={{ borderRadius: "10px", overflow: "hidden", border: `1.5px solid #90702033` }}>
+                <div style={{ backgroundColor: "#F5F0E0", padding: "10px 16px", borderBottom: `1px solid #90702022` }}>
+                  <span style={{ fontFamily: "Georgia, serif", fontSize: "13px", fontWeight: "700", color: "#3A2C00" }}>Case Reflection — Learning & Next Steps</span>
+                </div>
+                <div style={{ padding: "12px 16px", backgroundColor: "white" }}>
+                  <p style={{ margin: 0, fontFamily: "Georgia, serif", fontSize: "12.5px", color: T.inkMid, lineHeight: 1.75, whiteSpace: "pre-wrap" }}>{caselearning}</p>
+                </div>
+              </div>
+            </>
+          )}
+
+          {divider("Synthesis & Supervision Goals")}
+
+          {/* Synthesis text */}
+          <div style={{ borderRadius: "10px", overflow: "hidden", border: `1.5px solid ${T.line}` }}>
+            <div style={{ backgroundColor: T.bgDeep, padding: "10px 16px", borderBottom: `1px solid ${T.line}` }}>
+              <span style={{ fontFamily: "Georgia, serif", fontSize: "13px", fontWeight: "700", color: T.inkMid }}>Synthesis — What patterns do I notice?</span>
+              <p style={{ margin: "2px 0 0", fontFamily: "Georgia, serif", fontSize: "11px", color: T.inkFaint }}>Looking across everything above — what themes, patterns or recurring gaps do you notice?</p>
+            </div>
+            <textarea value={synthesis} onChange={e => { setSynthesis(e.target.value); save(synthKey, e.target.value); }}
+              placeholder="e.g. I notice that across several layers my formulation stays at the behavioural level — I'm not consistently thinking neuropsychologically. I also notice that I rarely explicitly document strengths and resilience…"
+              rows={5}
+              style={{ width: "100%", border: "none", outline: "none", padding: "14px 16px", fontSize: "12.5px", fontFamily: "Georgia, serif", color: T.inkMid, backgroundColor: "white", resize: "vertical", boxSizing: "border-box", lineHeight: 1.7 }}/>
+          </div>
+
+          {/* Goals */}
+          <div style={{ borderRadius: "10px", overflow: "hidden", border: `1.5px solid ${T.line}` }}>
+            <div style={{ backgroundColor: T.bgDeep, padding: "10px 16px", borderBottom: `1px solid ${T.line}` }}>
+              <span style={{ fontFamily: "Georgia, serif", fontSize: "13px", fontWeight: "700", color: T.inkMid }}>Supervision & Learning Goals</span>
+              <p style={{ margin: "2px 0 0", fontFamily: "Georgia, serif", fontSize: "11px", color: T.inkFaint }}>What specific goals do you want to bring to supervision? What will you do to address the gaps you have identified?</p>
+            </div>
+            <textarea value={goals} onChange={e => { setGoals(e.target.value); save(goalsKey, e.target.value); }}
+              placeholder="e.g. 1. Bring a case to supervision to practise multi-level formulation. 2. Read O'Keeffe & Macaulay (2012) on neuropsychological constructs. 3. Ask supervisor to help me develop a more explicit strengths-based lens…"
+              rows={5}
+              style={{ width: "100%", border: "none", outline: "none", padding: "14px 16px", fontSize: "12.5px", fontFamily: "Georgia, serif", color: T.inkMid, backgroundColor: "white", resize: "vertical", boxSizing: "border-box", lineHeight: 1.7 }}/>
+          </div>
+
+          {/* Prompts to support synthesis */}
+          <div style={{ backgroundColor: T.bgDeep, borderRadius: "10px", padding: "14px 18px", border: `1px solid ${T.lineFaint}` }}>
+            <p style={{ margin: "0 0 8px", fontSize: "10px", color: T.inkGhost, letterSpacing: "0.1em", textTransform: "uppercase", fontFamily: "monospace" }}>Questions to support your synthesis</p>
+            {[
+              "Which gaps appear across more than one layer of the SIPM — what does that tell you about a deeper pattern?",
+              "Are your gaps more about knowledge and theory, clinical skill and technique, or personal/reflective development?",
+              "What would growth look like in 3 months — what would you be doing differently in the room?",
+              "What support, training or reading would most address your priority gaps?",
+              "What do you most want your supervisor to know, challenge you on, or help you with?",
+              "How will you know when you have made progress — what will be different?",
+            ].map((q, i) => (
+              <p key={i} style={{ margin: "4px 0 0", fontSize: "12px", color: T.inkFaint, fontFamily: "Georgia, serif", lineHeight: 1.6 }}>· {q}</p>
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
+const REFERENCE_GROUPS = [
+  {
+    heading: "Systemic Integrative Practice Model (SIPM)",
+    color: { bg: "#EAF5EC", border: "#3A8A58", text: "#163820" },
+    refs: [
+      { authors: "White, L. & Owen, K.", year: "2022", title: "Systemic Integrative Practice: A Meta-Framework", source: "Australian and New Zealand Journal of Family Therapy, 43, 33–53." },
+      { authors: "White, L.", year: "2022", title: "Editorial: Integrative practice in family therapy", source: "Australian and New Zealand Journal of Family Therapy, 43, 3–8." },
+      { authors: "Fife, S., Whiting, J., Bradford, K. & Davis, S.", year: "2014", title: "The therapeutic pyramid: A common factors synthesis of techniques, alliance and way of being", source: "Journal of Marital and Family Therapy, 40(1), 20–33." },
+      { authors: "Davis, S. D., Fife, S. T., Whiting, J. B. & Bradford, K. P.", year: "2020", title: "Way of being and the therapeutic pyramid: Expanding the application of a common factors meta-model", source: "Journal of Marital and Family Therapy, 47, 69–84." },
+      { authors: "LeBow, J. L.", year: "2019", title: "Current issues in the practice of integrative couple and family therapy", source: "Family Process, 58(3), 610–628." },
+      { authors: "LeBow, J. L.", year: "1997", title: "Clinical theory and practice: Integrative family therapy", source: "Family Process, 36, 1–17." },
+      { authors: "Kozlowska, K. & Hanney, L.", year: "2003", title: "Maltreated children: A systems approach to treatment planning in clinical settings", source: "Australian and New Zealand Journal of Family Therapy, 24(2), 75–87." },
+    ],
+  },
+  {
+    heading: "Therapeutic Alliance",
+    color: { bg: "#EFF0FA", border: "#5060B8", text: "#1A2060" },
+    refs: [
+      { authors: "Bordin, E. S.", year: "1979", title: "The generalisability of the psychoanalytic concept of the working alliance", source: "Psychotherapy: Theory, Research and Practice, 16, 252–260." },
+      { authors: "Friedlander, M. L., Escudero, V., Welmers-van de Poll, M. & Heatherington, L.", year: "2018", title: "Meta-analysis of the alliance-outcome relation in couple and family therapy", source: "Psychotherapy, 55(4), 356–371." },
+      { authors: "Escudero, V., Friedlander, M. L., Varela, N. & Abascal, A.", year: "2008", title: "Observing the therapeutic alliance in family therapy: associations with participants' perceptions and therapeutic outcomes", source: "Journal of Family Therapy, 30, 194–214." },
+    ],
+  },
+  {
+    heading: "Neuroscience, Attachment & Nervous System",
+    color: { bg: "#EAF0F8", border: "#3A68B0", text: "#162848" },
+    refs: [
+      { authors: "Porges, S. W.", year: "2003", title: "The polyvagal theory: phylogenetic contributions to social behaviour", source: "Physiology & Behavior, 79, 503–513." },
+      { authors: "Siegel, D. J.", year: "1999", title: "The Developing Mind: How Relationships and the Brain Interact to Shape Who We Are", source: "New York: Guilford Press." },
+      { authors: "Bowlby, J.", year: "1969", title: "Attachment and Loss: Vol. 1. Attachment", source: "New York: Basic Books." },
+      { authors: "Schore, A. N.", year: "2014", title: "The science of the art of psychotherapy", source: "New York: Norton." },
+      { authors: "Badenoch, B.", year: "2008", title: "Being a Brain-Wise Therapist: A Practical Guide to Interpersonal Neurobiology", source: "New York: Norton." },
+      { authors: "Beaudoin, M. & Monk, G.", year: "2024", title: "Narrative Practices and Emotions: 40+ Ways to Support the Emergence of Flourishing Identities", source: "New York: Norton Professional Books." },
+      { authors: "Goleman, D.", year: "2006", title: "Social Intelligence: The New Science of Human Relationships", source: "London: Hutchinson." },
+      { authors: "Hughes, D.", year: "2007", title: "Attachment-Focused Family Therapy", source: "New York: Norton." },
+    ],
+  },
+  {
+    heading: "Diagnostic Formulation & Developmental-Behavioural Practice",
+    color: { bg: "#FEF6EE", border: "#C07840", text: "#5A2A10" },
+    refs: [
+      { authors: "O'Keeffe, M. & Macaulay, C.", year: "2012", title: "Diagnosis in developmental–behavioural paediatrics: The art of diagnostic formulation", source: "Journal of Paediatrics and Child Health, 48, E15–E26." },
+      { authors: "Engel, G. L.", year: "1977", title: "The need for a new medical model: A challenge for biomedicine", source: "Science, 196, 129–136." },
+      { authors: "Bronfenbrenner, U.", year: "1979", title: "The Ecology of Human Development: Experiments by Nature and Design", source: "Cambridge, MA: Harvard University Press." },
+      { authors: "Nurcombe, B.", year: "2008", title: "Diagnostic formulation, treatment planning, and modes of treatment in children and adolescents", source: "In: Ebert M., Loosen P., Nurcombe B. & Leckman J. (eds). Psychiatry: Current Diagnosis and Treatment, 2nd edn. London: McGraw Hill Medical, pp. 163–166." },
+      { authors: "Winters, N., Hanson, G. & Stoyanova, N.", year: "2007", title: "The case formulation in child and adolescent psychiatry", source: "Child and Adolescent Psychiatric Clinics of North America, 16, 111–113." },
+      { authors: "Jellinek, M. S. & McDermott, J. F.", year: "2004", title: "Formulation: putting the diagnosis into a therapeutic context and treatment plan", source: "Journal of the American Academy of Child and Adolescent Psychiatry, 43, 913–916." },
+    ],
+  },
+  {
+    heading: "Family Therapy Schools & Systemic Practice",
+    color: { bg: "#E6F0F8", border: "#3A68B0", text: "#162848" },
+    refs: [
+      { authors: "Minuchin, S.", year: "1974", title: "Families and Family Therapy", source: "Cambridge, MA: Harvard University Press." },
+      { authors: "Selvini, M. P., Boscolo, L., Cecchin, G. & Prata, G.", year: "1980", title: "Hypothesizing — Circularity — Neutrality: Three guidelines for the conductor of the session", source: "Family Process, 19(1), 3–12." },
+      { authors: "Cecchin, G.", year: "1987", title: "Hypothesizing, circularity, and neutrality revisited: An invitation to curiosity", source: "Family Process, 26(4), 405–413." },
+      { authors: "White, M. & Epston, D.", year: "1990", title: "Narrative Means to Therapeutic Ends", source: "New York: Norton." },
+      { authors: "de Shazer, S.", year: "1985", title: "Keys to Solution in Brief Therapy", source: "New York: Norton." },
+      { authors: "Bowen, M.", year: "1978", title: "Family Therapy in Clinical Practice", source: "New York: Aronson." },
+      { authors: "Satir, V.", year: "1972", title: "Peoplemaking", source: "Palo Alto, CA: Science and Behavior Books." },
+      { authors: "Bertrando, P.", year: "2007", title: "The Dialogical Therapist: Dialogue in Systemic Practice", source: "London: Karnac Books." },
+      { authors: "Lowe, R.", year: "2004", title: "Family Therapy: A Constructive Framework", source: "London: Sage Publications." },
+      { authors: "Nichols, M. P. & Davis, S.", year: "2019", title: "Family Therapy: Concepts and Methods", source: "Hoboken, NJ: Pearson." },
+    ],
+  },
+  {
+    heading: "Mentalizing & Dyadic Developmental Psychotherapy",
+    color: { bg: "#F0EBF8", border: "#7048B0", text: "#2A1050" },
+    refs: [
+      { authors: "Fonagy, P., Gergely, G., Jurist, E. & Target, M.", year: "2002", title: "Affect Regulation, Mentalization, and the Development of the Self", source: "New York: Other Press." },
+      { authors: "Hughes, D. A.", year: "2011", title: "Brain-Based Parenting: The Neuroscience of Caregiving for Healthy Attachment", source: "New York: Norton." },
+      { authors: "Fuggle, P.", year: "2016", title: "Mentalizing in child and adolescent therapy", source: "In: Bateman, A. & Fonagy, P. (eds). Handbook of Mentalizing in Mental Health Practice. Washington: American Psychiatric Publishing." },
+    ],
+  },
+  {
+    heading: "Social Constructionism & Epistemology",
+    color: { bg: "#F0EBF8", border: "#7048B0", text: "#2A1050" },
+    refs: [
+      { authors: "Gergen, K. J.", year: "1999", title: "An Invitation to Social Construction", source: "London: Sage." },
+      { authors: "Anderson, H. & Goolishian, H.", year: "1992", title: "The client is the expert: a not-knowing approach to therapy", source: "In: McNamee, S. & Gergen, K. J. (eds). Therapy as Social Construction. London: Sage, pp. 25–39." },
+      { authors: "Flaskas, C.", year: "2002", title: "Towards a common ground in psychoanalysis and family therapy: On knowing not to know", source: "Journal of Family Therapy, 24(4), 346–366." },
+      { authors: "Macaskie, J., Meekums, B. & Nolan, G.", year: "2021", title: "A not-knowing, values-based and relational approach to counselling education", source: "British Journal of Guidance & Counselling, 51(1), 1–14." },
+      { authors: "Winter, D. A. & Metcalfe, C.", year: "2013", title: "The relationship between therapist epistemology, therapy style, working alliance, and intervention use", source: "American Journal of Psychotherapy, 67(4), 323–345." },
+      { authors: "Bauman, Z.", year: "2000", title: "Liquid Modernity", source: "Cambridge: Polity Press." },
+    ],
+  },
+  {
+    heading: "Anti-Oppressive Practice, Power & Social Justice",
+    color: { bg: "#F5E6F0", border: "#A03880", text: "#481830" },
+    refs: [
+      { authors: "Burnham, J.", year: "1993", title: "Systemic supervision: The evolution of reflexivity in the context of the supervisory relationship", source: "Human Systems, 4, 349–381. [Social GRACES framework]" },
+      { authors: "Dominelli, L.", year: "2002", title: "Anti-Oppressive Social Work Theory and Practice", source: "Basingstoke: Palgrave Macmillan." },
+      { authors: "Goodchild, M.", year: "2022", title: "Relational Systems Thinking: The Dibaajimowin (Story) of Re-Theorizing 'Systems Thinking' and 'Complexity Science'", source: "Journal of Awareness-Based Systems Change, 1(1), 53–76." },
+    ],
+  },
+  {
+    heading: "Supervision",
+    color: { bg: "#E4F0F0", border: "#408888", text: "#103838" },
+    refs: [
+      { authors: "O'Donoghue, K.", year: "2003", title: "Restorying Social Work Supervision", source: "Palmerston North, Aotearoa New Zealand: Dunmore Press." },
+      { authors: "Kadushin, A.", year: "1992", title: "Supervision in Social Work (3rd ed.)", source: "New York: Columbia University Press." },
+      { authors: "Hawkins, P. & Ryde, J.", year: "2020", title: "Integrative Psychotherapy in Theory and Practice", source: "London: Jessica Kingsley." },
+      { authors: "O'Keeffe, M. J. & Shelton, D. C.", year: "2007", title: "Personal supervision for paediatricians", source: "Journal of Paediatrics and Child Health, 43, 103–106." },
+      { authors: "Lowe, R., Hunt, C. & Simmons, P.", year: "2008", title: "Towards multi-positioned live supervision in family therapy", source: "Contemporary Family Therapy, 30, 3–14." },
+    ],
+  },
+  {
+    heading: "Philosophy of Practice & Professional Identity",
+    color: { bg: "#E8F5F0", border: "#208870", text: "#083828" },
+    refs: [
+      { authors: "Schon, D. A.", year: "1991", title: "The Reflective Practitioner: How Professionals Think in Action", source: "Aldershot: Ashgate." },
+      { authors: "Argyris, C. & Schon, D. A.", year: "1974", title: "Theory in Practice: Increasing Professional Effectiveness", source: "San Francisco: Jossey-Bass." },
+      { authors: "Masten, A.", year: "2001", title: "Ordinary magic: Resilience processes in development", source: "American Psychologist, 56, 227–238." },
+    ],
+  },
+];
+
+function ReferencesView() {
+  const [open, setOpen] = useState({});
+  const toggle = id => setOpen(p => ({ ...p, [id]: !p[id] }));
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+      <div style={{ padding: "18px 22px", backgroundColor: T.bgDeep, borderRadius: "12px", border: `1px solid ${T.line}` }}>
+        <h2 style={{ margin: "0 0 4px", fontFamily: "Georgia, serif", fontSize: "18px", color: T.inkMid, fontWeight: "700" }}>References & Acknowledgements</h2>
+        <p style={{ margin: 0, fontSize: "12px", color: T.inkFaint, fontFamily: "Georgia, serif", lineHeight: 1.6 }}>
+          The theoretical frameworks, models and authors whose work underpins this supervision tool. Click each heading to expand.
+        </p>
+      </div>
+
+      <div style={{ padding: "14px 18px", backgroundColor: "white", borderRadius: "12px", border: `1px solid ${T.lineFaint}` }}>
+        <p style={{ margin: "0 0 6px", fontFamily: "Georgia, serif", fontSize: "13px", fontWeight: "700", color: T.inkMid }}>Primary Framework</p>
+        <p style={{ margin: 0, fontFamily: "Georgia, serif", fontSize: "12.5px", color: T.inkFaint, lineHeight: 1.7 }}>
+          This tool is built around the <strong style={{ color: T.inkMid }}>Systemic Integrative Practice Model (SIPM)</strong> developed by Dr Leonie White and Kylie Owen (2022), hosted by Therapywell Allied Health and Wellbeing. The supervision framework also draws on Kieran O'Donoghue's <em>Restorying Social Work Supervision</em> (2003). The multi-level diagnostic formulation framework is drawn from O'Keeffe & Macaulay (2012).
+        </p>
+      </div>
+
+      {REFERENCE_GROUPS.map((group, gi) => {
+        const isOpen = open[gi];
+        const c = group.color;
+        return (
+          <div key={gi} style={{ borderRadius: "12px", overflow: "hidden", border: `1.5px solid ${isOpen ? c.border : T.lineFaint}`, transition: "border-color 0.2s" }}>
+            <div onClick={() => toggle(gi)} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "13px 18px", cursor: "pointer", backgroundColor: isOpen ? c.bg : "white", borderBottom: isOpen ? `1px solid ${c.border}33` : "none", transition: "background 0.2s" }}>
+              <span style={{ fontFamily: "Georgia, serif", fontSize: "14px", fontWeight: "700", color: isOpen ? c.text : T.inkMid }}>{group.heading}</span>
+              <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                <span style={{ fontSize: "10px", color: T.inkGhost, fontFamily: "monospace" }}>{group.refs.length} source{group.refs.length !== 1 ? "s" : ""}</span>
+                <span style={{ color: T.inkGhost, fontSize: "12px", transform: isOpen ? "rotate(180deg)" : "none", transition: "transform 0.2s" }}>▾</span>
+              </div>
+            </div>
+            {isOpen && (
+              <div style={{ backgroundColor: "white", padding: "4px 0 8px" }}>
+                {group.refs.map((ref, ri) => (
+                  <div key={ri} style={{ padding: "10px 18px", borderBottom: ri < group.refs.length - 1 ? `1px solid ${T.lineFaint}` : "none" }}>
+                    <p style={{ margin: 0, fontSize: "12.5px", fontFamily: "Georgia, serif", color: T.inkMid, lineHeight: 1.65 }}>
+                      <span style={{ fontWeight: "700" }}>{ref.authors}</span>
+                      {" "}({ref.year}).{" "}
+                      <span style={{ fontStyle: "italic" }}>{ref.title}.</span>
+                      {" "}<span style={{ color: T.inkFaint }}>{ref.source}</span>
+                    </p>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        );
+      })}
+
+      <div style={{ padding: "14px 18px", backgroundColor: T.bgDeep, borderRadius: "12px", border: `1px solid ${T.lineFaint}`, marginTop: "4px" }}>
+        <p style={{ margin: 0, fontSize: "11px", color: T.inkGhost, fontFamily: "Georgia, serif", lineHeight: 1.7, fontStyle: "italic" }}>
+          This tool was developed for clinical supervision purposes. All theoretical frameworks are attributed to their original authors. If you identify a source that should be included or credited differently, please raise this with your supervisor.
+        </p>
       </div>
     </div>
   );
