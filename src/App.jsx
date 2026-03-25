@@ -1,4 +1,3 @@
-import { useState, useRef, useCallback } from "react";
 
 // ─── DESIGN TOKENS ───────────────────────────────────────────────────────────
 const T = {
@@ -715,11 +714,11 @@ function MapView({ satItems, onSatAdd, onSatRemove }) {
           {/* Title just inside Systemic ring top */}
           {T2({ x: CX, y: CY - 178, rows: ["Systemic Formulation"], size: 15, bold: true })}
           {T2({ x: CX, y: CY - 162, rows: ["& Practice"], size: 15, bold: true })}
-          {T2({ x: CX, y: CY - 147, rows: ['"The Helicopter"'], size: 11, fill: "#444", italic: true })}
+          {T2({ x: CX, y: CY - 147, rows: ['"The Helicopter View"'], size: 11, fill: "#444", italic: true })}
 
           {/* Left side — x between CX-252 and CX-128 */}
-          {T2({ x: CX - 186, y: CY - 82, rows: ["Structural", "Consideration:", "Family &", "Stakeholder", "Systems"], size: 9, fill: "#222" })}
-          {T2({ x: CX - 186, y: CY + 14, rows: ["Family", "Life Cycle"], size: 9, fill: "#222" })}
+          {T2({ x: CX - 172, y: CY - 100, rows: ["Structural", "Consideration:", "Family &", "Stakeholder", "Systems"], size: 9, fill: "#222" })}
+          {T2({ x: CX - 186, y: CY - 4, rows: ["Family", "Life Cycle"], size: 9, fill: "#222" })}
           {T2({ x: CX - 186, y: CY + 46, rows: ["Vertical &", "Horizontal", "Stressors"], size: 9, fill: "#222" })}
           {T2({ x: CX - 178, y: CY + 82, rows: ["Broader Societal", "Factors e.g.,", "structural", "oppression"], size: 8.5, fill: "#222", dy: 11 })}
           {T2({ x: CX - 140, y: CY + 138, rows: ["Strengths,", "Resources", "& Resilience"], size: 9, fill: "#222" })}
@@ -1202,7 +1201,7 @@ export default function App() {
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "8px" }}>
               <div>
                 <h2 style={{ margin: "0 0 2px", fontFamily: "Georgia, serif", fontSize: "18px", color: T.inkMid, fontWeight: "700" }}>Practice Framework Map</h2>
-                <p style={{ margin: 0, fontSize: "12px", color: T.inkFaint }}>The SIPM at centre — click any satellite node to open its reflection prompts and build your framework</p>
+                <p style={{ margin: 0, fontSize: "12px", color: T.inkFaint }}>Systemic Meta-Framework for Integrative Practice — click any ellipse ring or satellite node to open reflection prompts</p>
               </div>
             </div>
             {/* Satellite guide */}
@@ -1693,4 +1692,3 @@ function ReferencesView() {
     </div>
   );
 }
- 
