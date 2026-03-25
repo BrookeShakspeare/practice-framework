@@ -1,4 +1,5 @@
 import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback } from "react";
 
 // ─── DESIGN TOKENS ───────────────────────────────────────────────────────────
 const T = {
@@ -732,13 +733,13 @@ function MapView({ satItems, onSatAdd, onSatRemove }) {
           {T2({ x: CX + 138, y: CY + 110, rows: ['The "Dances":', "Problem &", "Exception", "Patterns"], size: 8.5, fill: "#222", dy: 11 })}
 
           {/* THERAPY / INTERVENTION — inner ellipse rx=128 ry=106 */}
-          {/* Decision Making box — top — taller to fit 5 rows */}
-          <rect x={CX-58} y={CY-102} width={116} height={60} rx={4} fill="white" stroke="#333" strokeWidth="1.5" style={{ pointerEvents: "none" }}/>
-          {T2({ x: CX, y: CY - 89, rows: ["Decision Making:"], size: 8.5, bold: true })}
-          {T2({ x: CX, y: CY - 77, rows: ["Theory of Change,", "context, resources,", "timing & staging,", "decolonizing,", "self of therapist"], size: 7, fill: "#444", dy: 10 })}
+          {/* Decision Making box — top — taller to fit title + 5 rows at dy=9 */}
+          <rect x={CX-62} y={CY-106} width={124} height={68} rx={4} fill="white" stroke="#333" strokeWidth="1.5" style={{ pointerEvents: "none" }}/>
+          {T2({ x: CX, y: CY - 93, rows: ["Decision Making:"], size: 8.5, bold: true })}
+          {T2({ x: CX, y: CY - 82, rows: ["Theory of Change,", "context, resources,", "timing & staging,", "decolonizing,", "self of therapist"], size: 7, fill: "#444", dy: 9 })}
 
           {/* Down arrow */}
-          <polygon points={`${CX-9},${CY-41} ${CX+9},${CY-41} ${CX+9},${CY-30} ${CX+16},${CY-30} ${CX},${CY-18} ${CX-16},${CY-30} ${CX-9},${CY-30}`} fill="#333" opacity="0.85" style={{ pointerEvents: "none" }}/>
+          <polygon points={`${CX-9},${CY-37} ${CX+9},${CY-37} ${CX+9},${CY-26} ${CX+16},${CY-26} ${CX},${CY-14} ${CX-16},${CY-26} ${CX-9},${CY-26}`} fill="#333" opacity="0.85" style={{ pointerEvents: "none" }}/>
 
           {/* Therapy label + list */}
           {T2({ x: CX, y: CY - 7, rows: ["Therapy/Intervention"], size: 9.5, bold: true })}
