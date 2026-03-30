@@ -1,4 +1,5 @@
 import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback } from "react";
 
 // ─── DESIGN TOKENS ───────────────────────────────────────────────────────────
 const T = {
@@ -1101,7 +1102,7 @@ function CaseReflectionView() {
       <div style={{ padding: "18px 22px", backgroundColor: T.bgDeep, borderRadius: "12px", border: `1px solid ${T.line}` }}>
         <h2 style={{ margin: "0 0 4px", fontFamily: "Georgia, serif", fontSize: "18px", color: T.inkMid, fontWeight: "700" }}>Case Reflection</h2>
         <p style={{ margin: 0, fontSize: "12px", color: T.inkFaint, fontFamily: "Georgia, serif", lineHeight: 1.6 }}>
-          A structured reflection on a specific client or session — working through each layer of the SIPM from Way of Being through to the intervention in the room.
+          A structured reflection on a specific client or session — working through each layer of the Practice Map from Way of Being through to the intervention in the room.
         </p>
       </div>
       {CASE_SECTIONS.map(s => <CaseSection key={s.id} section={s}/>)}
@@ -1716,8 +1717,9 @@ function ReferencesView() {
       <div style={{ padding: "14px 18px", backgroundColor: "white", borderRadius: "12px", border: `1px solid ${T.lineFaint}` }}>
         <p style={{ margin: "0 0 6px", fontFamily: "Georgia, serif", fontSize: "13px", fontWeight: "700", color: T.inkMid }}>About This Tool</p>
         <p style={{ margin: 0, fontFamily: "Georgia, serif", fontSize: "12.5px", color: T.inkFaint, lineHeight: 1.7 }}>
-          The Practice Map was developed by Brooke Shakspeare, social worker, clinical supervisor and educator. It draws on a rich and layered body of knowledge and experience — including social work practice framework traditions, Brooke's own clinical and supervisory practice, learnings from mentors and clinical supervision across her career, and her experience working within and leading multidisciplinary teams. Particularly formative was her work within <strong style={{ color: T.inkMid }}>Evolve Therapeutic Services</strong>, where an explicitly systemic practice framework was developed collaboratively across the team and across disciplines — an experience that deeply shaped her understanding of what it means to hold a shared theoretical framework in complex MDT settings.
-          {"\n\n"}The Systemic Meta-Framework for Integrative Practice forms the visual and reflective practice framework at the centre of this tool. The framework was first published by <strong style={{ color: T.inkMid }}>White, L. & Owen, K. (2022)</strong> in the Australian and New Zealand Journal of Family Therapy, and has been further developed and updated by <strong style={{ color: T.inkMid }}>Dr Leonie White (2025)</strong> through her ongoing teaching, supervision and practice at Therapywell Allied Health and Wellbeing and Phoenix Family Therapy Academy. The broader satellite knowledge bases, reflection prompts, case reflection structure and supervision framework reflect Brooke's own practice framework as a social worker and supervisor, informed by the many authors, theorists and colleagues credited in the reference groups below. The supervision framework also draws on Kieran O'Donoghue's <em>Restorying Social Work Supervision</em> (2003), and the multi-level diagnostic formulation framework is drawn from O'Keeffe & Macaulay (2012).
+          The Practice Map is a collaborative work developed by <strong style={{ color: T.inkMid }}>Brooke Shakspeare</strong>, social worker, clinical supervisor and educator, in collaboration with <strong style={{ color: T.inkMid }}>Dr Leonie White</strong>, clinical family therapist, psychologist, supervisor and Director of Phoenix Family Therapy Academy and Therapywell Allied Health and Wellbeing.
+          {"\n\n"}The tool draws on a rich and layered body of knowledge and experience — including social work practice framework traditions, Brooke's own clinical and supervisory practice, learnings from mentors and clinical supervision across her career, and her experience working within and leading multidisciplinary teams. Particularly formative was her work within <strong style={{ color: T.inkMid }}>Evolve Therapeutic Services</strong>, where an explicitly systemic practice framework was developed collaboratively across the team and across disciplines — an experience that deeply shaped her understanding of what it means to hold a shared theoretical framework in complex MDT settings.
+          {"\n\n"}Dr Leonie White's <strong style={{ color: T.inkMid }}>Systemic Meta-Framework for Integrative Practice</strong> forms the visual and reflective practice framework at the centre of this tool. The framework was first published by White, L. & Owen, K. (2022) in the Australian and New Zealand Journal of Family Therapy, and has been further developed and updated by Dr Leonie White (2025) through her ongoing teaching, supervision and practice at Therapywell Allied Health and Wellbeing and Phoenix Family Therapy Academy. The broader satellite knowledge bases, reflection prompts, case reflection structure and supervision framework reflect Brooke's own practice framework as a social worker and supervisor, informed by the many authors, theorists and colleagues credited in the reference groups below. The supervision framework also draws on Kieran O'Donoghue's <em>Restorying Social Work Supervision</em> (2003), and the multi-level diagnostic formulation framework is drawn from O'Keeffe & Macaulay (2012).
         </p>
       </div>
 
@@ -1759,4 +1761,3 @@ function ReferencesView() {
     </div>
   );
 }
- 
