@@ -1,4 +1,5 @@
 import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback } from "react";
 
 // ─── DESIGN TOKENS ───────────────────────────────────────────────────────────
 const T = {
@@ -1120,7 +1121,7 @@ function loadFromStorage(key, defaultValue) {
 }
 
 // ─── PASSWORD GATE ───────────────────────────────────────────────────────────
-const CORRECT_PASSWORD = "practiceframework2025";
+const CORRECT_PASSWORD = "practiceframework2026brookeshakspeare";
 
 function PasswordGate({ onUnlock }) {
   const [input, setInput] = useState("");
