@@ -1,5 +1,4 @@
 import { useState, useRef, useCallback } from "react";
-import { useState, useRef, useCallback } from "react";
 
 // ─── DESIGN TOKENS ───────────────────────────────────────────────────────────
 const T = {
@@ -1230,6 +1229,47 @@ function AppInner() {
   }, []);
   const totalItems  = Object.values(allItems).flat().length + Object.values(satItems).flat().length;
 
+  // ── Export all data to a JSON file ──
+  const exportData = useCallback(() => {
+    const data = {};
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key && key.startsWith("pfm_")) data[key] = localStorage.getItem(key);
+    }
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `practice-map-data-${new Date().toISOString().slice(0,10)}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  }, []);
+
+  // ── Import data from a JSON file ──
+  const importData = useCallback(() => {
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = ".json";
+    input.onchange = (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        try {
+          const data = JSON.parse(ev.target.result);
+          Object.entries(data).forEach(([key, val]) => {
+            if (key.startsWith("pfm_")) localStorage.setItem(key, val);
+          });
+          window.location.reload();
+        } catch {
+          alert("Could not read file — please make sure it is a valid Practice Map data file.");
+        }
+      };
+      reader.readAsText(file);
+    };
+    input.click();
+  }, []);
+
   const tabs = [
     { id: "howto",     label: "How to Use" },
     { id: "map",       label: "Visual Map" },
@@ -1254,8 +1294,10 @@ function AppInner() {
             {tabs.map(t => <button key={t.id} onClick={() => setTab(t.id)} style={{ padding: "7px 16px", borderRadius: "7px", cursor: "pointer", fontSize: "12px", backgroundColor: tab === t.id ? "#2E5020" : "transparent", color: tab === t.id ? "#C0E8A8" : "#587A50", border: "none", fontFamily: "Georgia, serif", transition: "all 0.15s" }}>{t.label}</button>)}
             {totalItems > 0 && <span style={{ padding: "7px 12px", fontSize: "11px", color: "#7AAB68", fontFamily: "monospace", alignSelf: "center" }}>{totalItems} elements</span>}
           </div>
-          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
             <span style={{ fontSize: "10px", color: "#4A6A42", fontFamily: "monospace" }}>● auto-saved to this browser</span>
+            <button onClick={exportData} style={{ fontSize: "10px", color: "#7AAB68", background: "none", border: "1px solid #3A6A32", borderRadius: "6px", padding: "3px 10px", cursor: "pointer", fontFamily: "Georgia, serif" }}>↓ Export data</button>
+            <button onClick={importData} style={{ fontSize: "10px", color: "#7AAB68", background: "none", border: "1px solid #3A6A32", borderRadius: "6px", padding: "3px 10px", cursor: "pointer", fontFamily: "Georgia, serif" }}>↑ Import data</button>
             <button onClick={clearAll} style={{ fontSize: "10px", color: "#8A6A5A", background: "none", border: "1px solid #4A3A2A", borderRadius: "6px", padding: "3px 10px", cursor: "pointer", fontFamily: "Georgia, serif" }}>Clear all data</button>
           </div>
         </div>
@@ -1316,6 +1358,15 @@ function AppInner() {
         {tab === "growth"    && <GrowthGapsView/>}
         {tab === "howto"     && <HowToUseView onNavigate={setTab}/>}
         {tab === "refs"      && <ReferencesView/>}
+      </div>
+
+      {/* Copyright footer */}
+      <div style={{ background: "#0D1A0B", padding: "12px 28px", textAlign: "center" }}>
+        <p style={{ margin: 0, fontSize: "10px", color: "#4A6A42", fontFamily: "monospace", lineHeight: 1.7 }}>
+          © 2026 Brooke Shakspeare & Dr Leonie White. All rights reserved.
+          The Practice Map is a collaborative work. Systemic Meta-Framework for Integrative Practice © Dr Leonie White (White & Owen, 2022).
+          Not to be reproduced, copied or distributed without permission.
+        </p>
       </div>
     </div>
   );
