@@ -1,4 +1,5 @@
 import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback } from "react";
 
 // ─── DESIGN TOKENS ───────────────────────────────────────────────────────────
 const T = {
@@ -1141,18 +1142,12 @@ function PasswordGate({ onUnlock }) {
   return (
     <div style={{ minHeight: "100vh", backgroundColor: "#1A2818", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "Georgia, serif", padding: "20px" }}>
       <div style={{ backgroundColor: "#F7F3EE", borderRadius: "16px", padding: "48px 44px", maxWidth: "420px", width: "100%", boxShadow: "0 8px 48px #00000040", textAlign: "center" }}>
-        {/* Logo mark */}
+        {/* Logo */}
         <div style={{ marginBottom: "24px" }}>
-          <svg width="60" height="60" viewBox="0 0 60 60" style={{ display: "block", margin: "0 auto" }}>
-            <ellipse cx="30" cy="30" rx="28" ry="26" fill="none" stroke="#C07840" strokeWidth="1.5" opacity="0.4"/>
-            <ellipse cx="30" cy="30" rx="21" ry="19" fill="none" stroke="#5060B8" strokeWidth="1.5" opacity="0.5"/>
-            <ellipse cx="30" cy="30" rx="14" ry="12" fill="none" stroke="#3A8A58" strokeWidth="1.5" opacity="0.65"/>
-            <ellipse cx="30" cy="30" rx="7" ry="6" fill="none" stroke="#A03880" strokeWidth="1.5" opacity="0.8"/>
-          </svg>
+          <img src="/logo.webp" alt="The Practice Map" style={{ width: "140px", height: "140px", objectFit: "contain", display: "block", margin: "0 auto" }}/>
         </div>
 
         <p style={{ margin: "0 0 4px", fontSize: "10px", color: "#7AAB68", letterSpacing: "0.14em", textTransform: "uppercase", fontFamily: "monospace" }}>Clinical Supervision Tool</p>
-        <h1 style={{ margin: "0 0 8px", fontSize: "22px", fontWeight: "700", color: "#3D3128" }}>Practice Framework Map</h1>
         <p style={{ margin: "0 0 32px", fontSize: "13px", color: "#7A6B5C", fontStyle: "italic", lineHeight: 1.5 }}>A living map for intentional clinical practice</p>
 
         <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
@@ -1764,4 +1759,3 @@ function ReferencesView() {
     </div>
   );
 }
- 
