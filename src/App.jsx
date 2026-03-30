@@ -1119,7 +1119,78 @@ function loadFromStorage(key, defaultValue) {
   } catch { return defaultValue; }
 }
 
+// ─── PASSWORD GATE ───────────────────────────────────────────────────────────
+const CORRECT_PASSWORD = "practiceframework2025";
+
+function PasswordGate({ onUnlock }) {
+  const [input, setInput] = useState("");
+  const [error, setError] = useState(false);
+  const [focused, setFocused] = useState(false);
+
+  const attempt = () => {
+    if (input.trim().toLowerCase() === CORRECT_PASSWORD) {
+      try { localStorage.setItem("pfm_auth", "1"); } catch {}
+      onUnlock();
+    } else {
+      setError(true);
+      setInput("");
+      setTimeout(() => setError(false), 2000);
+    }
+  };
+
+  return (
+    <div style={{ minHeight: "100vh", backgroundColor: "#1A2818", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "Georgia, serif", padding: "20px" }}>
+      <div style={{ backgroundColor: "#F7F3EE", borderRadius: "16px", padding: "48px 44px", maxWidth: "420px", width: "100%", boxShadow: "0 8px 48px #00000040", textAlign: "center" }}>
+        {/* Logo mark */}
+        <div style={{ marginBottom: "24px" }}>
+          <svg width="60" height="60" viewBox="0 0 60 60" style={{ display: "block", margin: "0 auto" }}>
+            <ellipse cx="30" cy="30" rx="28" ry="26" fill="none" stroke="#C07840" strokeWidth="1.5" opacity="0.4"/>
+            <ellipse cx="30" cy="30" rx="21" ry="19" fill="none" stroke="#5060B8" strokeWidth="1.5" opacity="0.5"/>
+            <ellipse cx="30" cy="30" rx="14" ry="12" fill="none" stroke="#3A8A58" strokeWidth="1.5" opacity="0.65"/>
+            <ellipse cx="30" cy="30" rx="7" ry="6" fill="none" stroke="#A03880" strokeWidth="1.5" opacity="0.8"/>
+          </svg>
+        </div>
+
+        <p style={{ margin: "0 0 4px", fontSize: "10px", color: "#7AAB68", letterSpacing: "0.14em", textTransform: "uppercase", fontFamily: "monospace" }}>Clinical Supervision Tool</p>
+        <h1 style={{ margin: "0 0 8px", fontSize: "22px", fontWeight: "700", color: "#3D3128" }}>Practice Framework Map</h1>
+        <p style={{ margin: "0 0 32px", fontSize: "13px", color: "#7A6B5C", fontStyle: "italic", lineHeight: 1.5 }}>A living map for intentional clinical practice</p>
+
+        <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+          <input
+            type="password"
+            value={input}
+            onChange={e => setInput(e.target.value)}
+            onKeyDown={e => e.key === "Enter" && attempt()}
+            onFocus={() => setFocused(true)}
+            onBlur={() => setFocused(false)}
+            placeholder="Enter access password"
+            style={{ width: "100%", padding: "12px 16px", borderRadius: "8px", border: `1.5px solid ${error ? "#C03030" : focused ? "#3A8A58" : "#C8B8A2"}`, fontSize: "14px", fontFamily: "Georgia, serif", color: "#3D3128", outline: "none", backgroundColor: "white", boxSizing: "border-box", textAlign: "center", transition: "border-color 0.15s" }}
+          />
+          {error && <p style={{ margin: 0, fontSize: "12px", color: "#C03030", fontFamily: "Georgia, serif" }}>Incorrect password — please try again</p>}
+          <button onClick={attempt} style={{ padding: "12px", borderRadius: "8px", backgroundColor: "#2E3A28", color: "#C0E8A8", border: "none", fontSize: "14px", fontFamily: "Georgia, serif", cursor: "pointer", fontWeight: "700", letterSpacing: "0.04em" }}>
+            Enter
+          </button>
+        </div>
+
+        <p style={{ margin: "24px 0 0", fontSize: "11px", color: "#B5A898", fontFamily: "Georgia, serif", lineHeight: 1.6 }}>
+          Access is provided by your supervisor.<br/>Contact Brooke Shakspeare for access.
+        </p>
+      </div>
+    </div>
+  );
+}
+
 export default function App() {
+  const [unlocked, setUnlocked] = useState(() => {
+    try { return localStorage.getItem("pfm_auth") === "1"; } catch { return false; }
+  });
+
+  if (!unlocked) return <PasswordGate onUnlock={() => setUnlocked(true)}/>;
+
+  return <AppInner/>;
+}
+
+function AppInner() {
   const [tab, setTab] = useState("howto");
   const [allItems, setAllItems] = useState(() => loadFromStorage("pfm_allItems", { values: [], theories: [], approaches: [], influences: [], self: [], context: [] }));
   const [satItems, setSatItems] = useState(() => loadFromStorage("pfm_satItems", { systems: [], foundational: [], epistemology: [], humanrights: [], antioppressive: [], cultural: [], ethics: [], philosophy: [], contemporary: [] }));
