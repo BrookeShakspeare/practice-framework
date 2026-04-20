@@ -1,4 +1,3 @@
-import { useState, useRef, useCallback } from "react";
 
 // ─── DESIGN TOKENS ───────────────────────────────────────────────────────────
 const T = {
@@ -79,27 +78,28 @@ const SAT_DEFS = [
   {
     id: "foundational", angle: -50,
     title: "Foundational Theories", icon: "◈",
-    tagline: "The developmental, neuroscience, attachment & diagnostic formulation frameworks underpinning your practice",
+    tagline: "Trauma-informed practice · Attachment · Neuroscience · Developmental theory · Diagnostic formulation",
     color: { bg: "#EAF5EC", border: "#3A8A58", text: "#163820" },
     prompts: [
+      // Trauma-informed as foundation
+      "Trauma-informed practice is not a specialisation — it is a foundation of all good clinical work. How explicitly do you hold a trauma-informed lens in your everyday practice, even when trauma is not the presenting concern?",
+      "What does being trauma-informed mean to you beyond knowledge — how does it shape your Way of Being, the pace of your work, how you create safety, and how you respond when clients are dysregulated or distressed?",
+      "How do you understand the relationship between trauma, adversity and the presentations you see most often — even when clients don't identify as trauma survivors?",
       // Attachment & neuroscience
       "How do attachment theory and developmental psychology shape how you understand your clients — and how does this show up in practice?",
       "How does nervous system science and neurobiology inform how you create safety in the room?",
       "How do you draw on polyvagal theory, interpersonal neurobiology or DDP in your clinical thinking?",
       // Multi-level diagnostic formulation (O'Keeffe & Macaulay)
       "How do you hold a multi-level understanding of your clients — moving beyond presenting symptoms to consider the neuropsychological processes, biological factors and environmental systems that interact to create and maintain the presenting concern?",
-      "How do you think about the neuropsychological constructs underlying a client's behaviour — areas like executive function, attention control, emotional regulation, social competence, language and memory — rather than defaulting to categorical diagnostic labels?",
-      "How do you hold the temporal axis in your formulation — what predisposed this person (biological and environmental risk factors), what precipitated the current presentation, and what is perpetuating it? What is your prognosis with and without intervention?",
-      "How explicitly do you assess and document the environmental systems — family patterns, school, community, broader ecology — as part of your formulation, rather than focusing primarily on the individual?",
-      "How strengths-focused is your assessment and formulation? Are you as thorough in identifying resilience factors, affinities and protective factors as you are in identifying deficits and difficulties?",
+      "How do you hold the temporal axis in your formulation — what predisposed this person, what precipitated the current presentation, and what is perpetuating it?",
+      "How strengths-focused is your assessment and formulation? Are you as thorough in identifying resilience factors and protective factors as you are in identifying deficits?",
       // Biopsychosocial & beyond labels
       "How do you hold the limitations of categorical diagnostic labels alongside their utility — and how do you advocate for a more individualised, functional formulation rather than diagnosis-as-endpoint?",
-      // Disciplinary training
       "How does your professional discipline's training shape what you foreground in assessment and what you overlook — and where does that create blind spots?",
     ],
     suggestions: [
-      "Attachment Theory (Bowlby)","Polyvagal Theory (Porges)","Interpersonal Neurobiology (Siegel)","Developmental Psychology","Dyadic Developmental Psychotherapy (DDP)","Mentalization (Fonagy)","Trauma-Informed Practice","PACE framework","Window of tolerance (Ogden)","ACEs framework","Circle of Security (COS)","Triple P (PPP)",
-      "Multi-level diagnostic formulation (O'Keeffe & Macaulay)","Biopsychosocial model (Engel)","Bronfenbrenner's ecological theory","Neuropsychological constructs","Temporal axis (predisposing · precipitating · perpetuating)","Strengths & resilience focus","Beyond categorical diagnosis","Behavioural level","Neuropsychological level","Biological level","Environmental/family level",
+      "Trauma-informed practice","Trauma & the nervous system","ACEs framework","Attachment Theory (Bowlby)","Polyvagal Theory (Porges)","Interpersonal Neurobiology (Siegel)","Developmental Psychology","Dyadic Developmental Psychotherapy (DDP)","Mentalization (Fonagy)","PACE framework","Window of tolerance (Ogden)","Circle of Security (COS)",
+      "Multi-level diagnostic formulation (O'Keeffe & Macaulay)","Biopsychosocial model (Engel)","Bronfenbrenner's ecological theory","Neuropsychological constructs","Temporal axis (predisposing · precipitating · perpetuating)","Strengths & resilience focus","Beyond categorical diagnosis",
     ],
   },
   {
@@ -431,36 +431,42 @@ const RING_PANELS = {
     prompts: [
       "How would you describe your Way of Being with this client — are you in an I-Thou or I-It position, and what tells you that?",
       "What do you notice in yourself when you are with this client — emotionally, somatically, relationally?",
+      "How are you actively creating a felt sense of safety in the room — not just assumed, but attended to? How do you know the client feels safe enough to be present with you?",
       "How are your own Social GRACES showing up in your work with this client?",
       "What does Unconditional Positive Regard look like for you with this client — where does it come easily, and where is it harder?",
       "How does your Way of Being shift across different clients, contexts or presentations — and what does that tell you?",
       "What life experiences, family of origin stories or personal material are present and influencing how you show up in the room?",
+      "Trauma-informed practice begins with your presence — how regulated, grounded and available are you in this work? What do you need to show up well for this client?",
     ],
     gaps: [
       "Where in your Way of Being do you notice the most uncertainty or thin edges?",
       "Which clients or presentations make it hardest to sustain an I-Thou position — and what does that tell you?",
+      "How trauma-informed is your presence — not just your knowledge, but how you actually show up in the room?",
       "What personal work, supervision or learning would most develop your Way of Being as a clinician?",
     ],
-    suggestions: ["I-Thou presence","UPR in practice","Congruence & authenticity","Social GRACES reflection","Personal material activated","Embodied presence","Emotional attunement","Relational safety created","Countertransference awareness","I-It moments & recovery"],
+    suggestions: ["I-Thou presence","UPR in practice","Congruence & authenticity","Social GRACES reflection","Personal material activated","Embodied presence","Emotional attunement","Felt sense of safety created","Trauma-informed presence","Countertransference awareness","I-It moments & recovery","Nervous system regulation"],
   },
   alliance: {
     title: "Therapeutic Alliance",
-    tagline: "Goals · Tasks · Bonds · Neuroscience · PACE · Mentalizing",
+    tagline: "Goals · Tasks · Bonds · Neuroscience · PACE · Mentalizing · Trauma-Informed Safety",
     color: { bg: "#EFF0FA", border: "#5060B8", text: "#1A2060" },
     prompts: [
       "What type of relationship do you have with this client — customer, complainant, visitor or mandated? How does this shape your approach?",
       "How shared and meaningful are the goals of the work — does the client see themselves as part of the solution?",
-      "How safe does the client feel in the room — what tells you this neurobiologically and relationally?",
+      "How safe does the client feel in the room — not assumed, but evidenced. What tells you this neurobiologically, behaviourally and relationally?",
+      "Trauma-informed practice means safety is not a precondition — it is an ongoing practice. How are you actively creating and maintaining safety for this client in every interaction, not just at the start of the work?",
       "How are you using PACE (Playfulness, Acceptance, Curiosity, Empathy) in your work with this client?",
       "Where is the alliance strongest — with an individual, a subsystem, or the whole family system?",
       "How are you drawing on mentalization and epistemic trust to deepen the alliance?",
+      "How is the client's trauma history — even if not the presenting concern — shaping how they relate to you and to the therapeutic relationship?",
     ],
     gaps: [
       "Where do you find alliance-building most challenging — which client types, presentations or contexts?",
+      "How confident are you in your trauma-informed approach to building safety — is this an active practice or an assumption?",
       "What neuroscience or attachment knowledge would strengthen how you build and repair alliance?",
       "What would you like to develop in how you hold the systemic alliance across family members?",
     ],
-    suggestions: ["Customer relationship","Complainant relationship","Shared goals established","Safety neurobiologically","PACE in practice","Mentalization","Epistemic trust","Right-brain attunement","Alliance rupture & repair","Systemic alliance across members"],
+    suggestions: ["Customer relationship","Complainant relationship","Shared goals established","Neurobiological safety","Felt safety created","PACE in practice","Mentalization","Epistemic trust","Right-brain attunement","Alliance rupture & repair","Systemic alliance across members","Trauma-informed alliance"],
   },
   systemic: {
     title: "Systemic Formulation & Practice",
@@ -980,6 +986,26 @@ const CASE_SECTIONS = [
     ],
   },
   {
+    id: "formulation_case",
+    label: "Formulation — The 7 Ps",
+    icon: "◎",
+    color: { bg: "#EAF5EC", border: "#3A8A58", text: "#163820" },
+    desc: "A guided formulation process — work through each P to build your working hypothesis, co-create goals and develop a realistic, prioritised intervention plan. Assessment is dynamic — your formulation will deepen and shift as the work unfolds.",
+    prompts: [
+      "PRESENTING PROBLEM — In your own words, what is the core concern that brought this client/family to you? Whose concern is it — does everyone in the system see it the same way, or are there different perspectives? What is the client/family hoping will be different — and is that the same as what the referrer wants?",
+      "PREDISPOSING FACTORS — What in this person's history, relationships or biology may have created vulnerability to this difficulty? Consider: early attachment experiences, family of origin patterns, trauma history, developmental or neuropsychological factors. You don't need to know everything yet — what stands out as most relevant to understanding why this person is struggling in this way now?",
+      "PRECIPITATING FACTORS — What has happened recently — or accumulated over time — to bring this to a point of crisis or referral now? Has there been a loss, transition, life cycle change or stressor that has destabilised things? Why now, rather than six months ago?",
+      "PERPETUATING FACTORS — What is keeping this problem going and stopping it from resolving on its own? Think about: the patterns and sequences around the problem — what happens before, during and after — the meanings and beliefs that maintain it, attempted solutions that may be making things worse, and any broader structural factors (poverty, housing, systemic disadvantage) that are outside the family but very much part of the picture.",
+      "PROTECTIVE FACTORS — What is already working, even a little? What strengths, relationships, resources and exceptions to the problem exist — moments when things are better, different or more manageable? These are not just nice additions — they are the foundation of your intervention plan and your theory of change.",
+      "PEOPLE & SOCIAL CONTEXT — Who is in this person's world — family, community, culture, school, services? Whose perspectives haven't yet been heard? How are culture, identity, power and structural context shaping this presentation? How do your own Social GRACES show up in how you are understanding and responding to this situation?",
+      "YOUR WORKING HYPOTHESIS — Based on everything above, what is your best current understanding of what is maintaining the problem and what would need to shift for change to happen? A working hypothesis is a starting point, not a conclusion — state it clearly so you can test it, refine it and revise it as the work unfolds.",
+      "PRIORITY FOCUS — You cannot address everything at once, and trying to will serve no one. Given your formulation, what is the most important thing to focus on first — and why? What needs to happen before other work can begin (e.g. safety, stabilisation, building the alliance, addressing a crisis)? What are you choosing not to focus on right now — and is that a conscious clinical decision?",
+      "GOALS WITH THE CLIENT — What does the client/family want to be different? How can you collaboratively shape 1–3 meaningful, realistic goals that connect their hopes to your formulation? Goals work best when they are co-created, specific, connected to the client's own theory of change — and honest about what is and isn't possible in this context.",
+      "INITIAL TREATMENT PLAN — What approach, modality or intervention fits best for this client right now, given their context, capacity, readiness and your formulation? What is your rationale for this choice? How does your Way of Being, the alliance and your systemic thinking underpin and shape everything you do in the room?",
+      "ONGOING REVIEW — Assessment is a dynamic process and your formulation is a living hypothesis. How will you know if it needs to shift? What will you watch for — in the client's response, in the patterns of the work, in yourself — that tells you to reorient, slow down, change direction or celebrate progress?",
+    ],
+  },
+  {
     id: "wob_case",
     label: "Way of Being in This Session",
     icon: "◉",
@@ -988,6 +1014,7 @@ const CASE_SECTIONS = [
     prompts: [
       "How present and attuned were you in this session — what was your Way of Being like?",
       "Were there moments of I-It — where the client became a problem to solve rather than a person to be with? What happened?",
+      "How actively were you creating safety in this session — not as a one-off at the start, but as an ongoing practice throughout? What told you the client felt safe enough?",
       "What personal material, family of origin stories or lived experiences were activated in you during this session?",
       "How did your Social GRACES show up — what did you notice about the relational dynamics between you and this client?",
     ],
@@ -1003,25 +1030,6 @@ const CASE_SECTIONS = [
       "Were there moments of rupture or disconnection — and how did you respond?",
       "How safe did the client feel — what told you this neurobiologically and relationally?",
       "How well-aligned were you and the client on the goals and tasks of the session?",
-    ],
-  },
-  {
-    id: "formulation_case",
-    label: "Multi-Level Formulation",
-    icon: "◎",
-    color: { bg: "#EAF5EC", border: "#3A8A58", text: "#163820" },
-    desc: "A multi-level understanding: observable behaviours · neuropsychological constructs · biological factors · environmental systems",
-    prompts: [
-      "What are the presenting symptoms and functional skills — both difficulties (weaknesses) and competencies (strengths)? What are the observable behaviours and functional concerns that brought this person to you?",
-      "What neuropsychological constructs help explain what you are observing? Consider: attention control, executive function (planning, impulse control, self-monitoring), emotional regulation, social competence, language, memory, higher order cognition. What is the underlying process beneath the surface behaviour?",
-      "What biological factors — genetic, neurological, developmental, medical — may be predisposing or contributing to this presentation? Are there biological red flags requiring further investigation?",
-      "What does the environmental and family assessment reveal? How are family interaction patterns, beliefs, parenting, sibling dynamics, and broader social systems (school, community, services) contributing to and maintaining the presenting concern?",
-      "How are broader societal factors — structural oppression, racism, poverty, housing instability, systemic disadvantage — present in this person's situation? How are these held in your formulation rather than located within the individual or family?",
-      "What predisposed this person to this difficulty (early biological or environmental risk factors)? What precipitated the current presentation (acute stressors or events)? What is perpetuating it (biological, psychological or environmental maintaining factors)?",
-      "What is your systemic hypothesis about what is maintaining the presenting problem — what is keeping this from being resolved? How are you holding the full ecosystem in your formulation?",
-      "How are you actively considering anti-oppressive practice in this case — how are you attending to power, privilege, structural oppression and the risk of imposing Western frameworks in ways that may not fit this client's culture, context or knowledge systems?",
-      "What are the strengths, affinities, resilience factors and protective elements in this person, their family, school and community — and how are you building these explicitly into the formulation and management plan?",
-      "What is your prognosis — with and without intervention? What is likely to happen for this person over time, and what does that mean for your plan?",
     ],
   },
   {
@@ -1050,8 +1058,8 @@ const CASE_SECTIONS = [
     desc: "What this session reveals about your developing practice — and what comes next",
     prompts: [
       "What would you do differently — and what does that illuminate about your growth edges?",
-      "Where was your formulation thin or incomplete — which level of analysis (behavioural, neuropsychological, biological, environmental) did you attend to least, and why?",
-      "Was your assessment sufficiently strengths-focused — or did deficit-thinking dominate? What resilience and protective factors need more attention?",
+      "Where was your formulation thin or incomplete — which of the 7 Ps did you attend to least, and why?",
+      "Was your assessment sufficiently strengths-focused — or did deficit-thinking dominate? What protective factors need more attention?",
       "What did this session reveal about gaps in your framework, knowledge or skills — and what do you want to learn more about?",
       "What do you want to bring to supervision from this reflection?",
       "What management goals — including resilience-building goals — are you taking forward, and what is your follow-up plan?",
@@ -1278,6 +1286,7 @@ function AppInner() {
     { id: "questions", label: "Supervision Qs" },
     { id: "case",      label: "Case Reflection" },
     { id: "growth",    label: "Growth & Gaps" },
+    { id: "glossary",  label: "Glossary" },
     { id: "refs",      label: "References" },
   ];
 
@@ -1356,6 +1365,7 @@ function AppInner() {
         {tab === "questions" && <SupervisionQView/>}
         {tab === "case"      && <CaseReflectionView/>}
         {tab === "growth"    && <GrowthGapsView/>}
+        {tab === "glossary"  && <GlossaryView/>}
         {tab === "howto"     && <HowToUseView onNavigate={setTab}/>}
         {tab === "refs"      && <ReferencesView/>}
       </div>
@@ -1515,10 +1525,10 @@ function HowToUseView({ onNavigate }) {
       color: { bg: "#E6F0F8", border: "#3A68B0", text: "#162848" },
       desc: "Use this when starting supervision, beginning with a new supervisor, or at key points in your professional development.",
       steps: [
-        { tab: "map", label: "Visual Map", instruction: "Start here. The SIPM diagram sits at the centre — click any of the four ellipse rings (Way of Being, Therapeutic Alliance, Systemic Formulation, Therapy & Intervention) to open a reflection panel for that layer." },
-        { tab: "map", label: "Visual Map", instruction: "Then click each of the nine satellite nodes around the outside. Each one represents a knowledge base that informs your practice. Read the framework overview, then work through the reflection prompts." },
-        { tab: "editor", label: "Editor", instruction: "Use the Editor tab to add the specific theories, approaches, values and influences that make up your practice. Tap suggestions or type your own." },
-        { tab: "summary", label: "Summary", instruction: "The Summary tab collects everything you've added into one view — useful to bring to supervision as a snapshot of your framework." },
+        { tab: "map", label: "Visual Map", instruction: "Start here. The Systemic Meta-Framework for Integrative Practice sits at the centre — click any of the four ellipse rings (Way of Being, Therapeutic Alliance, Systemic Formulation, Therapy & Intervention) to open a reflection panel for that layer." },
+        { tab: "map", label: "Visual Map", instruction: "Then click each of the nine satellite nodes around the outside. Each represents a broader knowledge base. Read the framework overview, work through the reflection prompts and add what belongs in your framework." },
+        { tab: "editor", label: "Editor", instruction: "Use the Editor to add theories, approaches, values and influences across six domains. Add discipline-specific frameworks here — they will appear in your Summary." },
+        { tab: "summary", label: "Summary", instruction: "The Summary collects everything you've added into one view — a snapshot of your personal practice framework, useful to bring to supervision or share with a new supervisor." },
       ],
     },
     {
@@ -1526,10 +1536,11 @@ function HowToUseView({ onNavigate }) {
       color: { bg: "#F5E6F0", border: "#A03880", text: "#481830" },
       desc: "Use this when you want to think through a case in depth — moving layer by layer from your Way of Being to what you actually did in the room.",
       steps: [
-        { tab: "case", label: "Case Reflection", instruction: "Go to the Case Reflection tab. Work through the six sections in order — starting with the client context, then your Way of Being, the alliance, the formulation, the intervention, and finally your learning." },
+        { tab: "case", label: "Case Reflection", instruction: "Go to the Case Reflection tab. Work through the sections in order — starting with the client context and formulation (7 Ps), then your Way of Being, the alliance, the intervention, and finally your learning." },
         { tab: "case", label: "Case Reflection", instruction: "You don't need to complete every section. Open the ones most relevant to what you want to bring to supervision. Each section saves automatically." },
         { tab: "map", label: "Visual Map", instruction: "You can also click the SIPM rings on the Visual Map and use those panels to reflect on a specific client — the prompts are framed around live clinical situations." },
         { tab: "questions", label: "Supervision Qs", instruction: "Use the Supervision Questions tab to generate discussion questions to bring to your supervisor after completing your case reflection." },
+        { tab: "glossary", label: "Glossary", instruction: "If you encounter unfamiliar terms in the prompts, the Glossary tab has plain-language definitions for every key concept in the tool." },
       ],
     },
     {
@@ -1540,6 +1551,8 @@ function HowToUseView({ onNavigate }) {
         { tab: "map", label: "Visual Map", instruction: "Click each SIPM ring on the Visual Map. At the bottom of each panel you'll find a Gaps, Growth & Supervision Goals section with specific prompts about where your knowledge or practice is thin." },
         { tab: "case", label: "Case Reflection", instruction: "Complete a Case Reflection and pay particular attention to the final section — Learning & Next Steps — which asks what the session revealed about gaps in your framework." },
         { tab: "growth", label: "Growth & Gaps", instruction: "Go to the Growth & Gaps tab. It automatically collects everything you've written in the gaps sections across all panels into one view. Use the Synthesis and Goals sections to identify patterns and build your supervision goals." },
+        { tab: "glossary", label: "Glossary", instruction: "Use the Glossary to deepen your understanding of frameworks or concepts that feel unfamiliar — this can help you identify where your knowledge base needs strengthening." },
+        { tab: "refs", label: "References", instruction: "Browse the References tab for further reading — each section lists the key sources behind the frameworks in the tool." },
       ],
     },
     {
@@ -1560,7 +1573,9 @@ function HowToUseView({ onNavigate }) {
     { icon: "◎", text: "You don't need to use every tab. Start with what's most relevant to you right now — the tool is designed to be used flexibly and in any order." },
     { icon: "◈", text: "On the Visual Map, click the ellipse rings to reflect on each SIPM layer. Click the satellite nodes to explore the knowledge bases informing your practice." },
     { icon: "◇", text: "Panel descriptions can be collapsed — look for the 'Hide framework overview' toggle to bring the reflection prompts into view more quickly." },
-    { icon: "◆", text: "The References tab credits all authors and frameworks underpinning the tool — useful for further reading or citing in professional development portfolios." },
+    { icon: "○", text: "The Glossary tab defines key terms used across the tool — useful if you encounter unfamiliar language or want to deepen your understanding of a concept." },
+    { icon: "◆", text: "Use the Export Data button in the top bar to download your reflections as a file. You can import this file on another device to restore all your work." },
+    { icon: "◈", text: "The References tab credits all authors and frameworks underpinning the tool — useful for further reading or citing in professional development portfolios." },
   ];
 
   const Block = ({ uc }) => {
@@ -1633,6 +1648,185 @@ function HowToUseView({ onNavigate }) {
   );
 }
 
+// ─── GLOSSARY VIEW ───────────────────────────────────────────────────────────
+const GLOSSARY_TERMS = [
+  {
+    heading: "The Practice Map & SIPM",
+    color: { bg: "#EAF5EC", border: "#3A8A58", text: "#163820" },
+    terms: [
+      { term: "Systemic Meta-Framework for Integrative Practice (SIPM)", def: "A structured model for integrative psychotherapy developed by Dr Leonie White & Kate Owen (2022). It organises diverse theories into a coherent clinical guide using systemic thinking as the overarching frame, structured through four nested layers: Way of Being, Therapeutic Alliance, Systemic Formulation & Practice, and Therapy/Intervention." },
+      { term: "Integrative practice", def: "The thoughtful and intentional blending of therapeutic models within a cohesive framework. Different from eclecticism — integrative practice involves deliberate, principled choices about which approaches to combine and why, guided by the client's needs, context and theory of change." },
+      { term: "Eclectic practice", def: "Drawing from multiple therapeutic models based on perceived effectiveness. Unlike integrative practice, eclectic approaches may lack a coherent underlying framework, risking 'therapeutic drift' or working from a conceptual soup without clear rationale." },
+      { term: "Theory of change", def: "The clinician's understanding of how and why change happens for a particular client — what needs to shift, and what interventions will create that shift. A clear theory of change guides intervention decisions rather than leaving them to habit or intuition." },
+      { term: "The helicopter view", def: "Leonie White's metaphor for the systemic thinking layer — the ability to rise above the immediate presenting problem and see the full picture of the client's ecosystem, patterns, history and context. The helicopter can also 'enter the atmosphere' to consider broader societal and structural factors." },
+      { term: "Conscious competence", def: "The stage of skill development where a clinician is able to perform a skill well and is aware of how and why they are doing so. The goal of reflective practice — moving from unconscious habit to intentional, articulable clinical decision-making." },
+    ],
+  },
+  {
+    heading: "Way of Being",
+    color: { bg: "#FEF6EE", border: "#C07840", text: "#5A2A10" },
+    terms: [
+      { term: "Way of Being", def: "The quality of the clinician's relational presence — how they show up in the room. Includes the I-Thou position, Unconditional Positive Regard, congruence, and the use of self. Way of Being is the foundation on which all other layers of the framework rest." },
+      { term: "I-Thou position (Buber)", def: "A relational stance in which the client is seen as a full human being to connect with — not an object, problem or case to manage (I-It). The I-Thou position requires genuine presence, curiosity and openness to being affected by the other." },
+      { term: "I-It position", def: "A relational stance in which the other is treated as an object — a problem to be solved, a case to be managed, a diagnostic category to be applied. Moments of I-It are normal and human, but becoming aware of them and returning to I-Thou is essential to good practice." },
+      { term: "Unconditional Positive Regard (Rogers)", def: "The acceptance of the client as a whole person, regardless of their behaviour, choices or presentation. Involves separating the person from their behaviour and maintaining a vision of their inherent worth and capacity for change. Not always easy — especially in complex or high-emotion work." },
+      { term: "Congruence", def: "Authenticity and genuineness in the therapeutic relationship — the clinician's inner experience and outer expression are aligned. The clinician is present as a real person, not hiding behind a professional mask." },
+      { term: "Use of self", def: "The intentional and reflective use of the clinician's own person — their personality, experiences, values, feelings and reactions — as a therapeutic tool. Requires self-awareness, supervision and ongoing reflection." },
+      { term: "Social GRACES (Burnham)", def: "A framework for reflecting on the social and cultural dimensions of identity that shape both the clinician and the client: Gender, Race, Religion, Age, Ability, Culture, Class, Ethnicity, Sexuality (and more). Used to explore how identity and power show up in the therapeutic relationship." },
+      { term: "Countertransference", def: "The clinician's emotional and psychological reactions to the client — including feelings, memories, fantasies or behaviours that are activated by the therapeutic relationship. Can be a useful source of information about the client's relational world if reflected on thoughtfully." },
+    ],
+  },
+  {
+    heading: "Therapeutic Alliance",
+    color: { bg: "#EFF0FA", border: "#5060B8", text: "#1A2060" },
+    terms: [
+      { term: "Trauma-informed practice", def: "An approach to all clinical work — not just trauma-specific therapy — that recognises the widespread prevalence of trauma and adversity, understands how trauma affects the nervous system, behaviour and relationships, and actively works to create safety, avoid re-traumatisation, and support recovery. Being trauma-informed shapes Way of Being, alliance-building, formulation and intervention — it is a foundation of practice, not a specialisation." },
+      { term: "Trauma-informed vs. trauma-specific", def: "Trauma-informed practice means holding a trauma lens in all clinical work — understanding that trauma and adversity shape many presentations even when they are not the presenting concern. Trauma-specific practice refers to therapeutic interventions designed specifically to process traumatic material (e.g. EMDR, TF-CBT). All clinicians should be trauma-informed; not all need to be trauma-specific practitioners." },
+      { term: "Re-traumatisation", def: "When clinical encounters — including assessment processes, service interactions, power dynamics or the way information is gathered — inadvertently recreate experiences of powerlessness, violation, or loss of control. Trauma-informed practice actively works to prevent re-traumatisation in every interaction." },
+      { term: "Therapeutic alliance", def: "The collaborative relationship between clinician and client, comprising three dimensions: the emotional bond, agreement on the goals of therapy, and agreement on the tasks of therapy (Bordin, 1979). Consistently one of the strongest predictors of therapeutic outcome across all modalities." },
+      { term: "Systemic alliance", def: "In family and systemic work, the therapeutic alliance exists not just between clinician and individual client but across the whole system — with each individual, each subsystem and the whole family. Managing these multiple alliances requires skill and ongoing attention." },
+      { term: "PACE (Hughes)", def: "A relational stance developed within Dyadic Developmental Psychotherapy: Playfulness, Acceptance, Curiosity, Empathy. Used to create safety and connection, particularly with clients who have experienced relational trauma or disrupted attachment." },
+      { term: "Mentalization", def: "The capacity to understand one's own and others' behaviour in terms of underlying mental states — thoughts, feelings, intentions and desires. Both a therapeutic goal and a relational stance: the clinician mentalizes the client, and helps the client develop their own mentalizing capacity." },
+      { term: "Epistemic trust", def: "The client's willingness to receive and use new information or perspectives from the clinician. Depends on the quality of the alliance — clients who feel seen, understood and safe are more likely to trust and integrate what the clinician offers." },
+      { term: "Alliance rupture and repair", def: "Moments of disconnection, misattunement or conflict in the therapeutic relationship. Research shows that the ability to notice, name and repair ruptures is a key competency — and that successfully repaired ruptures can actually strengthen the alliance." },
+      { term: "Window of tolerance (Siegel/Ogden)", def: "The zone of nervous system arousal within which a client can process experience, engage relationally and make use of therapy. Below the window: shutdown, freeze, dissociation. Above: overwhelm, hyperactivation, flooding. Therapy aims to work within and gradually expand the window." },
+    ],
+  },
+  {
+    heading: "Systemic Formulation & Practice",
+    color: { bg: "#EAF0F8", border: "#3A68B0", text: "#162848" },
+    terms: [
+      { term: "Systemic hypothesis", def: "The clinician's working explanation of what is maintaining the presenting problem — what keeps this from resolving, and what would need to shift for change to occur. A hypothesis is tentative, curious and open to revision — not a fixed diagnosis or conclusion." },
+      { term: "Circular causality", def: "The systemic understanding that events are connected in feedback loops rather than linear cause-and-effect chains. A influences B, which influences C, which circles back to A. Helps move away from blame and towards understanding patterns." },
+      { term: "Genogram", def: "A visual map of a family system across at least three generations, showing family structure, relationships, patterns, significant events and emotional connections. A core assessment tool in systemic practice — often reveals patterns and transmission processes invisible in individual history-taking." },
+      { term: "Family life cycle", def: "The predictable stages of family development — formation, having children, raising children, launching children, later life — each involving transitions that place stress on the system. Difficulties often arise at transition points when the family's existing patterns are no longer adequate." },
+      { term: "Vertical stressors", def: "Patterns, beliefs, expectations and legacies that are transmitted across generations — family myths, relationship patterns, trauma, secrets, roles. They travel down through time via the family system." },
+      { term: "Horizontal stressors", def: "Current, time-specific stressors affecting the family — developmental transitions, unexpected events, accidents, illness, job loss. They move across the life cycle and interact with vertical stressors to create difficulty." },
+      { term: "The 'dances'", def: "The recurring interactional sequences and behavioural patterns around the problem — what happens before, during and after. Understanding the dance (rather than blaming any individual dancer) is central to systemic thinking." },
+      { term: "Primary, secondary and rejected pictures", def: "The clinician's multiple hypotheses about what is happening — the one they find most compelling (primary), alternative explanations (secondary), and possibilities they are actively resistant to considering (rejected). Reflecting on all three guards against premature closure and bias." },
+      { term: "Structural oppression", def: "The systemic and institutional ways in which power, resources and opportunities are distributed unequally along lines of race, class, gender, ability and other dimensions. Structural oppression is a legitimate and significant part of clinical formulation — not just background context." },
+    ],
+  },
+  {
+    heading: "Epistemology & Knowledge",
+    color: { bg: "#F0EBF8", border: "#7048B0", text: "#2A1050" },
+    terms: [
+      { term: "Epistemology", def: "The study of knowledge — how we know what we know, what counts as valid knowledge, and the assumptions underlying our understanding of reality. In clinical practice, a clinician's epistemological position shapes everything: what they attend to, what they privilege, how they position themselves in relation to the client." },
+      { term: "Not-knowing stance (Anderson & Goolishian)", def: "A collaborative, curious stance in which the clinician approaches the client without fixed assumptions or predetermined interpretations. The client is positioned as the expert on their own experience, and understanding is co-constructed in conversation." },
+      { term: "Expert stance", def: "A position in which the clinician holds privileged knowledge and acts from a position of authority — diagnosing, prescribing, directing. Has utility in some contexts but risks closing down the client's own meaning-making and reinforcing unequal power dynamics." },
+      { term: "Critical not-knowing (Flaskas)", def: "A third position between expert and not-knowing — the clinician contributes their knowledge, experience and perspective while remaining genuinely open and curious. Holding knowing and not-knowing together rather than choosing between them." },
+      { term: "Social constructionism", def: "The view that meaning, identity and reality are created through language and social interaction rather than discovered as fixed truths. Informs narrative, collaborative and postmodern approaches to therapy — and shapes how clinicians understand problems, solutions and change." },
+      { term: "Positionality", def: "The clinician's awareness of their own social location — their gender, culture, class, race, professional training — and how this shapes what they see, what they miss, and how they relate to clients. Reflective practice requires ongoing attention to positionality." },
+    ],
+  },
+  {
+    heading: "Formulation",
+    color: { bg: "#EAF5EC", border: "#3A8A58", text: "#163820" },
+    terms: [
+      { term: "Formulation", def: "An integrated, individualised explanation of a client's difficulties that brings together predisposing, precipitating, perpetuating and protective factors into a coherent narrative. Goes beyond diagnosis or symptom description to explain why this person is struggling in this way now — and what might help. Best understood as a hypothesis to be tested rather than a fixed truth (Butler, 1998; Johnstone & Dallos, 2006)." },
+      { term: "Formulation as process vs. event", def: "Formulation is both an ongoing collaborative sense-making activity (process) and a written or diagrammatic product (event). In practice, formulation-as-process is the more common clinical activity — the ongoing conversation, revision and deepening of understanding across the life of the work. The written formulation is a snapshot of that evolving process, not its endpoint (Johnstone & Dallos, 2006; DCP, 2011)." },
+      { term: "Collaborative formulation", def: "Formulation is constructed with the client, not about them. The phrase 'formulation for/with X' rather than 'of X' is recommended (DCP, 2011). Collaborative formulation increases the client's sense of agency, meaning and hope — and is more likely to reflect their actual experience. The clinician's expertise and the client's lived knowledge are both essential." },
+      { term: "Personal meaning as the integrating factor", def: "A list of factors (biological, social, psychological) does not constitute a formulation unless those factors are synthesised through an understanding of their personal meaning to the client. What did these experiences mean to this person — how did they make sense of them, and how does that meaning shape the current difficulty? Personal meaning is what makes a formulation individual rather than generic (DCP, 2011)." },
+      { term: "Team formulation", def: "A shared formulation developed collaboratively with a multidisciplinary team — and ideally with the client. Research suggests team formulation can be a powerful systemic intervention in itself: increasing team empathy, reducing negative perceptions of clients, achieving a consistent approach, and promoting a more psychosocial perspective across the service (Summers, 2006; Kennedy et al., 2003; DCP, 2011)." },
+      { term: "The 7 Ps", def: "A formulation framework: Presenting Problem, Predisposing factors, Precipitating factors, Perpetuating factors, Protective factors, People & social context, and Plans. Provides a comprehensive structure for assessment and treatment planning. Works best when factors are integrated through personal meaning rather than simply listed." },
+      { term: "Working hypothesis", def: "The clinician's best current explanation of what is maintaining the problem and what would need to shift for change to occur. It is tentative, testable and open to revision as the work unfolds — not a fixed conclusion. Holding it lightly and being willing to reformulate is a sign of clinical maturity." },
+      { term: "Reformulation", def: "The process of revising the formulation in light of new information, changing circumstances or lack of progress. All formulations are partial and dynamic — 'broad snapshot summaries of complex evolving stories' (Cole & Johnstone, in press). Regular review and willingness to reformulate is essential to good practice." },
+      { term: "Formulation and the ethics of power", def: "Formulations can be experienced by clients as helpful and containing — but also as overwhelming, frightening or pathologising. Because formulations are rooted in the authority of professional knowledge, clients may find it hard to disagree. Good practice requires pacing the sharing of formulations, using accessible language, checking the client's response, and remaining genuinely open to their disagreement (DCP, 2011)." },
+      { term: "Multi-level formulation (O'Keeffe & Macaulay)", def: "A framework for understanding presentations at four levels: observable behaviours and functional skills, neuropsychological constructs, biological factors, and environmental systems. Each level informs the others and all are needed for a comprehensive picture." },
+      { term: "Differential formulation", def: "Holding multiple possible explanations for a client's presentation simultaneously — rather than committing prematurely to one. Essential to thorough assessment and guards against confirmation bias." },
+      { term: "Prognosis", def: "An informed estimate of likely outcomes — with and without intervention. Helps clinicians and clients set realistic expectations, prioritise goals and make decisions about the nature and intensity of support." },
+    ],
+  },
+  {
+    heading: "Anti-Oppressive Practice",
+    color: { bg: "#F5E6F0", border: "#A03880", text: "#481830" },
+    terms: [
+      { term: "Anti-oppressive practice", def: "An approach to clinical work that actively challenges the ways in which power, privilege and structural inequality shape both the client's experience and the therapeutic relationship. Goes beyond cultural sensitivity to address the root causes of disadvantage and marginalisation." },
+      { term: "Intersectionality", def: "The understanding that dimensions of identity — race, gender, class, sexuality, ability — interact and compound in complex ways. A person's experience of oppression or privilege cannot be understood by examining any single dimension in isolation." },
+      { term: "Decolonising practice", def: "The process of critically examining and challenging the ways in which colonial legacies, Western knowledge systems and dominant cultural norms are embedded in clinical frameworks, assessment tools and therapeutic approaches — and actively working to centre Indigenous and non-Western ways of knowing." },
+      { term: "Cultural humility", def: "An ongoing process of self-reflection and learning in relation to cultural difference — recognising the limits of one's own cultural knowledge and positioning the client as the expert on their own cultural experience. Distinguished from cultural competence by its emphasis on lifelong learning rather than mastery." },
+      { term: "Structural factors", def: "The social, economic, political and institutional conditions — poverty, racism, housing instability, discrimination, systemic disadvantage — that shape people's lives and create the conditions in which distress arises. Holding structural factors in formulation means resisting the individualisation of social problems." },
+    ],
+  },
+  {
+    heading: "Professional Practice",
+    color: { bg: "#E8F5F0", border: "#208870", text: "#083828" },
+    terms: [
+      { term: "Reflective practice (Schon)", def: "The capacity to think critically about one's own actions, decisions and assumptions — both in the moment (reflection-in-action) and after the fact (reflection-on-action). The foundation of professional learning and the development of clinical wisdom." },
+      { term: "Internalized professionalism", def: "Moving beyond compliance with external rules and standards to genuinely embodying the values, ethics and commitments of one's profession as one's own. The hallmark of a mature professional identity." },
+      { term: "Portable professional identity", def: "A stable, coherent sense of professional self that travels with the clinician across roles, organisations and contexts — rather than being defined by a job title or organisational culture." },
+      { term: "Vicarious trauma", def: "The cumulative impact on the clinician of exposure to clients' traumatic material — resulting in changes to the clinician's own worldview, sense of safety and psychological wellbeing. Requires proactive self-care, supervision and organisational support." },
+      { term: "Compassion fatigue", def: "A state of emotional and physical exhaustion arising from the ongoing demands of empathic engagement with suffering. Related to but distinct from burnout — compassion fatigue is specifically tied to the empathic cost of caring." },
+      { term: "The 3 R's of professional resilience", def: "Reflection — the capacity to think critically about practice; Relationships — connection with colleagues, supervisors and community; Resilience — the ability to navigate challenge, uncertainty and ethical complexity without losing one's professional self." },
+      { term: "Wobble points", def: "The specific client presentations, relational dynamics or clinical situations that activate the clinician's own personal material, challenge their values or destabilise their sense of competence. Naming wobble points in supervision is a sign of maturity — not weakness." },
+    ],
+  },
+];
+
+function GlossaryView() {
+  const [open, setOpen] = useState({});
+  const [search, setSearch] = useState("");
+  const toggle = id => setOpen(p => ({ ...p, [id]: !p[id] }));
+
+  const filtered = GLOSSARY_TERMS.map(group => ({
+    ...group,
+    terms: group.terms.filter(t =>
+      !search.trim() ||
+      t.term.toLowerCase().includes(search.toLowerCase()) ||
+      t.def.toLowerCase().includes(search.toLowerCase())
+    ),
+  })).filter(g => g.terms.length > 0);
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+      <div style={{ padding: "18px 22px", backgroundColor: T.bgDeep, borderRadius: "12px", border: `1px solid ${T.line}` }}>
+        <h2 style={{ margin: "0 0 4px", fontFamily: "Georgia, serif", fontSize: "18px", color: T.inkMid, fontWeight: "700" }}>Glossary</h2>
+        <p style={{ margin: "0 0 14px", fontSize: "12px", color: T.inkFaint, fontFamily: "Georgia, serif", lineHeight: 1.6 }}>
+          Definitions of key terms used across the Practice Map — organised by framework area.
+        </p>
+        <div style={{ display: "flex", alignItems: "center", gap: "8px", backgroundColor: "white", border: `1.5px solid ${T.line}`, borderRadius: "8px", padding: "8px 12px" }}>
+          <span style={{ color: T.inkGhost, fontSize: "14px" }}>⌕</span>
+          <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search terms…"
+            style={{ flex: 1, border: "none", outline: "none", fontSize: "13px", fontFamily: "Georgia, serif", color: T.inkMid, background: "transparent" }}/>
+          {search && <button onClick={() => setSearch("")} style={{ background: "none", border: "none", cursor: "pointer", color: T.inkGhost, fontSize: "14px", padding: "0" }}>✕</button>}
+        </div>
+      </div>
+
+      {filtered.length === 0 && (
+        <div style={{ padding: "32px", textAlign: "center", backgroundColor: "white", borderRadius: "12px", border: `1px solid ${T.lineFaint}` }}>
+          <p style={{ margin: 0, color: T.inkGhost, fontFamily: "Georgia, serif", fontSize: "14px" }}>No terms found for "{search}"</p>
+        </div>
+      )}
+
+      {filtered.map((group, gi) => {
+        const isOpen = open[gi] !== false;
+        const c = group.color;
+        return (
+          <div key={gi} style={{ borderRadius: "12px", overflow: "hidden", border: `1.5px solid ${isOpen ? c.border : T.lineFaint}`, transition: "border-color 0.2s" }}>
+            <div onClick={() => toggle(gi)} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "13px 18px", cursor: "pointer", backgroundColor: isOpen ? c.bg : "white", borderBottom: isOpen ? `1px solid ${c.border}33` : "none", transition: "background 0.2s" }}>
+              <span style={{ fontFamily: "Georgia, serif", fontSize: "14px", fontWeight: "700", color: isOpen ? c.text : T.inkMid }}>{group.heading}</span>
+              <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                <span style={{ fontSize: "10px", color: T.inkGhost, fontFamily: "monospace" }}>{group.terms.length} term{group.terms.length !== 1 ? "s" : ""}</span>
+                <span style={{ color: T.inkGhost, fontSize: "12px", transform: isOpen ? "rotate(180deg)" : "none", transition: "transform 0.2s" }}>▾</span>
+              </div>
+            </div>
+            {isOpen && (
+              <div style={{ backgroundColor: "white", padding: "4px 0 8px" }}>
+                {group.terms.map((t, ti) => (
+                  <div key={ti} style={{ padding: "12px 18px", borderBottom: ti < group.terms.length - 1 ? `1px solid ${T.lineFaint}` : "none" }}>
+                    <p style={{ margin: "0 0 4px", fontSize: "13px", fontWeight: "700", fontFamily: "Georgia, serif", color: c.text }}>{t.term}</p>
+                    <p style={{ margin: 0, fontSize: "12.5px", fontFamily: "Georgia, serif", color: T.inkFaint, lineHeight: 1.7 }}>{t.def}</p>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 const REFERENCE_GROUPS = [
   {
     heading: "Systemic Meta-Framework for Integrative Practice",
@@ -1676,6 +1870,9 @@ const REFERENCE_GROUPS = [
     heading: "Diagnostic Formulation & Developmental-Behavioural Practice",
     color: { bg: "#FEF6EE", border: "#C07840", text: "#5A2A10" },
     refs: [
+      { authors: "Johnstone, L. & Dallos, R. (Eds.)", year: "2006", title: "Formulation in Psychology and Psychotherapy: Making Sense of People's Problems", source: "London: Routledge. [Foundational text on formulation across therapeutic modalities — recommended further reading for all disciplines]" },
+      { authors: "Division of Clinical Psychology (DCP), British Psychological Society", year: "2011", title: "Good Practice Guidelines on the use of Psychological Formulation", source: "Leicester: British Psychological Society. Available at: https://sisdca.it/documenti/catalogo/Linee_Guida_-_Allegati/DCP-Guidelines-for-Formulation-2011.pdf [Although psychology-specific, this document contains widely applicable principles for formulation across disciplines, including collaborative formulation, personal meaning as the integrating factor, team formulation, and ethical practice in formulating]" },
+      { authors: "Butler, G.", year: "1998", title: "Clinical formulation", source: "In: Bellack, A. S. & Hersen, M. (Eds.), Comprehensive Clinical Psychology. Oxford: Pergamon. [Classic text — formulation as hypothesis to be tested; 'at some level it all makes sense']" },
       { authors: "O'Keeffe, M. & Macaulay, C.", year: "2012", title: "Diagnosis in developmental–behavioural paediatrics: The art of diagnostic formulation", source: "Journal of Paediatrics and Child Health, 48, E15–E26." },
       { authors: "Engel, G. L.", year: "1977", title: "The need for a new medical model: A challenge for biomedicine", source: "Science, 196, 129–136." },
       { authors: "Bronfenbrenner, U.", year: "1979", title: "The Ecology of Human Development: Experiments by Nature and Design", source: "Cambridge, MA: Harvard University Press." },
