@@ -1,4 +1,3 @@
-import { useState, useRef, useCallback } from "react";
 
 // ─── DESIGN TOKENS ───────────────────────────────────────────────────────────
 const T = {
@@ -1129,7 +1128,8 @@ function loadFromStorage(key, defaultValue) {
 }
 
 // ─── PASSWORD GATE ───────────────────────────────────────────────────────────
-const CORRECT_PASSWORD = "practiceframework2026brookeshakspeare";
+const CORRECT_PASSWORD = "practicemap2026brookeleonie";
+const AUTH_KEY = "pfm_auth_v2";
 
 function PasswordGate({ onUnlock }) {
   const [input, setInput] = useState("");
@@ -1138,7 +1138,7 @@ function PasswordGate({ onUnlock }) {
 
   const attempt = () => {
     if (input.trim().toLowerCase() === CORRECT_PASSWORD) {
-      try { localStorage.setItem("pfm_auth", "1"); } catch {}
+      try { localStorage.setItem(AUTH_KEY, "1"); } catch {}
       onUnlock();
     } else {
       setError(true);
@@ -1185,7 +1185,7 @@ function PasswordGate({ onUnlock }) {
 
 export default function App() {
   const [unlocked, setUnlocked] = useState(() => {
-    try { return localStorage.getItem("pfm_auth") === "1"; } catch { return false; }
+    try { return localStorage.getItem(AUTH_KEY) === "1"; } catch { return false; }
   });
 
   if (!unlocked) return <PasswordGate onUnlock={() => setUnlocked(true)}/>;
