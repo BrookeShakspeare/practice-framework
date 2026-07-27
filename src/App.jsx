@@ -1,4 +1,5 @@
 import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback } from "react";
 
 // ─── DESIGN TOKENS ───────────────────────────────────────────────────────────
 const T = {
@@ -480,6 +481,7 @@ const RING_PANELS = {
       "How are you holding the full ecosystem — family, school, services, community — in your formulation?",
       "How are broader societal factors — structural oppression, racism, poverty, housing, systemic disadvantage — present in this person's situation, and how are these held in your formulation rather than located within the individual?",
       "What are the behavioural sequences (the 'dances') around the problem — and what function might the symptom serve in the system?",
+      "What exceptions to the problem exist — times when the dances look different, the problem has less hold, or something else is possible? What does exploring these exceptions reveal about an alternate story for this client or family?",
       "What are the strengths, resources and resilience in this system that you can build on?",
       "How are you actively considering anti-oppressive practice in this work — how are you attending to power, privilege, structural oppression and the risk of imposing Western frameworks in ways that may not fit this client's culture, context or knowledge systems?",
       "What primary, secondary and rejected pictures are shaping your formulation — and what might you be missing?",
@@ -998,7 +1000,7 @@ const CASE_SECTIONS = [
       "PREDISPOSING FACTORS — What in this person's history, relationships or biology may have created vulnerability to this difficulty? Consider: early attachment experiences, family of origin patterns, trauma history, developmental or neuropsychological factors. You don't need to know everything yet — what stands out as most relevant to understanding why this person is struggling in this way now?",
       "PRECIPITATING FACTORS — What has happened recently — or accumulated over time — to bring this to a point of crisis or referral now? Has there been a loss, transition, life cycle change or stressor that has destabilised things? Why now, rather than six months ago?",
       "PERPETUATING FACTORS — What is keeping this problem going and stopping it from resolving on its own? Think about: the patterns and sequences around the problem — what happens before, during and after — the meanings and beliefs that maintain it, attempted solutions that may be making things worse, and any broader structural factors (poverty, housing, systemic disadvantage) that are outside the family but very much part of the picture.",
-      "PROTECTIVE FACTORS — What is already working, even a little? What strengths, relationships, resources and exceptions to the problem exist — moments when things are better, different or more manageable? These are not just nice additions — they are the foundation of your intervention plan and your theory of change.",
+      "PROTECTIVE FACTORS — What is already working, even a little? What strengths, relationships, resources and exceptions to the problem exist — moments when things are better, different or more manageable? What do these exceptions reveal about an alternate story — a different account of this person or family that sits alongside and challenges the dominant problem-saturated narrative? These are not just nice additions — they are the foundation of your intervention plan and your theory of change.",
       "PEOPLE & SOCIAL CONTEXT — Who is in this person's world — family, community, culture, school, services? Whose perspectives haven't yet been heard? How are culture, identity, power and structural context shaping this presentation? How do your own Social GRACES show up in how you are understanding and responding to this situation?",
       "YOUR WORKING HYPOTHESIS — Based on everything above, what is your best current understanding of what is maintaining the problem and what would need to shift for change to happen? A working hypothesis is a starting point, not a conclusion — state it clearly so you can test it, refine it and revise it as the work unfolds.",
       "PRIORITY FOCUS — You cannot address everything at once, and trying to will serve no one. Given your formulation, what is the most important thing to focus on first — and why? What needs to happen before other work can begin (e.g. safety, stabilisation, building the alliance, addressing a crisis)? What are you choosing not to focus on right now — and is that a conscious clinical decision?",
