@@ -1,17 +1,16 @@
-import { useState, useRef, useCallback } from "react";
 
 // ─── DESIGN TOKENS ───────────────────────────────────────────────────────────
 const T = {
-  bg: "#F7F3EE", bgDeep: "#EDE7DC", canvas: "#FDFAF6",
-  inkMid: "#3D3128", inkFaint: "#7A6B5C", inkGhost: "#B5A898",
-  line: "#C8B8A2", lineFaint: "#E0D4C4",
+  bg: "#F7F4F0", bgDeep: "#EDE8E0", canvas: "#FDFAF6",
+  inkMid: "#2D4A2D", inkFaint: "#5C7A5C", inkGhost: "#9AAE9A",
+  line: "#C4B8A0", lineFaint: "#DDD4C0",
   domains: {
-    values:     { bg: "#E8F0E4", border: "#7AAB68", text: "#2E5020" },
-    theories:   { bg: "#E4EAF4", border: "#5878C0", text: "#1C2E6A" },
-    approaches: { bg: "#F4EDE4", border: "#C07840", text: "#5A2E10" },
-    influences: { bg: "#F0E4F0", border: "#9058A8", text: "#3A1050" },
-    self:       { bg: "#F4E8E4", border: "#C05060", text: "#5A1020" },
-    context:    { bg: "#E4F0F0", border: "#408888", text: "#103838" },
+    values:     { bg: "#EAF0E8", border: "#7A9E7E", text: "#2D4A2D" },
+    theories:   { bg: "#E8EEF4", border: "#5878A8", text: "#1C2E5A" },
+    approaches: { bg: "#F4EDE8", border: "#B5614A", text: "#5A2010" },
+    influences: { bg: "#F0EAE8", border: "#C49A8A", text: "#5A3020" },
+    self:       { bg: "#F4EAE4", border: "#C9A84C", text: "#5A3A00" },
+    context:    { bg: "#E8F0EC", border: "#5A8A6A", text: "#103828" },
   },
 };
 
@@ -38,9 +37,9 @@ const DOMAINS = [
 ];
 
 // ─── SATELLITE DEFINITIONS ───────────────────────────────────────────────────
-// These are the 6 knowledge-base nodes orbiting the SIPM.
+// These are the 6 knowledge-base nodes orbiting the SMFIP.
 // Each has a title, colour, icon, reflection prompts, and example suggestions.
-// 9 satellites at 40° intervals around the SIPM
+// 9 satellites at 40° intervals around the SMFIP
 const SAT_DEFS = [
   {
     id: "systems", angle: -90,
@@ -48,7 +47,7 @@ const SAT_DEFS = [
     tagline: "From parts to wholes — understanding the web of relationships, patterns, context and circularity",
     description: [
       { label: "Relationship", body: "A system is not the sum of its parts — it is the product of their interaction. Key question: What does this part influence, and what influences it?" },
-      { label: "Pattern", body: "Recurring behaviours and underlying structures reveal root causes rather than isolated incidents. Key question: What is happening over time — why do we keep facing the same issue?" },
+      { label: "Pattern", body: "Recurring behaviours and underlying structures reveal perpetuating factors rather than isolated incidents. Key question: What is happening over time — why do we keep facing the same issue?" },
       { label: "Context", body: "A situation cannot be understood in isolation — it must be understood within its environment. Key question: How does shifting the boundary of our investigation change how we understand this problem?" },
       { label: "Circularity", body: "Events are interconnected feedback loops, not straight lines with a single root cause. Key question: What are the reinforcing or balancing feedback loops driving this behaviour?" },
     ],
@@ -73,7 +72,7 @@ const SAT_DEFS = [
     ],
     suggestions: [
       "Relationship & interconnectedness","Pattern recognition","Context as essential","Circular causality","Feedback loops","Holistic vs reductionist","Non-linear causality","Complexity science","Chaos theory",
-      "Structural FT (Minuchin)","Milan Systemic Therapy","Ecological / ecosystems thinking","Bowen Family Systems","Bateson's ecology of mind","Goodchild's relational systems","General Systems Theory","Indigenous relational systems","Family as emotional unit","Irreducible wholeness",
+      "Structural FT (Minuchin)","Milan Systemic Therapy","Strategic Family Therapy","Narrative Therapy (White & Epston)","Solution Focused Brief Therapy (de Shazer)","Ecological / ecosystems thinking","Bowen Family Systems","Bateson's ecology of mind","Goodchild's relational systems","General Systems Theory","Indigenous relational systems","Family as emotional unit","Irreducible wholeness",
     ],
   },
   {
@@ -92,14 +91,14 @@ const SAT_DEFS = [
       "How do you draw on polyvagal theory, interpersonal neurobiology or DDP in your clinical thinking?",
       // Multi-level diagnostic formulation (O'Keeffe & Macaulay)
       "How do you hold a multi-level understanding of your clients — moving beyond presenting symptoms to consider the neuropsychological processes, biological factors and environmental systems that interact to create and maintain the presenting concern?",
-      "How do you hold the temporal axis in your formulation — what predisposed this person, what precipitated the current presentation, and what is perpetuating it?",
+      "How do you hold the vertical and horizontal stressors in your formulation — what predisposed this person, what precipitated the current presentation, and what is perpetuating it?",
       "How strengths-focused is your assessment and formulation? Are you as thorough in identifying resilience factors and protective factors as you are in identifying deficits?",
       // Biopsychosocial & beyond labels
       "How do you hold the limitations of categorical diagnostic labels alongside their utility — and how do you advocate for a more individualised, functional formulation rather than diagnosis-as-endpoint?",
       "How does your professional discipline's training shape what you foreground in assessment and what you overlook — and where does that create blind spots?",
     ],
     suggestions: [
-      "Trauma-informed practice","Trauma & the nervous system","ACEs framework","Attachment Theory (Bowlby)","Polyvagal Theory (Porges)","Interpersonal Neurobiology (Siegel)","Developmental Psychology","Dyadic Developmental Psychotherapy (DDP)","Mentalization (Fonagy)","PACE framework","Window of tolerance (Ogden)","Circle of Security (COS)",
+      "Trauma-informed practice","Trauma & the nervous system","ACEs framework","Attachment Theory (Bowlby)","Polyvagal Theory (Porges)","Interpersonal Neurobiology (Siegel)","Developmental Psychology","Dyadic Developmental Psychotherapy (DDP)","Mentalization (Fonagy)","PACE framework","Window of tolerance (Ogden)","Circles of Capacity (Malchiodi)","Circle of Security (COS)",
       "Multi-level diagnostic formulation (O'Keeffe & Macaulay)","Biopsychosocial model (Engel)","Bronfenbrenner's ecological theory","Neuropsychological constructs","Temporal axis (predisposing · precipitating · perpetuating)","Strengths & resilience focus","Beyond categorical diagnosis",
     ],
   },
@@ -111,7 +110,7 @@ const SAT_DEFS = [
     description: [
       { label: "Expert / Rationalist stance", body: "The therapist holds privileged knowledge — they diagnose, prescribe and act from a position of authority. Knowledge is objective and knowable; the clinician's expertise is what creates change." },
       { label: "Not-Knowing stance", body: "The therapist approaches with genuine curiosity and openness, without fixed assumptions about the client's meaning. Knowledge is co-constructed in conversation — the client is the expert on their own life (Anderson & Goolishian, 1992)." },
-      { label: "Critical Not-Knowing", body: "A third position — holding not-knowing and knowing together. The therapist contributes meaning, interpretation and expertise while remaining genuinely open to being changed by the client's perspective. Neither pure expert nor absence of expertise." },
+      { label: "Critical Not-Knowing", body: "A third position — holding not-knowing and knowing together. The therapist contributes meaning, interpretation and expertise while remaining genuinely open to being changed by the client's perspective. Neither pure expert nor absence of expertise. For example, Ged Smith's 1.5 position or Marie-Nathalie Beaudoin's co-centring." },
       { label: "Your epistemic style shapes everything", body: "Research shows therapist epistemological approach predicts therapeutic method, working alliance emphasis, and intervention use. A rationalist stance predicts directive, advice-giving interventions; a constructivist stance predicts collaborative, meaning-making approaches." },
     ],
     prompts: [
@@ -125,15 +124,15 @@ const SAT_DEFS = [
       "How does your training's dominant paradigm — rationalist or constructivist — shape what you privilege as 'knowledge' and what you dismiss?",
       // Power and authority
       "How does the expert position locate power in the therapeutic relationship — and what are the ethical implications of that for you?",
-      "Whose knowledge and meaning-making gets privileged in the room — yours or your client's? How do you actively work to centre the client's own knowing?",
+      "Whose knowledge and meaning-making gets privileged in the room — yours or your client's? How do you actively work to centre the client's own knowing and agency?",
       // Broader epistemology
       "What is your theory of knowledge — how do you understand truth, reality and meaning in your practice?",
       "Where does your practice sit in relation to modernist and postmodern ways of knowing — and how do you hold that tension?",
       "How has your thinking about knowledge, certainty and clinical authority shifted over your professional life?",
     ],
     suggestions: [
-      "Not-knowing stance (Anderson & Goolishian)","Critical not-knowing","Expert vs collaborative position","Rationalist epistemology","Constructivist epistemology","Social constructionism","Postmodernism","Critical realism","Phenomenology","Second-order cybernetics",
-      "Collaborative language systems","Reflecting processes (Andersen)","Narrative epistemology","Multiple realities","Epistemic humility","Power in therapeutic relationship","Client as expert on own life","Uncertainty & ambiguity tolerance","Conscious use of expertise",
+      "Not-knowing stance","Critical not-knowing","Expert vs collaborative position","Rationalist epistemology","Constructivist epistemology","Social constructionism","Postmodernism","Critical realism","Phenomenology","Second-order cybernetics",
+      "Collaborative language systems","Reflecting processes (Andersen)","Narrative epistemology","Multiple realities","Epistemic humility","Power in therapeutic relationship","Client as expert on own life","Uncertainty & ambiguity tolerance","Conscious use of expertise","1.5 position","Co-centring (Beaudoin)",
     ],
   },
   {
@@ -159,6 +158,7 @@ const SAT_DEFS = [
       "How do you actively work against oppression and discrimination in your practice?",
       "What does your Social GRACES analysis reveal about your positionality with clients?",
       "How do you recognise and respond to structural inequalities that affect your clients' lives?",
+      "How can considering intersectionality and structural oppression inform your work — and how does holding these dimensions shape your formulation, your alliance and your intervention choices?",
       "Where does your practice risk re-enacting colonising or oppressive patterns — and how do you interrupt this?",
       "How does your professional discipline's history sit in relation to oppression — and what does that mean for your practice today?",
     ],
@@ -190,7 +190,7 @@ const SAT_DEFS = [
       "How does your commitment to supervision connect to your professional and ethical obligations?",
       "How do the ethical frameworks of your discipline sit alongside those of other disciplines you work with?",
     ],
-    suggestions: ["AASW Code of Ethics","PACFA Code of Ethics","ANZAPPL","APS Ethical Guidelines","OT Australia Ethics","Duty of care","Informed consent","Confidentiality & limits","Mandatory reporting","Scope of practice","Cultural safety obligations","Supervision requirements","Vicarious trauma obligations"],
+    suggestions: ["AASW Code of Ethics","PACFA Code of Ethics","ANZAPLL","APS Ethical Guidelines","AHPRA Psychology Code of Conduct","AAFT Code of Ethics","OT Australia Ethics","Duty of care","Informed consent","Confidentiality & limits","Mandatory reporting","Scope of practice","Cultural safety obligations","Supervision requirements","Vicarious trauma obligations"],
   },
   {
     id: "philosophy", angle: 190,
@@ -434,7 +434,7 @@ const RING_PANELS = {
       "What do you notice in yourself when you are with this client — emotionally, somatically, relationally?",
       "How are you actively creating a felt sense of safety in the room — not just assumed, but attended to? How do you know the client feels safe enough to be present with you?",
       "How are your own Social GRACES showing up in your work with this client?",
-      "What does Unconditional Positive Regard look like for you with this client — where does it come easily, and where is it harder?",
+      "What does Unconditional Positive Regard look like for you with this client (and/or other stakeholders/ members of the system) — where does it come easily, and where is it harder?",
       "How does your Way of Being shift across different clients, contexts or presentations — and what does that tell you?",
       "What life experiences, family of origin stories or personal material are present and influencing how you show up in the room?",
       "Trauma-informed practice begins with your presence — how regulated, grounded and available are you in this work? What do you need to show up well for this client?",
@@ -445,7 +445,7 @@ const RING_PANELS = {
       "How trauma-informed is your presence — not just your knowledge, but how you actually show up in the room?",
       "What personal work, supervision or learning would most develop your Way of Being as a clinician?",
     ],
-    suggestions: ["I-Thou presence","UPR in practice","Congruence & authenticity","Social GRACES reflection","Personal material activated","Embodied presence","Emotional attunement","Felt sense of safety created","Trauma-informed presence","Countertransference awareness","I-It moments & recovery","Nervous system regulation"],
+    suggestions: ["I-Thou presence","Unconditional Positive Regard","Congruence & authenticity","Social GRACES reflection","Personal material activated","Embodied presence","Emotional attunement","Felt sense of safety created","Trauma-informed presence","Countertransference awareness","I-It moments & recovery","Nervous system regulation"],
   },
   alliance: {
     title: "Therapeutic Alliance",
@@ -456,7 +456,7 @@ const RING_PANELS = {
       "How shared and meaningful are the goals of the work — does the client see themselves as part of the solution?",
       "How safe does the client feel in the room — not assumed, but evidenced. What tells you this neurobiologically, behaviourally and relationally?",
       "Trauma-informed practice means safety is not a precondition — it is an ongoing practice. How are you actively creating and maintaining safety for this client in every interaction, not just at the start of the work?",
-      "How are you using PACE (Playfulness, Acceptance, Curiosity, Empathy) in your work with this client?",
+      "How are you using PACE (Playfulness, Acceptance, Curiosity, Empathy) to facilitate relationship development and corrective relational experiences?",
       "Where is the alliance strongest — with an individual, a subsystem, or the whole family system?",
       "How are you drawing on mentalization and epistemic trust to deepen the alliance?",
       "How is the client's trauma history — even if not the presenting concern — shaping how they relate to you and to the therapeutic relationship?",
@@ -496,7 +496,7 @@ const RING_PANELS = {
     color: { bg: "#EAF5EC", border: "#3A8A58", text: "#163820" },
     prompts: [
       "Before reflecting on technique — how were your Way of Being, the alliance, and your systemic formulation present and active in this session?",
-      "What was your theory of change for this session — and did your interventions align with it?",
+      "What is your theory of change, what is your client's theory of change — and are you collaborating on interventions that consider this?",
       "What did you actually do in the room — which approaches, techniques or modalities did you draw on, and why those?",
       "How did you attend to the self of the therapist in your decision-making — your wobble points, your theory of change preferences, your reactions to this client or family?",
       "How intentional vs intuitive were your choices in session — and what does that tell you about your conscious competence?",
@@ -729,7 +729,7 @@ function MapView({ satItems, onSatAdd, onSatRemove }) {
           {T2({ x: CX - 186, y: CY - 4, rows: ["Family", "Life Cycle"], size: 9, fill: "#222" })}
           {T2({ x: CX - 186, y: CY + 46, rows: ["Vertical &", "Horizontal", "Stressors"], size: 9, fill: "#222" })}
           {T2({ x: CX - 178, y: CY + 82, rows: ["Broader Societal", "Factors e.g.,", "structural", "oppression"], size: 8.5, fill: "#222", dy: 11 })}
-          {T2({ x: CX - 140, y: CY + 138, rows: ["Strengths,", "Resources", "& Resilience"], size: 9, fill: "#222" })}
+          {T2({ x: CX + 148, y: CY + 148, rows: ["Strengths,", "Resources", "& Resilience"], size: 9, fill: "#222" })}
 
           {/* Right side — x between CX+128 and CX+252 */}
           {T2({ x: CX + 182, y: CY - 82, rows: ["Systemic", "Context", "(Genogram", "& Timeline)"], size: 9, fill: "#222" })}
@@ -1041,7 +1041,7 @@ const CASE_SECTIONS = [
     desc: "The actual interventions, grounded in all the layers that came before",
     prompts: [
       "Before reflecting on technique — how were your Way of Being, the alliance, and your formulation present and active in this session?",
-      "What was your theory of change for this session — and did your interventions align with it?",
+      "What is your theory of change, what is your client's theory of change — and are you collaborating on interventions that consider this?",
       "What did you actually do in the room — which approaches, techniques or modalities did you draw on, and why those?",
       "How did you attend to the self of the therapist in your decision-making — your wobble points, your anxiety, your theory of change preferences, and any pull toward induction?",
       "How intentional vs intuitive were your choices — and what does that tell you about your conscious competence?",
@@ -1108,7 +1108,7 @@ function CaseReflectionView() {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
       <div style={{ padding: "18px 22px", backgroundColor: T.bgDeep, borderRadius: "12px", border: `1px solid ${T.line}` }}>
-        <h2 style={{ margin: "0 0 4px", fontFamily: "Georgia, serif", fontSize: "18px", color: T.inkMid, fontWeight: "700" }}>Case Reflection</h2>
+        <h2 style={{ margin: "0 0 4px", fontFamily: "Georgia, serif", fontSize: "18px", color: T.inkMid, fontWeight: "700" }}>Client Case Reflection</h2>
         <p style={{ margin: 0, fontSize: "12px", color: T.inkFaint, fontFamily: "Georgia, serif", lineHeight: 1.6 }}>
           A structured reflection on a specific client or session — working through each layer of the Practice Map from Way of Being through to the intervention in the room.
         </p>
@@ -1149,15 +1149,15 @@ function PasswordGate({ onUnlock }) {
   };
 
   return (
-    <div style={{ minHeight: "100vh", backgroundColor: "#1A2818", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "Georgia, serif", padding: "20px" }}>
-      <div style={{ backgroundColor: "#F7F3EE", borderRadius: "16px", padding: "48px 44px", maxWidth: "420px", width: "100%", boxShadow: "0 8px 48px #00000040", textAlign: "center" }}>
+    <div style={{ minHeight: "100vh", backgroundColor: "#1A3020", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "Georgia, serif", padding: "20px" }}>
+      <div style={{ backgroundColor: "#F7F4F0", borderRadius: "16px", padding: "48px 44px", maxWidth: "420px", width: "100%", boxShadow: "0 8px 48px #00000040", textAlign: "center" }}>
         {/* Logo */}
         <div style={{ marginBottom: "24px" }}>
           <img src="/logo.webp" alt="The Practice Map" style={{ width: "140px", height: "140px", objectFit: "contain", display: "block", margin: "0 auto" }}/>
         </div>
 
-        <p style={{ margin: "0 0 4px", fontSize: "10px", color: "#7AAB68", letterSpacing: "0.14em", textTransform: "uppercase", fontFamily: "monospace" }}>Clinical Supervision Tool</p>
-        <p style={{ margin: "0 0 32px", fontSize: "13px", color: "#7A6B5C", fontStyle: "italic", lineHeight: 1.5 }}>A living map for intentional clinical practice</p>
+        <p style={{ margin: "0 0 4px", fontSize: "10px", color: "#7A9E7E", letterSpacing: "0.14em", textTransform: "uppercase", fontFamily: "monospace" }}>Clinical Supervision Tool</p>
+        <p style={{ margin: "0 0 32px", fontSize: "13px", color: "#5C7A5C", fontStyle: "italic", lineHeight: 1.5 }}>A living map for intentional clinical practice</p>
 
         <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
           <input
@@ -1168,15 +1168,15 @@ function PasswordGate({ onUnlock }) {
             onFocus={() => setFocused(true)}
             onBlur={() => setFocused(false)}
             placeholder="Enter access password"
-            style={{ width: "100%", padding: "12px 16px", borderRadius: "8px", border: `1.5px solid ${error ? "#C03030" : focused ? "#3A8A58" : "#C8B8A2"}`, fontSize: "14px", fontFamily: "Georgia, serif", color: "#3D3128", outline: "none", backgroundColor: "white", boxSizing: "border-box", textAlign: "center", transition: "border-color 0.15s" }}
+            style={{ width: "100%", padding: "12px 16px", borderRadius: "8px", border: `1.5px solid ${error ? "#B5614A" : focused ? "#7A9E7E" : "#C4B8A0"}`, fontSize: "14px", fontFamily: "Georgia, serif", color: "#2D4A2D", outline: "none", backgroundColor: "white", boxSizing: "border-box", textAlign: "center", transition: "border-color 0.15s" }}
           />
-          {error && <p style={{ margin: 0, fontSize: "12px", color: "#C03030", fontFamily: "Georgia, serif" }}>Incorrect password — please try again</p>}
-          <button onClick={attempt} style={{ padding: "12px", borderRadius: "8px", backgroundColor: "#2E3A28", color: "#C0E8A8", border: "none", fontSize: "14px", fontFamily: "Georgia, serif", cursor: "pointer", fontWeight: "700", letterSpacing: "0.04em" }}>
+          {error && <p style={{ margin: 0, fontSize: "12px", color: "#B5614A", fontFamily: "Georgia, serif" }}>Incorrect password — please try again</p>}
+          <button onClick={attempt} style={{ padding: "12px", borderRadius: "8px", backgroundColor: "#2D4A2D", color: "#C4D4B4", border: "none", fontSize: "14px", fontFamily: "Georgia, serif", cursor: "pointer", fontWeight: "700", letterSpacing: "0.04em" }}>
             Enter
           </button>
         </div>
 
-        <p style={{ margin: "24px 0 0", fontSize: "11px", color: "#B5A898", fontFamily: "Georgia, serif", lineHeight: 1.6 }}>
+        <p style={{ margin: "24px 0 0", fontSize: "11px", color: "#9AAE9A", fontFamily: "Georgia, serif", lineHeight: 1.6 }}>
           Access is provided by your supervisor.<br/>Contact Brooke Shakspeare for access.
         </p>
       </div>
@@ -1286,7 +1286,7 @@ function AppInner() {
     { id: "editor",    label: "Editor" },
     { id: "summary",   label: "Summary" },
     { id: "questions", label: "Supervision Qs" },
-    { id: "case",      label: "Case Reflection" },
+    { id: "case",      label: "Client Case Reflection" },
     { id: "growth",    label: "Growth & Gaps" },
     { id: "glossary",  label: "Glossary" },
     { id: "refs",      label: "References" },
@@ -1294,22 +1294,22 @@ function AppInner() {
 
   return (
     <div style={{ minHeight: "100vh", backgroundColor: T.bg, fontFamily: "Georgia, serif", color: T.inkMid }}>
-      <div style={{ background: "linear-gradient(to right, #2E3A28, #1A2818)", padding: "20px 28px 18px", display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: "14px" }}>
+      <div style={{ background: "linear-gradient(to right, #2D4A2D, #1A3020)", padding: "20px 28px 18px", display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: "14px" }}>
         <div>
-          <p style={{ margin: "0 0 2px", fontSize: "10px", color: "#7AAB68", letterSpacing: "0.14em", textTransform: "uppercase", fontFamily: "monospace" }}>Clinical Supervision Tool</p>
+          <p style={{ margin: "0 0 2px", fontSize: "10px", color: "#7A9E7E", letterSpacing: "0.14em", textTransform: "uppercase", fontFamily: "monospace" }}>Clinical Supervision Tool</p>
           <h1 style={{ margin: 0, fontFamily: "Georgia, serif", fontSize: "24px", color: "#F0EAE0", fontWeight: "700" }}>Practice Framework Map</h1>
-          <p style={{ margin: "3px 0 0", fontSize: "12px", color: "#7A8F74", fontStyle: "italic" }}>Map the theories, values and knowledge bases that shape your clinical practice</p>
+          <p style={{ margin: "3px 0 0", fontSize: "12px", color: "#8AAA8A", fontStyle: "italic" }}>Map the theories, values and knowledge bases that shape your clinical practice</p>
         </div>
         <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: "8px" }}>
-          <div style={{ display: "flex", gap: "4px", backgroundColor: "#0D1A0B", padding: "4px", borderRadius: "10px" }}>
-            {tabs.map(t => <button key={t.id} onClick={() => setTab(t.id)} style={{ padding: "7px 16px", borderRadius: "7px", cursor: "pointer", fontSize: "12px", backgroundColor: tab === t.id ? "#2E5020" : "transparent", color: tab === t.id ? "#C0E8A8" : "#587A50", border: "none", fontFamily: "Georgia, serif", transition: "all 0.15s" }}>{t.label}</button>)}
-            {totalItems > 0 && <span style={{ padding: "7px 12px", fontSize: "11px", color: "#7AAB68", fontFamily: "monospace", alignSelf: "center" }}>{totalItems} elements</span>}
+          <div style={{ display: "flex", gap: "4px", backgroundColor: "#0D1A0D", padding: "4px", borderRadius: "10px" }}>
+            {tabs.map(t => <button key={t.id} onClick={() => setTab(t.id)} style={{ padding: "7px 16px", borderRadius: "7px", cursor: "pointer", fontSize: "12px", backgroundColor: tab === t.id ? "#2D4A2D" : "transparent", color: tab === t.id ? "#C4D4B4" : "#7A9E7E", border: "none", fontFamily: "Georgia, serif", transition: "all 0.15s" }}>{t.label}</button>)}
+            {totalItems > 0 && <span style={{ padding: "7px 12px", fontSize: "11px", color: "#7A9E7E", fontFamily: "monospace", alignSelf: "center" }}>{totalItems} elements</span>}
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-            <span style={{ fontSize: "10px", color: "#4A6A42", fontFamily: "monospace" }}>● auto-saved to this browser</span>
-            <button onClick={exportData} style={{ fontSize: "10px", color: "#7AAB68", background: "none", border: "1px solid #3A6A32", borderRadius: "6px", padding: "3px 10px", cursor: "pointer", fontFamily: "Georgia, serif" }}>↓ Export data</button>
-            <button onClick={importData} style={{ fontSize: "10px", color: "#7AAB68", background: "none", border: "1px solid #3A6A32", borderRadius: "6px", padding: "3px 10px", cursor: "pointer", fontFamily: "Georgia, serif" }}>↑ Import data</button>
-            <button onClick={clearAll} style={{ fontSize: "10px", color: "#8A6A5A", background: "none", border: "1px solid #4A3A2A", borderRadius: "6px", padding: "3px 10px", cursor: "pointer", fontFamily: "Georgia, serif" }}>Clear all data</button>
+            <span style={{ fontSize: "10px", color: "#5C7A5C", fontFamily: "monospace" }}>● auto-saved to this browser</span>
+            <button onClick={exportData} style={{ fontSize: "10px", color: "#7A9E7E", background: "none", border: "1px solid #4A7A52", borderRadius: "6px", padding: "3px 10px", cursor: "pointer", fontFamily: "Georgia, serif" }}>↓ Export data</button>
+            <button onClick={importData} style={{ fontSize: "10px", color: "#7A9E7E", background: "none", border: "1px solid #4A7A52", borderRadius: "6px", padding: "3px 10px", cursor: "pointer", fontFamily: "Georgia, serif" }}>↑ Import data</button>
+            <button onClick={clearAll} style={{ fontSize: "10px", color: "#9A7A6A", background: "none", border: "1px solid #6A4A3A", borderRadius: "6px", padding: "3px 10px", cursor: "pointer", fontFamily: "Georgia, serif" }}>Clear all data</button>
           </div>
         </div>
       </div>
@@ -1373,10 +1373,10 @@ function AppInner() {
       </div>
 
       {/* Copyright footer */}
-      <div style={{ background: "#0D1A0B", padding: "12px 28px", textAlign: "center" }}>
-        <p style={{ margin: 0, fontSize: "10px", color: "#4A6A42", fontFamily: "monospace", lineHeight: 1.7 }}>
+      <div style={{ background: "#0D1A0D", padding: "12px 28px", textAlign: "center" }}>
+        <p style={{ margin: 0, fontSize: "10px", color: "#4A6A4A", fontFamily: "monospace", lineHeight: 1.7 }}>
           © 2026 Brooke Shakspeare & Dr Leonie White. All rights reserved.
-          The Practice Map is a collaborative work. Systemic Meta-Framework for Integrative Practice © Dr Leonie White (White & Owen, 2022).
+          The Practice Map is a collaborative work. Systemic Meta-Framework for Integrative Practice (SMFIP) © Dr Leonie White.
           Not to be reproduced, copied or distributed without permission.
         </p>
       </div>
@@ -1429,7 +1429,7 @@ function GrowthGapsView() {
       <div style={{ padding: "18px 22px", backgroundColor: T.bgDeep, borderRadius: "12px", border: `1px solid ${T.line}` }}>
         <h2 style={{ margin: "0 0 4px", fontFamily: "Georgia, serif", fontSize: "18px", color: T.inkMid, fontWeight: "700" }}>Growth & Gaps</h2>
         <p style={{ margin: 0, fontSize: "12px", color: T.inkFaint, fontFamily: "Georgia, serif", lineHeight: 1.65 }}>
-          A collation of the gaps and growth reflections you have recorded across the SIPM ring panels and Case Reflection. Use this page to identify patterns, name priority areas, and build your supervision and learning goals.
+          A collation of the gaps and growth reflections you have recorded across the SMFIP ring panels and Case Reflection. Use this page to identify patterns, name priority areas, and build your supervision and learning goals.
         </p>
       </div>
 
@@ -1438,7 +1438,7 @@ function GrowthGapsView() {
         <div style={{ padding: "32px 22px", backgroundColor: "white", borderRadius: "12px", border: `1.5px solid ${T.lineFaint}`, textAlign: "center" }}>
           <p style={{ margin: "0 0 6px", fontFamily: "Georgia, serif", fontSize: "16px", color: T.inkGhost }}>No gaps or growth notes recorded yet</p>
           <p style={{ margin: 0, fontFamily: "Georgia, serif", fontSize: "12px", color: T.inkGhost, lineHeight: 1.6 }}>
-            Click the ellipse rings on the Visual Map to open each SIPM layer panel — scroll to the bottom of each panel to find the Gaps, Growth & Supervision Goals section. Reflections from the Case Reflection tab also appear here.
+            Click the ellipse rings on the Visual Map to open each SMFIP layer panel — scroll to the bottom of each panel to find the Gaps, Growth & Supervision Goals section. Reflections from the Case Reflection tab also appear here.
           </p>
         </div>
       )}
@@ -1446,7 +1446,7 @@ function GrowthGapsView() {
       {/* Collated ring gaps */}
       {hasAny && (
         <>
-          {divider("Collated from SIPM ring panels")}
+          {divider("Collated from SMFIP ring panels")}
           {ringGaps.map(r => r.text.trim() ? (
             <div key={r.key} style={{ borderRadius: "10px", overflow: "hidden", border: `1.5px solid ${r.color.border}33` }}>
               <div style={{ backgroundColor: r.color.bg, padding: "10px 16px", borderBottom: `1px solid ${r.color.border}22` }}>
@@ -1503,7 +1503,7 @@ function GrowthGapsView() {
           <div style={{ backgroundColor: T.bgDeep, borderRadius: "10px", padding: "14px 18px", border: `1px solid ${T.lineFaint}` }}>
             <p style={{ margin: "0 0 8px", fontSize: "10px", color: T.inkGhost, letterSpacing: "0.1em", textTransform: "uppercase", fontFamily: "monospace" }}>Questions to support your synthesis</p>
             {[
-              "Which gaps appear across more than one layer of the SIPM — what does that tell you about a deeper pattern?",
+              "Which gaps appear across more than one layer of the SMFIP — what does that tell you about a deeper pattern?",
               "Are your gaps more about knowledge and theory, clinical skill and technique, or personal/reflective development?",
               "What would growth look like in 3 months — what would you be doing differently in the room?",
               "What support, training or reading would most address your priority gaps?",
@@ -1538,9 +1538,9 @@ function HowToUseView({ onNavigate }) {
       color: { bg: "#F5E6F0", border: "#A03880", text: "#481830" },
       desc: "Use this when you want to think through a case in depth — moving layer by layer from your Way of Being to what you actually did in the room.",
       steps: [
-        { tab: "case", label: "Case Reflection", instruction: "Go to the Case Reflection tab. Work through the sections in order — starting with the client context and formulation (7 Ps), then your Way of Being, the alliance, the intervention, and finally your learning." },
-        { tab: "case", label: "Case Reflection", instruction: "You don't need to complete every section. Open the ones most relevant to what you want to bring to supervision. Each section saves automatically." },
-        { tab: "map", label: "Visual Map", instruction: "You can also click the SIPM rings on the Visual Map and use those panels to reflect on a specific client — the prompts are framed around live clinical situations." },
+        { tab: "case", label: "Client Case Reflection", instruction: "Go to the Client Case Reflection tab. Work through the sections in order — starting with the client context and formulation (7 Ps), then your Way of Being, the alliance, the intervention, and finally your learning." },
+        { tab: "case", label: "Client Case Reflection", instruction: "You don't need to complete every section. Open the ones most relevant to what you want to bring to supervision. Each section saves automatically." },
+        { tab: "map", label: "Visual Map", instruction: "You can also click the SMFIP rings on the Visual Map and use those panels to reflect on a specific client — the prompts are framed around live clinical situations." },
         { tab: "questions", label: "Supervision Qs", instruction: "Use the Supervision Questions tab to generate discussion questions to bring to your supervisor after completing your case reflection." },
         { tab: "glossary", label: "Glossary", instruction: "If you encounter unfamiliar terms in the prompts, the Glossary tab has plain-language definitions for every key concept in the tool." },
       ],
@@ -1550,8 +1550,8 @@ function HowToUseView({ onNavigate }) {
       color: { bg: "#F5F0E0", border: "#907020", text: "#3A2C00" },
       desc: "Use this periodically — at supervision, at the start of a training year, or when you're feeling stuck or uncertain in your practice.",
       steps: [
-        { tab: "map", label: "Visual Map", instruction: "Click each SIPM ring on the Visual Map. At the bottom of each panel you'll find a Gaps, Growth & Supervision Goals section with specific prompts about where your knowledge or practice is thin." },
-        { tab: "case", label: "Case Reflection", instruction: "Complete a Case Reflection and pay particular attention to the final section — Learning & Next Steps — which asks what the session revealed about gaps in your framework." },
+        { tab: "map", label: "Visual Map", instruction: "Click each SMFIP ring on the Visual Map. At the bottom of each panel you'll find a Gaps, Growth & Supervision Goals section with specific prompts about where your knowledge or practice is thin." },
+        { tab: "case", label: "Client Case Reflection", instruction: "Complete a Client Case Reflection and pay particular attention to the final section — Learning & Next Steps — which asks what the session revealed about gaps in your framework." },
         { tab: "growth", label: "Growth & Gaps", instruction: "Go to the Growth & Gaps tab. It automatically collects everything you've written in the gaps sections across all panels into one view. Use the Synthesis and Goals sections to identify patterns and build your supervision goals." },
         { tab: "glossary", label: "Glossary", instruction: "Use the Glossary to deepen your understanding of frameworks or concepts that feel unfamiliar — this can help you identify where your knowledge base needs strengthening." },
         { tab: "refs", label: "References", instruction: "Browse the References tab for further reading — each section lists the key sources behind the frameworks in the tool." },
@@ -1573,7 +1573,7 @@ function HowToUseView({ onNavigate }) {
   const NAV_TIPS = [
     { icon: "◉", text: "Your data saves automatically as you type — you can close the app and return to find everything where you left it." },
     { icon: "◎", text: "You don't need to use every tab. Start with what's most relevant to you right now — the tool is designed to be used flexibly and in any order." },
-    { icon: "◈", text: "On the Visual Map, click the ellipse rings to reflect on each SIPM layer. Click the satellite nodes to explore the knowledge bases informing your practice." },
+    { icon: "◈", text: "On the Visual Map, click the ellipse rings to reflect on each SMFIP layer. Click the satellite nodes to explore the knowledge bases informing your practice." },
     { icon: "◇", text: "Panel descriptions can be collapsed — look for the 'Hide framework overview' toggle to bring the reflection prompts into view more quickly." },
     { icon: "○", text: "The Glossary tab defines key terms used across the tool — useful if you encounter unfamiliar language or want to deepen your understanding of a concept." },
     { icon: "◆", text: "Use the Export Data button in the top bar to download your reflections as a file. You can import this file on another device to restore all your work." },
@@ -1627,6 +1627,76 @@ function HowToUseView({ onNavigate }) {
       {/* Use cases */}
       {USE_CASES.map((uc, i) => <Block key={i} uc={uc}/>)}
 
+      {/* Privacy & Legal Obligations */}
+      <div style={{ borderRadius: "12px", overflow: "hidden", border: `1.5px solid #C07840`, backgroundColor: "white" }}>
+        <div style={{ backgroundColor: "#FEF6EE", padding: "13px 18px", borderBottom: "1px solid #C0784033" }}>
+          <p style={{ margin: "0 0 2px", fontFamily: "Georgia, serif", fontSize: "14px", fontWeight: "700", color: "#5A2A10" }}>Privacy, Confidentiality & Legal Obligations</p>
+          <p style={{ margin: 0, fontFamily: "Georgia, serif", fontSize: "11.5px", color: "#C07840", fontStyle: "italic" }}>Important — please read before using this tool</p>
+        </div>
+        <div style={{ padding: "16px 18px", display: "flex", flexDirection: "column", gap: "14px" }}>
+
+          {/* In-app notice */}
+          <div style={{ backgroundColor: "#FEF6EE", borderRadius: "8px", padding: "12px 14px", borderLeft: "3px solid #C07840" }}>
+            <p style={{ margin: "0 0 4px", fontFamily: "Georgia, serif", fontSize: "12.5px", fontWeight: "700", color: "#5A2A10" }}>⚠ This tool is for reflective practice only. Do not enter any identifying client information.</p>
+            <p style={{ margin: 0, fontFamily: "Georgia, serif", fontSize: "12px", color: "#5A2A10", lineHeight: 1.65 }}>Reflections should be de-identified and focused on clinical themes, processes and frameworks — not client-specific details. This protects your clients and ensures your use of this tool is consistent with your professional and legal obligations.</p>
+          </div>
+
+          {/* How data is stored */}
+          <div>
+            <p style={{ margin: "0 0 6px", fontSize: "10px", color: T.inkGhost, letterSpacing: "0.1em", textTransform: "uppercase", fontFamily: "monospace" }}>How your data is stored</p>
+            <div style={{ display: "flex", flexDirection: "column", gap: "7px" }}>
+              {[
+                { icon: "◉", text: "All reflections are stored only in your browser's local storage on your own device. Nothing is transmitted to any external server, database or third party." },
+                { icon: "◎", text: "Local storage is not encrypted. If your device is accessed by others or is lost, your reflections could potentially be viewed. Keep this in mind when writing reflections and ensure your device is password protected." },
+                { icon: "◈", text: "Local storage can be cleared if you clear your browser data or history, or if you use a different browser or device. Use the Export Data button regularly to download and save a backup of your reflections." },
+                { icon: "◇", text: "This tool does not replace your organisation's secure record-keeping systems. It is a reflective practice aid — not a clinical notes system." },
+              ].map((item, i) => (
+                <div key={i} style={{ display: "flex", gap: "10px", alignItems: "flex-start" }}>
+                  <span style={{ fontSize: "12px", color: "#C07840", flexShrink: 0, marginTop: "2px" }}>{item.icon}</span>
+                  <p style={{ margin: 0, fontFamily: "Georgia, serif", fontSize: "12px", color: T.inkFaint, lineHeight: 1.65 }}>{item.text}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* How the Practice Map meets professional standards */}
+          <div>
+            <p style={{ margin: "0 0 6px", fontSize: "10px", color: T.inkGhost, letterSpacing: "0.1em", textTransform: "uppercase", fontFamily: "monospace" }}>How The Practice Map meets professional standards</p>
+            <p style={{ margin: "0 0 8px", fontFamily: "Georgia, serif", fontSize: "12px", color: T.inkFaint, lineHeight: 1.65 }}>The Practice Map has been designed to support reflective practice in a way that is consistent with the ethical and legal obligations of allied health clinicians across disciplines, including AASW, AHPRA, APS, AAPi, PACFA, ACA, AAFT and OT Australia. Specifically:</p>
+            <div style={{ display: "flex", flexDirection: "column", gap: "7px" }}>
+              {[
+                { label: "No client data is collected or stored by the tool", body: "All data remains on the user's own device and is never transmitted, shared or accessed by the developers or any third party." },
+                { label: "Designed as a reflective practice tool, not a clinical record", body: "The Practice Map is intended for professional reflection on frameworks, skills, knowledge and practice — not for recording client-specific clinical information." },
+                { label: "Supports reflective practice obligations", body: "Regular reflective practice is required under the codes of ethics of all major allied health professional bodies in Australia. The Practice Map directly supports this obligation." },
+                { label: "Supports CPD obligations", body: "Structured reflective practice using the tool can contribute toward Continuing Professional Development (CPD) requirements across disciplines. Clinicians should check their specific professional body's CPD guidelines." },
+                { label: "Export function supports data portability", body: "The Export Data button allows clinicians to download their reflections as a file and store them securely on their own systems, supporting continuity of professional development records." },
+              ].map((item, i) => (
+                <div key={i} style={{ backgroundColor: T.bg, borderRadius: "8px", padding: "9px 13px", borderLeft: "3px solid #C07840" }}>
+                  <p style={{ margin: "0 0 2px", fontFamily: "Georgia, serif", fontSize: "12px", fontWeight: "700", color: T.inkMid }}>{item.label}</p>
+                  <p style={{ margin: 0, fontFamily: "Georgia, serif", fontSize: "12px", color: T.inkFaint, lineHeight: 1.6 }}>{item.body}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Discipline-specific obligations */}
+          <div>
+            <p style={{ margin: "0 0 6px", fontSize: "10px", color: T.inkGhost, letterSpacing: "0.1em", textTransform: "uppercase", fontFamily: "monospace" }}>Your professional obligations</p>
+            <p style={{ margin: 0, fontFamily: "Georgia, serif", fontSize: "12px", color: T.inkFaint, lineHeight: 1.7 }}>
+              Regardless of the tool you use, you remain responsible for meeting your professional and legal obligations under your discipline's code of ethics, the Australian Privacy Act 1988, and any relevant state or territory legislation. These include obligations around client confidentiality, secure record keeping, and the appropriate use of technology in practice. If you are unsure how to use this tool within your obligations, consult your professional association, supervisor, or professional indemnity insurer.
+            </p>
+          </div>
+
+          {/* Legal disclaimer */}
+          <div style={{ backgroundColor: T.bgDeep, borderRadius: "8px", padding: "10px 14px", border: `1px solid ${T.lineFaint}` }}>
+            <p style={{ margin: 0, fontFamily: "Georgia, serif", fontSize: "11px", color: T.inkGhost, lineHeight: 1.7, fontStyle: "italic" }}>
+              The Practice Map does not constitute legal advice and does not make any representation about compliance with any particular legislation or regulatory requirement. Clinicians are encouraged to seek independent legal or professional advice regarding their specific obligations before using this tool in a professional context.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
       {/* General tips */}
       <div style={{ backgroundColor: "white", borderRadius: "12px", border: `1.5px solid ${T.lineFaint}`, padding: "16px 18px" }}>
         <p style={{ margin: "0 0 10px", fontSize: "10px", color: T.inkGhost, letterSpacing: "0.1em", textTransform: "uppercase", fontFamily: "monospace" }}>Good to know</p>
@@ -1653,14 +1723,14 @@ function HowToUseView({ onNavigate }) {
 // ─── GLOSSARY VIEW ───────────────────────────────────────────────────────────
 const GLOSSARY_TERMS = [
   {
-    heading: "The Practice Map & SIPM",
+    heading: "The Practice Map & SMFIP",
     color: { bg: "#EAF5EC", border: "#3A8A58", text: "#163820" },
     terms: [
-      { term: "Systemic Meta-Framework for Integrative Practice (SIPM)", def: "A structured model for integrative psychotherapy developed by Dr Leonie White & Kate Owen (2022). It organises diverse theories into a coherent clinical guide using systemic thinking as the overarching frame, structured through four nested layers: Way of Being, Therapeutic Alliance, Systemic Formulation & Practice, and Therapy/Intervention." },
+      { term: "Systemic Meta-Framework for Integrative Practice (SMFIP)", def: "Dr Leonie White's framework for integrative psychotherapy — a structured meta-framework that organises diverse theories into a coherent clinical guide using systemic thinking as the overarching frame. Structured through four nested layers: Way of Being, Therapeutic Alliance, Systemic Formulation & Practice, and Therapy/Intervention. The SMFIP was developed and continues to be evolved by Dr Leonie White through her teaching, supervision and practice at Therapywell Allied Health and Wellbeing and Phoenix Family Therapy Academy. An earlier version of the framework was published with Kate Owen (2022) — the SMFIP as represented in this tool reflects Dr White's updated and expanded model (2025), which includes Decision Making, Decolonizing, Self of Therapist, Broader Societal Factors and Ongoing Review." },
       { term: "Integrative practice", def: "The thoughtful and intentional blending of therapeutic models within a cohesive framework. Different from eclecticism — integrative practice involves deliberate, principled choices about which approaches to combine and why, guided by the client's needs, context and theory of change." },
       { term: "Eclectic practice", def: "Drawing from multiple therapeutic models based on perceived effectiveness. Unlike integrative practice, eclectic approaches may lack a coherent underlying framework, risking 'therapeutic drift' or working from a conceptual soup without clear rationale." },
       { term: "Theory of change", def: "The clinician's understanding of how and why change happens for a particular client — what needs to shift, and what interventions will create that shift. A clear theory of change guides intervention decisions rather than leaving them to habit or intuition." },
-      { term: "The helicopter view", def: "Leonie White's metaphor for the systemic thinking layer — the ability to rise above the immediate presenting problem and see the full picture of the client's ecosystem, patterns, history and context. The helicopter can also 'enter the atmosphere' to consider broader societal and structural factors." },
+      { term: "The helicopter view", def: "A systemic metaphor for the systemic thinking layer — the ability to rise above the immediate presenting problem and see the full picture of the client's ecosystem, patterns, history and context. The helicopter can also 'enter the atmosphere' to consider broader societal and structural factors." },
       { term: "Conscious competence", def: "The stage of skill development where a clinician is able to perform a skill well and is aware of how and why they are doing so. The goal of reflective practice — moving from unconscious habit to intentional, articulable clinical decision-making." },
     ],
   },
@@ -1674,7 +1744,7 @@ const GLOSSARY_TERMS = [
       { term: "Unconditional Positive Regard (Rogers)", def: "The acceptance of the client as a whole person, regardless of their behaviour, choices or presentation. Involves separating the person from their behaviour and maintaining a vision of their inherent worth and capacity for change. Not always easy — especially in complex or high-emotion work." },
       { term: "Congruence", def: "Authenticity and genuineness in the therapeutic relationship — the clinician's inner experience and outer expression are aligned. The clinician is present as a real person, not hiding behind a professional mask." },
       { term: "Use of self", def: "The intentional and reflective use of the clinician's own person — their personality, experiences, values, feelings and reactions — as a therapeutic tool. Requires self-awareness, supervision and ongoing reflection." },
-      { term: "Social GRACES (Burnham)", def: "A framework for reflecting on the social and cultural dimensions of identity that shape both the clinician and the client: Gender, Race, Religion, Age, Ability, Culture, Class, Ethnicity, Sexuality (and more). Used to explore how identity and power show up in the therapeutic relationship." },
+      { term: "Social GRACES", def: "A framework for reflecting on the social and cultural dimensions of identity that shape both the clinician and the client: Gender, Race, Religion, Age, Ability, Culture, Class, Ethnicity, Sexuality (and more). Used to explore how identity and power show up in the therapeutic relationship." },
       { term: "Countertransference", def: "The clinician's emotional and psychological reactions to the client — including feelings, memories, fantasies or behaviours that are activated by the therapeutic relationship. Can be a useful source of information about the client's relational world if reflected on thoughtfully." },
     ],
   },
@@ -1685,13 +1755,14 @@ const GLOSSARY_TERMS = [
       { term: "Trauma-informed practice", def: "An approach to all clinical work — not just trauma-specific therapy — that recognises the widespread prevalence of trauma and adversity, understands how trauma affects the nervous system, behaviour and relationships, and actively works to create safety, avoid re-traumatisation, and support recovery. Being trauma-informed shapes Way of Being, alliance-building, formulation and intervention — it is a foundation of practice, not a specialisation." },
       { term: "Trauma-informed vs. trauma-specific", def: "Trauma-informed practice means holding a trauma lens in all clinical work — understanding that trauma and adversity shape many presentations even when they are not the presenting concern. Trauma-specific practice refers to therapeutic interventions designed specifically to process traumatic material (e.g. EMDR, TF-CBT). All clinicians should be trauma-informed; not all need to be trauma-specific practitioners." },
       { term: "Re-traumatisation", def: "When clinical encounters — including assessment processes, service interactions, power dynamics or the way information is gathered — inadvertently recreate experiences of powerlessness, violation, or loss of control. Trauma-informed practice actively works to prevent re-traumatisation in every interaction." },
-      { term: "Therapeutic alliance", def: "The collaborative relationship between clinician and client, comprising three dimensions: the emotional bond, agreement on the goals of therapy, and agreement on the tasks of therapy (Bordin, 1979). Consistently one of the strongest predictors of therapeutic outcome across all modalities." },
+      { term: "Therapeutic alliance", def: "The collaborative relationship between clinician and client, comprising three dimensions: the emotional bond, agreement on the goals of therapy, and agreement on the tasks of therapy. Consistently one of the strongest predictors of therapeutic outcome across all modalities." },
       { term: "Systemic alliance", def: "In family and systemic work, the therapeutic alliance exists not just between clinician and individual client but across the whole system — with each individual, each subsystem and the whole family. Managing these multiple alliances requires skill and ongoing attention." },
       { term: "PACE (Hughes)", def: "A relational stance developed within Dyadic Developmental Psychotherapy: Playfulness, Acceptance, Curiosity, Empathy. Used to create safety and connection, particularly with clients who have experienced relational trauma or disrupted attachment." },
       { term: "Mentalization", def: "The capacity to understand one's own and others' behaviour in terms of underlying mental states — thoughts, feelings, intentions and desires. Both a therapeutic goal and a relational stance: the clinician mentalizes the client, and helps the client develop their own mentalizing capacity." },
       { term: "Epistemic trust", def: "The client's willingness to receive and use new information or perspectives from the clinician. Depends on the quality of the alliance — clients who feel seen, understood and safe are more likely to trust and integrate what the clinician offers." },
       { term: "Alliance rupture and repair", def: "Moments of disconnection, misattunement or conflict in the therapeutic relationship. Research shows that the ability to notice, name and repair ruptures is a key competency — and that successfully repaired ruptures can actually strengthen the alliance." },
-      { term: "Window of tolerance (Siegel/Ogden)", def: "The zone of nervous system arousal within which a client can process experience, engage relationally and make use of therapy. Below the window: shutdown, freeze, dissociation. Above: overwhelm, hyperactivation, flooding. Therapy aims to work within and gradually expand the window." },
+      { term: "Window of tolerance", def: "The zone of nervous system arousal within which a client can process experience, engage relationally and make use of therapy. Below the window: shutdown, freeze, dissociation. Above: overwhelm, hyperactivation, flooding. Therapy aims to work within and gradually expand the window." },
+      { term: "Circles of Capacity (Malchiodi)", def: "Cathy Malchiodi's framework that builds on and expands the window of tolerance concept — describing concentric circles of capacity for regulation, resilience and growth. Integrates the body, creative expression and relational safety as active components of expanding a client's capacity to tolerate and process difficult experience. Particularly relevant in trauma-informed, expressive and somatic approaches." },
     ],
   },
   {
@@ -1705,7 +1776,7 @@ const GLOSSARY_TERMS = [
       { term: "Vertical stressors", def: "Patterns, beliefs, expectations and legacies that are transmitted across generations — family myths, relationship patterns, trauma, secrets, roles. They travel down through time via the family system." },
       { term: "Horizontal stressors", def: "Current, time-specific stressors affecting the family — developmental transitions, unexpected events, accidents, illness, job loss. They move across the life cycle and interact with vertical stressors to create difficulty." },
       { term: "The 'dances'", def: "The recurring interactional sequences and behavioural patterns around the problem — what happens before, during and after. Understanding the dance (rather than blaming any individual dancer) is central to systemic thinking." },
-      { term: "Primary, secondary and rejected pictures", def: "The clinician's multiple hypotheses about what is happening — the one they find most compelling (primary), alternative explanations (secondary), and possibilities they are actively resistant to considering (rejected). Reflecting on all three guards against premature closure and bias." },
+      { term: "Primary, secondary and rejected pictures", def: "The clinician's multiple hypotheses about what is happening — the one they find most aligned to their practice framework (primary), alternative explanations (secondary), and possibilities they are actively resistant to considering (rejected). Reflecting on all three guards against premature closure and bias." },
       { term: "Structural oppression", def: "The systemic and institutional ways in which power, resources and opportunities are distributed unequally along lines of race, class, gender, ability and other dimensions. Structural oppression is a legitimate and significant part of clinical formulation — not just background context." },
     ],
   },
@@ -1714,9 +1785,11 @@ const GLOSSARY_TERMS = [
     color: { bg: "#F0EBF8", border: "#7048B0", text: "#2A1050" },
     terms: [
       { term: "Epistemology", def: "The study of knowledge — how we know what we know, what counts as valid knowledge, and the assumptions underlying our understanding of reality. In clinical practice, a clinician's epistemological position shapes everything: what they attend to, what they privilege, how they position themselves in relation to the client." },
-      { term: "Not-knowing stance (Anderson & Goolishian)", def: "A collaborative, curious stance in which the clinician approaches the client without fixed assumptions or predetermined interpretations. The client is positioned as the expert on their own experience, and understanding is co-constructed in conversation." },
+      { term: "Not-knowing stance", def: "A collaborative, curious stance in which the clinician approaches the client without fixed assumptions or predetermined interpretations. The client is positioned as the expert on their own experience, and understanding is co-constructed in conversation." },
       { term: "Expert stance", def: "A position in which the clinician holds privileged knowledge and acts from a position of authority — diagnosing, prescribing, directing. Has utility in some contexts but risks closing down the client's own meaning-making and reinforcing unequal power dynamics." },
-      { term: "Critical not-knowing (Flaskas)", def: "A third position between expert and not-knowing — the clinician contributes their knowledge, experience and perspective while remaining genuinely open and curious. Holding knowing and not-knowing together rather than choosing between them." },
+      { term: "Critical not-knowing", def: "A third position between expert and not-knowing — the clinician contributes their knowledge, experience and perspective while remaining genuinely open and curious. Holding knowing and not-knowing together rather than choosing between them." },
+      { term: "1.5 position", def: "A relational epistemological stance that sits between the expert position (1) and the not-knowing position (2) — the therapist brings knowledge and expertise while maintaining genuine curiosity and openness to the client's own knowing. A practical articulation of critical not-knowing in therapeutic practice." },
+      { term: "Co-centring (Beaudoin)", def: "Marie-Nathalie Beaudoin's concept of a relational stance in which the therapist and client both contribute to the meaning-making process — neither the therapist's expertise nor the client's experience is centred at the expense of the other. Both are held together in a genuinely collaborative way." },
       { term: "Social constructionism", def: "The view that meaning, identity and reality are created through language and social interaction rather than discovered as fixed truths. Informs narrative, collaborative and postmodern approaches to therapy — and shapes how clinicians understand problems, solutions and change." },
       { term: "Positionality", def: "The clinician's awareness of their own social location — their gender, culture, class, race, professional training — and how this shapes what they see, what they miss, and how they relate to clients. Reflective practice requires ongoing attention to positionality." },
     ],
@@ -1726,15 +1799,15 @@ const GLOSSARY_TERMS = [
     color: { bg: "#EAF5EC", border: "#3A8A58", text: "#163820" },
     terms: [
       { term: "Formulation", def: "An integrated, individualised explanation of a client's difficulties that brings together predisposing, precipitating, perpetuating and protective factors into a coherent narrative. Goes beyond diagnosis or symptom description to explain why this person is struggling in this way now — and what might help. Best understood as a hypothesis to be tested rather than a fixed truth (Butler, 1998; Johnstone & Dallos, 2006)." },
-      { term: "Formulation as process vs. event", def: "Formulation is both an ongoing collaborative sense-making activity (process) and a written or diagrammatic product (event). In practice, formulation-as-process is the more common clinical activity — the ongoing conversation, revision and deepening of understanding across the life of the work. The written formulation is a snapshot of that evolving process, not its endpoint (Johnstone & Dallos, 2006; DCP, 2011)." },
-      { term: "Collaborative formulation", def: "Formulation is constructed with the client, not about them. The phrase 'formulation for/with X' rather than 'of X' is recommended (DCP, 2011). Collaborative formulation increases the client's sense of agency, meaning and hope — and is more likely to reflect their actual experience. The clinician's expertise and the client's lived knowledge are both essential." },
-      { term: "Personal meaning as the integrating factor", def: "A list of factors (biological, social, psychological) does not constitute a formulation unless those factors are synthesised through an understanding of their personal meaning to the client. What did these experiences mean to this person — how did they make sense of them, and how does that meaning shape the current difficulty? Personal meaning is what makes a formulation individual rather than generic (DCP, 2011)." },
+      { term: "Formulation as process vs. event", def: "Formulation is both an ongoing collaborative sense-making activity (process) and a written or diagrammatic product (event). In practice, formulation-as-process is the more common clinical activity — the ongoing conversation, revision and deepening of understanding across the life of the work. The written formulation is a snapshot of that evolving process, not its endpoint." },
+      { term: "Collaborative formulation", def: "Formulation is constructed with the client, not about them. The phrase 'formulation for/with X' rather than 'of X' is recommended. Collaborative formulation increases the client's sense of agency, meaning and hope — and is more likely to reflect their actual experience. The clinician's expertise and the client's lived knowledge are both essential." },
+      { term: "Personal meaning as the integrating factor", def: "A list of factors (biological, social, psychological) does not constitute a formulation unless those factors are synthesised through an understanding of their personal meaning to the client. What did these experiences mean to this person — how did they make sense of them, and how does that meaning shape the current difficulty? Personal meaning is what makes a formulation individual rather than generic." },
       { term: "Team formulation", def: "A shared formulation developed collaboratively with a multidisciplinary team — and ideally with the client. Research suggests team formulation can be a powerful systemic intervention in itself: increasing team empathy, reducing negative perceptions of clients, achieving a consistent approach, and promoting a more psychosocial perspective across the service (Summers, 2006; Kennedy et al., 2003; DCP, 2011)." },
       { term: "The 7 Ps", def: "A formulation framework: Presenting Problem, Predisposing factors, Precipitating factors, Perpetuating factors, Protective factors, People & social context, and Plans. Provides a comprehensive structure for assessment and treatment planning. Works best when factors are integrated through personal meaning rather than simply listed." },
       { term: "Working hypothesis", def: "The clinician's best current explanation of what is maintaining the problem and what would need to shift for change to occur. It is tentative, testable and open to revision as the work unfolds — not a fixed conclusion. Holding it lightly and being willing to reformulate is a sign of clinical maturity." },
       { term: "Reformulation", def: "The process of revising the formulation in light of new information, changing circumstances or lack of progress. All formulations are partial and dynamic — 'broad snapshot summaries of complex evolving stories' (Cole & Johnstone, in press). Regular review and willingness to reformulate is essential to good practice." },
-      { term: "Formulation and the ethics of power", def: "Formulations can be experienced by clients as helpful and containing — but also as overwhelming, frightening or pathologising. Because formulations are rooted in the authority of professional knowledge, clients may find it hard to disagree. Good practice requires pacing the sharing of formulations, using accessible language, checking the client's response, and remaining genuinely open to their disagreement (DCP, 2011)." },
-      { term: "Multi-level formulation (O'Keeffe & Macaulay)", def: "A framework for understanding presentations at four levels: observable behaviours and functional skills, neuropsychological constructs, biological factors, and environmental systems. Each level informs the others and all are needed for a comprehensive picture." },
+      { term: "Formulation and the ethics of power", def: "Formulations can be experienced by clients as helpful and containing — but also as overwhelming, frightening or pathologising. Because formulations are rooted in the authority of professional knowledge, clients may find it hard to disagree. Good practice requires pacing the sharing of formulations, using accessible language, checking the client's response, and remaining genuinely open to their disagreement." },
+      { term: "Multi-level formulation", def: "A framework for understanding presentations at four levels: observable behaviours and functional skills, neuropsychological constructs, biological factors, and environmental systems. Each level informs the others and all are needed for a comprehensive picture." },
       { term: "Differential formulation", def: "Holding multiple possible explanations for a client's presentation simultaneously — rather than committing prematurely to one. Essential to thorough assessment and guards against confirmation bias." },
       { term: "Prognosis", def: "An informed estimate of likely outcomes — with and without intervention. Helps clinicians and clients set realistic expectations, prioritise goals and make decisions about the nature and intensity of support." },
     ],
@@ -1754,7 +1827,7 @@ const GLOSSARY_TERMS = [
     heading: "Professional Practice",
     color: { bg: "#E8F5F0", border: "#208870", text: "#083828" },
     terms: [
-      { term: "Reflective practice (Schon)", def: "The capacity to think critically about one's own actions, decisions and assumptions — both in the moment (reflection-in-action) and after the fact (reflection-on-action). The foundation of professional learning and the development of clinical wisdom." },
+      { term: "Reflective practice", def: "The capacity to think critically about one's own actions, decisions and assumptions — both in the moment (reflection-in-action) and after the fact (reflection-on-action). The foundation of professional learning and the development of clinical wisdom." },
       { term: "Internalized professionalism", def: "Moving beyond compliance with external rules and standards to genuinely embodying the values, ethics and commitments of one's profession as one's own. The hallmark of a mature professional identity." },
       { term: "Portable professional identity", def: "A stable, coherent sense of professional self that travels with the clinician across roles, organisations and contexts — rather than being defined by a job title or organisational culture." },
       { term: "Vicarious trauma", def: "The cumulative impact on the clinician of exposure to clients' traumatic material — resulting in changes to the clinician's own worldview, sense of safety and psychological wellbeing. Requires proactive self-care, supervision and organisational support." },
@@ -1864,6 +1937,7 @@ const REFERENCE_GROUPS = [
       { authors: "Schore, A. N.", year: "2014", title: "The science of the art of psychotherapy", source: "New York: Norton." },
       { authors: "Badenoch, B.", year: "2008", title: "Being a Brain-Wise Therapist: A Practical Guide to Interpersonal Neurobiology", source: "New York: Norton." },
       { authors: "Beaudoin, M. & Monk, G.", year: "2024", title: "Narrative Practices and Emotions: 40+ Ways to Support the Emergence of Flourishing Identities", source: "New York: Norton Professional Books." },
+      { authors: "Malchiodi, C. A.", year: "2020", title: "Trauma and Expressive Arts Therapy: Brain, Body, and Imagination in the Healing Process", source: "New York: Guilford Press. [Circles of Capacity framework — building on and expanding the window of tolerance concept through expressive arts, somatic and relational approaches]" },
       { authors: "Goleman, D.", year: "2006", title: "Social Intelligence: The New Science of Human Relationships", source: "London: Hutchinson." },
       { authors: "Hughes, D.", year: "2007", title: "Attachment-Focused Family Therapy", source: "New York: Norton." },
     ],
@@ -1917,6 +1991,8 @@ const REFERENCE_GROUPS = [
       { authors: "Flaskas, C.", year: "2002", title: "Towards a common ground in psychoanalysis and family therapy: On knowing not to know", source: "Journal of Family Therapy, 24(4), 346–366." },
       { authors: "Macaskie, J., Meekums, B. & Nolan, G.", year: "2021", title: "A not-knowing, values-based and relational approach to counselling education", source: "British Journal of Guidance & Counselling, 51(1), 1–14." },
       { authors: "Winter, D. A. & Metcalfe, C.", year: "2013", title: "The relationship between therapist epistemology, therapy style, working alliance, and intervention use", source: "American Journal of Psychotherapy, 67(4), 323–345." },
+      { authors: "Smith, G.", year: "1997", title: "Towards a 1.5 position: A new stance for therapists", source: "[Referenced in relation to the critical not-knowing or 1.5 position — a stance between expert and not-knowing]" },
+      { authors: "Beaudoin, M-N.", year: "2024", title: "Narrative Practices and Emotions: 40+ Ways to Support the Emergence of Flourishing Identities", source: "New York: Norton Professional Books. [Co-centring as a relational epistemological stance]" },
       { authors: "Bauman, Z.", year: "2000", title: "Liquid Modernity", source: "Cambridge: Polity Press." },
     ],
   },
@@ -1936,6 +2012,8 @@ const REFERENCE_GROUPS = [
       { authors: "O'Donoghue, K.", year: "2003", title: "Restorying Social Work Supervision", source: "Palmerston North, Aotearoa New Zealand: Dunmore Press." },
       { authors: "Kadushin, A.", year: "1992", title: "Supervision in Social Work (3rd ed.)", source: "New York: Columbia University Press." },
       { authors: "Hawkins, P. & Ryde, J.", year: "2020", title: "Integrative Psychotherapy in Theory and Practice", source: "London: Jessica Kingsley." },
+      { authors: "Lee, R. E. & Everett, C. A.", year: "2004", title: "The Integrative Family Therapy Supervisor: A Primer", source: "New York: Routledge Taylor and Francis Group." },
+      { authors: "Todd, T. C. & Storm, C. L.", year: "2014", title: "The Complete Systemic Supervisor: Context, Philosophy, and Pragmatics (2nd ed.)", source: "Chichester: Wiley Blackwell." },
       { authors: "O'Keeffe, M. J. & Shelton, D. C.", year: "2007", title: "Personal supervision for paediatricians", source: "Journal of Paediatrics and Child Health, 43, 103–106." },
       { authors: "Lowe, R., Hunt, C. & Simmons, P.", year: "2008", title: "Towards multi-positioned live supervision in family therapy", source: "Contemporary Family Therapy, 30, 3–14." },
     ],
@@ -1968,8 +2046,8 @@ function ReferencesView() {
         <p style={{ margin: "0 0 6px", fontFamily: "Georgia, serif", fontSize: "13px", fontWeight: "700", color: T.inkMid }}>About This Tool</p>
         <p style={{ margin: 0, fontFamily: "Georgia, serif", fontSize: "12.5px", color: T.inkFaint, lineHeight: 1.7 }}>
           The Practice Map is a collaborative work developed by <strong style={{ color: T.inkMid }}>Brooke Shakspeare</strong>, social worker, clinical supervisor and educator, in collaboration with <strong style={{ color: T.inkMid }}>Dr Leonie White</strong>, clinical family therapist, psychologist, supervisor and Director of Phoenix Family Therapy Academy and Therapywell Allied Health and Wellbeing.
-          {"\n\n"}The tool draws on a rich and layered body of knowledge and experience — including social work practice framework traditions, Brooke's own clinical and supervisory practice, learnings from mentors and clinical supervision across her career, and her experience working within and leading multidisciplinary teams. Particularly formative was her work within <strong style={{ color: T.inkMid }}>Evolve Therapeutic Services</strong>, where an explicitly systemic practice framework was developed collaboratively across the team and across disciplines — an experience that deeply shaped her understanding of what it means to hold a shared theoretical framework in complex MDT settings.
-          {"\n\n"}Dr Leonie White's <strong style={{ color: T.inkMid }}>Systemic Meta-Framework for Integrative Practice</strong> forms the visual and reflective practice framework at the centre of this tool. The framework was first published by White, L. & Owen, K. (2022) in the Australian and New Zealand Journal of Family Therapy, and has been further developed and updated by Dr Leonie White (2025) through her ongoing teaching, supervision and practice at Therapywell Allied Health and Wellbeing and Phoenix Family Therapy Academy. The broader satellite knowledge bases, reflection prompts, case reflection structure and supervision framework reflect Brooke's own practice framework as a social worker and supervisor, informed by the many authors, theorists and colleagues credited in the reference groups below. The supervision framework also draws on Kieran O'Donoghue's <em>Restorying Social Work Supervision</em> (2003), and the multi-level diagnostic formulation framework is drawn from O'Keeffe & Macaulay (2012).
+          {"\n\n"}The tool draws on a rich and layered body of knowledge and experience — including social work practice framework traditions, Brooke's own clinical and supervisory practice, learnings from mentors and clinical supervision across her career, and her experience working within and leading multidisciplinary teams. Particularly formative was her work within <strong style={{ color: T.inkMid }}>Evolve Therapeutic Services</strong>, where an explicitly systemic practice framework was developed collaboratively across the team and across disciplines — an experience that deeply shaped her understanding of what it means to hold a shared theoretical framework in complex multidisciplinary team settings.
+          {"\n\n"}Dr Leonie White's <strong style={{ color: T.inkMid }}>Systemic Meta-Framework for Integrative Practice</strong> forms the visual and reflective practice framework at the centre of this tool. The framework was first published by White, L. & Owen, K. (2022) in the Australian and New Zealand Journal of Family Therapy, and has been further developed and updated by Dr Leonie White (2025) through her ongoing teaching, supervision and practice at Phoenix Family Therapy Academy. The broader satellite knowledge bases, reflection prompts, case reflection structure and supervision framework reflect Brooke's own practice framework as a social worker and supervisor, informed by the many authors, theorists and colleagues credited in the reference groups below. The supervision framework also draws on Kieran O'Donoghue's <em>Restorying Social Work Supervision</em> (2003), and the multi-level diagnostic formulation framework is drawn from O'Keeffe & Macaulay (2012).
         </p>
       </div>
 
