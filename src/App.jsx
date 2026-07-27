@@ -1,5 +1,3 @@
-import { useState, useRef, useCallback } from "react";
-import { useState, useRef, useCallback } from "react";
 
 // ─── DESIGN TOKENS ───────────────────────────────────────────────────────────
 const T = {
@@ -731,14 +729,14 @@ function MapView({ satItems, onSatAdd, onSatRemove }) {
           {T2({ x: CX - 186, y: CY - 4, rows: ["Family", "Life Cycle"], size: 9, fill: "#222" })}
           {T2({ x: CX - 186, y: CY + 46, rows: ["Vertical &", "Horizontal", "Stressors"], size: 9, fill: "#222" })}
           {T2({ x: CX - 178, y: CY + 82, rows: ["Broader Societal", "Factors e.g.,", "structural", "oppression"], size: 8.5, fill: "#222", dy: 11 })}
-          {T2({ x: CX + 148, y: CY + 148, rows: ["Strengths,", "Resources", "& Resilience"], size: 9, fill: "#222" })}
+          {T2({ x: CX + 110, y: CY + 148, rows: ["Strengths,", "Resources", "& Resilience"], size: 9, fill: "#222" })}
 
           {/* Right side — x between CX+128 and CX+252 */}
-          {T2({ x: CX + 182, y: CY - 82, rows: ["Systemic", "Context", "(Genogram", "& Timeline)"], size: 9, fill: "#222" })}
-          {T2({ x: CX + 182, y: CY + 16, rows: ["Meaning", "Making"], size: 9, fill: "#222" })}
-          {T2({ x: CX + 182, y: CY + 52, rows: ["Emotions"], size: 9, fill: "#222" })}
-          {T2({ x: CX + 182, y: CY + 72, rows: ["Client(s)'s", "Ecosystem"], size: 9, fill: "#222" })}
-          {T2({ x: CX + 138, y: CY + 110, rows: ['The "Dances":', "Problem &", "Exception", "Patterns"], size: 8.5, fill: "#222", dy: 11 })}
+          {T2({ x: CX + 145, y: CY - 82, rows: ["Systemic", "Context", "(Genogram", "& Timeline)"], size: 9, fill: "#222" })}
+          {T2({ x: CX + 155, y: CY + 10, rows: ["Meaning", "Making"], size: 9, fill: "#222" })}
+          {T2({ x: CX + 155, y: CY + 40, rows: ["Emotions"], size: 9, fill: "#222" })}
+          {T2({ x: CX + 145, y: CY + 62, rows: ["Client(s)'s", "Ecosystem"], size: 9, fill: "#222" })}
+          {T2({ x: CX + 135, y: CY + 100, rows: ['The "Dances":', "Problem &", "Exception", "Patterns"], size: 8, fill: "#222", dy: 10 })}
 
           {/* THERAPY / INTERVENTION — inner ellipse rx=128 ry=106 */}
           {/* Decision Making box — top — taller to fit title + 5 rows at dy=9 */}
